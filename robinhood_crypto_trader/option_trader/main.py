@@ -4,7 +4,6 @@
 import robin_stocks.robinhood as rh
 
 from option import Option
-from optionMarketData import OptionMarketData
 
 def logout():
     try:
