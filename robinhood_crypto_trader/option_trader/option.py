@@ -117,3 +117,137 @@ class Option():
         self.high_fill_rate_sell_price = market_data['high_fill_rate_sell_price']
         self.low_fill_rate_buy_price = market_data['low_fill_rate_buy_price']
         self.low_fill_rate_sell_price = market_data['low_fill_rate_sell_price']
+        
+        try:
+            self.stock_price = rh.stocks.get_latest_price(self.chain_symbol)[0]
+        except:
+            self.stock_price = "0.00"
+    
+    def __repr__(self):
+        return "{" + self.chain_symbol + " " + self.type + " " + self.expiration_date + " $" + self.strike_price + " (adj_mark_price=$" + self.adjusted_mark_price + ") (breakeven_price=$" + self.break_even_price + ") (stock_price=$" + self.stock_price + ")}"
+    
+    def is_later_date(self, str1, str2):
+        """
+        Returns True if str1 is later than str2, and False otherwise.
+        Assumes that str1 and str2 are strings representing dates in the format of "YYYY-MM-DD".
+        """
+        date1 = [int(x) for x in str1.split("-")]
+        date2 = [int(x) for x in str2.split("-")]
+        
+        if date1[0] > date2[0]:
+            return True
+        elif date1[0] == date2[0] and date1[1] > date2[1]:
+            return True
+        elif date1[0] == date2[0] and date1[1] == date2[1] and date1[2] > date2[2]:
+            return True
+        else:
+            return False
+
+    
+    def __eq__(self, other):
+        # ==
+        if self.break_even_price == other.break_even_price and self.adjusted_mark_price == other.adjusted_mark_price and self.expiration_date == other.expiration_date:
+            return True
+        else:
+            return False
+    
+    def __lt__(self, other):
+        # <
+        if self.type == 'call':
+            # Want lower breakeven price for calls
+            if self.break_even_price < other.break_even_price:
+                return False
+            elif self.break_even_price > other.break_even_price:
+                return True
+            else:
+                # self and other have the same breakeven price
+                # rank by risk (premium)
+                if self.adjusted_mark_price < other.adjusted_mark_price:
+                    return False
+                elif self.adjusted_mark_price > other.adjusted_mark_price:
+                    return True
+                else:
+                    # self and other have the same breakeven price and risk
+                    # rank by expiration date
+                    return not self.is_later_date(self.expiration_date, other.expiration_date)
+        else:
+            # Want high breakeven price for puts
+            if self.break_even_price < other.break_even_price:
+                return True
+            elif self.break_even_price > other.break_even_price:
+                return False
+            else:
+                # self and other have the same breakeven price
+                # rank by risk (premium)
+                if self.adjusted_mark_price < other.adjusted_mark_price:
+                    return False
+                elif self.adjusted_mark_price > other.adjusted_mark_price:
+                    return True
+                else:
+                    # self and other have the same breakeven price and risk
+                    # rank by expiration date
+                    return not self.is_later_date(self.expiration_date, other.expiration_date)
+    
+    def __le__(self, other):
+        # <=
+        if self < other or self == other:
+            return True
+        else:
+            return False
+    
+    def __gt__(self, other):
+        # >
+        if self.type == 'call':
+            # Want lower breakeven price for calls
+            if self.break_even_price < other.break_even_price:
+                return True
+            elif self.break_even_price > other.break_even_price:
+                return False
+            else:
+                # self and other have the same breakeven price
+                # rank by risk (premium)
+                if self.adjusted_mark_price < other.adjusted_mark_price:
+                    return True
+                elif self.adjusted_mark_price > other.adjusted_mark_price:
+                    return False
+                else:
+                    # self and other have the same breakeven price and risk
+                    # rank by expiration date
+                    return self.is_later_date(self.expiration_date, other.expiration_date)
+        else:
+            # Want high breakeven price for puts
+            if self.break_even_price < other.break_even_price:
+                return False
+            elif self.break_even_price > other.break_even_price:
+                return True
+            else:
+                # self and other have the same breakeven price
+                # rank by risk (premium)
+                if self.adjusted_mark_price < other.adjusted_mark_price:
+                    return True
+                elif self.adjusted_mark_price > other.adjusted_mark_price:
+                    return False
+                else:
+                    # self and other have the same breakeven price and risk
+                    # rank by expiration date
+                    return self.is_later_date(self.expiration_date, other.expiration_date)
+    
+    def __ge__(self, other):
+        # >=
+        if self > other or self == other:
+            return True
+        else:
+            return False
+    
+    def get_latest_stock_price(self):
+        try:
+            price = rh.stocks.get_latest_price(self.chain_symbol)[0]
+            
+            if price == None:
+                return self.stock_price
+            else:
+                self.stock_price = price
+                
+                return self.stock_price
+        except:
+            return self.stock_price
