@@ -35,7 +35,7 @@ class Option():
         self.min_ticks = config['min_ticks']
         self.rhs_tradability = config['rhs_tradability']
         self.state = config['state']
-        self.strike_price = config['strike_price']
+        self.strike_price = float(config['strike_price'])
         self.tradability = config['tradability']
         self.type = config['type']
         self.updated_at = config['updated_at']
@@ -83,48 +83,156 @@ class Option():
         
         market_data = rh.options.get_option_market_data(self.chain_symbol, self.expiration_date, self.strike_price, self.type)[0][0]
         
-        self.adjusted_mark_price = market_data['adjusted_mark_price']
-        self.adjusted_mark_price_round_down = market_data['adjusted_mark_price_round_down']
-        self.ask_price = market_data['ask_price']
-        self.ask_size = market_data['ask_size']
-        self.bid_price = market_data['bid_price']
-        self.bid_size = market_data['bid_size']
-        self.break_even_price = market_data['break_even_price']
-        self.high_price = market_data['high_price']
+        try:
+            self.adjusted_mark_price = float(market_data['adjusted_mark_price'])
+        except:
+            self.adjusted_mark_price = market_data['adjusted_mark_price']
+        
+        try:
+            self.adjusted_mark_price_round_down = float(market_data['adjusted_mark_price_round_down'])
+        except:
+            self.adjusted_mark_price_round_down = market_data['adjusted_mark_price_round_down']
+        
+        try:
+            self.ask_price = float(market_data['ask_price'])
+        except:
+            self.ask_price = market_data['ask_price']
+        
+        try:
+            self.ask_size = int(market_data['ask_size'])
+        except:
+            self.ask_size = market_data['ask_size']
+        
+        try:
+            self.bid_price = float(market_data['bid_price'])
+        except:
+            self.bid_price = market_data['bid_price']
+        
+        try:
+            self.bid_size = int(market_data['bid_size'])
+        except:
+            self.bid_size = market_data['bid_size']
+        
+        self.break_even_price = float(market_data['break_even_price'])
+        
+        try:
+            self.high_price = float(market_data['high_price'])
+        except:
+            self.high_price = market_data['high_price']
+        
         self.instrument = market_data['instrument']
         self.instrument_id = market_data['instrument_id']
-        self.last_trade_price = market_data['last_trade_price']
-        self.last_trade_size = market_data['last_trade_size']
-        self.low_price = market_data['low_price']
-        self.mark_price = market_data['mark_price']
-        self.open_interest = market_data['open_interest']
+        
+        try:
+            self.last_trade_price = float(market_data['last_trade_price'])
+        except:
+            self.last_trade_price = market_data['last_trade_price']
+        
+        try:
+            self.last_trade_size = int(market_data['last_trade_size'])
+        except:
+            self.last_trade_size = market_data['last_trade_size']
+        
+        try:
+            self.low_price = float(market_data['low_price'])
+        except:
+            self.low_price = market_data['low_price']
+        
+        try:
+            self.mark_price = float(market_data['mark_price'])
+        except:
+            self.mark_price = market_data['mark_price']
+        
+        try:
+            self.open_interest = int(market_data['open_interest'])
+        except:
+            self.open_interest = market_data['open_interest']
+        
         self.previous_close_date = market_data['previous_close_date']
-        self.previous_close_price = market_data['previous_close_price']
+        
+        try:
+            self.previous_close_price = float(market_data['previous_close_price'])
+        except:
+            self.previous_close_price = market_data['previous_close_price']
+        
         self.updated_at = market_data['updated_at']
-        self.volume = market_data['volume']
+        
+        try:
+            self.volume = int(market_data['volume'])
+        except:
+            self.volume = market_data['volume']
+        
         self.symbol = market_data['symbol']
         self.occ_symbol = market_data['occ_symbol']
         self.state = market_data['state']
-        self.chance_of_profit_long = market_data['chance_of_profit_long']
-        self.chance_of_profit_short = market_data['chance_of_profit_short']
-        self.delta = market_data['delta']
-        self.gamma = market_data['gamma']
-        self.implied_volatility = market_data['implied_volatility']
-        self.rho = market_data['rho']
-        self.theta = market_data['theta']
-        self.vega = market_data['vega']
-        self.high_fill_rate_buy_price = market_data['high_fill_rate_buy_price']
-        self.high_fill_rate_sell_price = market_data['high_fill_rate_sell_price']
-        self.low_fill_rate_buy_price = market_data['low_fill_rate_buy_price']
-        self.low_fill_rate_sell_price = market_data['low_fill_rate_sell_price']
         
         try:
-            self.stock_price = rh.stocks.get_latest_price(self.chain_symbol)[0]
+            self.chance_of_profit_long = float(market_data['chance_of_profit_long'])
         except:
-            self.stock_price = "0.00"
+            self.chance_of_profit_long = market_data['chance_of_profit_long']
+        
+        try:
+            self.chance_of_profit_short = float(market_data['chance_of_profit_short'])
+        except:
+            self.chance_of_profit_short = market_data['chance_of_profit_short']
+        
+        try:
+            self.delta = float(market_data['delta'])
+        except:
+            self.delta = market_data['delta']
+        
+        try:
+            self.gamma = float(market_data['gamma'])
+        except:
+            self.gamma = market_data['gamma']
+        
+        try:
+            self.implied_volatility = float(market_data['implied_volatility'])
+        except:
+            self.implied_volatility = market_data['implied_volatility']
+        
+        try:
+            self.rho = float(market_data['rho'])
+        except:
+            self.rho = market_data['rho']
+        
+        try:
+            self.theta = float(market_data['theta'])
+        except:
+            self.theta = market_data['theta']
+        
+        try:
+            self.vega = float(market_data['vega'])
+        except:
+            self.vega = market_data['vega']
+        
+        try:
+            self.high_fill_rate_buy_price = float(market_data['high_fill_rate_buy_price'])
+        except:
+            self.high_fill_rate_buy_price = market_data['high_fill_rate_buy_price']
+        
+        try:
+            self.high_fill_rate_sell_price = float(market_data['high_fill_rate_sell_price'])
+        except:
+            self.high_fill_rate_sell_price = market_data['high_fill_rate_sell_price']
+        
+        try:
+            self.low_fill_rate_buy_price = float(market_data['low_fill_rate_buy_price'])
+        except:
+            self.low_fill_rate_buy_price = market_data['low_fill_rate_buy_price']
+        
+        try:
+            self.low_fill_rate_sell_price = float(market_data['low_fill_rate_sell_price'])
+        except:
+            self.low_fill_rate_sell_price = market_data['low_fill_rate_sell_price']
+        
+        try:
+            self.stock_price = float(rh.stocks.get_latest_price(self.chain_symbol)[0])
+        except:
+            self.stock_price = 0.00
     
     def __repr__(self):
-        return "{" + self.chain_symbol + " " + self.type + " " + self.expiration_date + " $" + self.strike_price + " (adj_mark_price=$" + self.adjusted_mark_price + ") (breakeven_price=$" + self.break_even_price + ") (stock_price=$" + self.stock_price + ")}"
+        return "{" + self.chain_symbol + " " + self.type + " " + self.expiration_date + " $" + str(self.strike_price) + " (adj_mark_price=$" + str(self.adjusted_mark_price) + ") (breakeven_price=$" + str(self.break_even_price) + ") (stock_price=$" + str(self.stock_price) + ")}"
     
     def is_later_date(self, str1, str2):
         """
@@ -161,14 +269,16 @@ class Option():
                 return True
             else:
                 # self and other have the same breakeven price
-                # rank by risk (premium)
+                # Rank by risk (premium)
+                # Want lower risk
                 if self.adjusted_mark_price < other.adjusted_mark_price:
                     return False
                 elif self.adjusted_mark_price > other.adjusted_mark_price:
                     return True
                 else:
                     # self and other have the same breakeven price and risk
-                    # rank by expiration date
+                    # Rank by expiration date
+                    # Want later expiration date
                     return not self.is_later_date(self.expiration_date, other.expiration_date)
         else:
             # Want high breakeven price for puts
@@ -185,7 +295,8 @@ class Option():
                     return True
                 else:
                     # self and other have the same breakeven price and risk
-                    # rank by expiration date
+                    # Rank by expiration date
+                    # Want later expiration date
                     return not self.is_later_date(self.expiration_date, other.expiration_date)
     
     def __le__(self, other):
@@ -205,14 +316,16 @@ class Option():
                 return False
             else:
                 # self and other have the same breakeven price
-                # rank by risk (premium)
+                # Rank by risk (premium)
+                # Want lower risk
                 if self.adjusted_mark_price < other.adjusted_mark_price:
                     return True
                 elif self.adjusted_mark_price > other.adjusted_mark_price:
                     return False
                 else:
                     # self and other have the same breakeven price and risk
-                    # rank by expiration date
+                    # Rank by expiration date
+                    # Want later expiration date
                     return self.is_later_date(self.expiration_date, other.expiration_date)
         else:
             # Want high breakeven price for puts
@@ -229,7 +342,8 @@ class Option():
                     return False
                 else:
                     # self and other have the same breakeven price and risk
-                    # rank by expiration date
+                    # Rank by expiration date
+                    # Want later expiration date
                     return self.is_later_date(self.expiration_date, other.expiration_date)
     
     def __ge__(self, other):
@@ -246,7 +360,7 @@ class Option():
             if price == None:
                 return self.stock_price
             else:
-                self.stock_price = price
+                self.stock_price = float(price)
                 
                 return self.stock_price
         except:
