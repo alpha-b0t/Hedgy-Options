@@ -81,7 +81,23 @@ class Option():
          'low_fill_rate_sell_price': '1.620000'}
         """
         
-        market_data = rh.options.get_option_market_data(self.chain_symbol, self.expiration_date, self.strike_price, self.type)[0][0]
+        market_data_response = rh.options.get_option_market_data(self.chain_symbol, self.expiration_date, config['strike_price'], self.type)
+        
+        self.retrieved_market_data = True
+
+        try:
+            market_data = market_data_response[0][0]
+        except IndexError:
+            try:
+                attempt_count = 1
+                while market_data_response == [[]] and attempt_count < 10:
+                    market_data_response = rh.options.get_option_market_data(self.chain_symbol, self.expiration_date, self.strike_price, self.type)
+                    attempt_count += 1
+            
+                market_data = market_data_response[0][0]
+            except:
+                self.retrieved_market_data = False
+                return
         
         try:
             self.adjusted_mark_price = float(market_data['adjusted_mark_price'])
@@ -230,9 +246,21 @@ class Option():
             self.stock_price = float(rh.stocks.get_latest_price(self.chain_symbol)[0])
         except:
             self.stock_price = 0.00
+        
+        try:
+            # TO-DO: Implement
+            if self.type == 'call':
+                self.long_ask_breakeven_price = self.strike_price + self.ask_price
+                # self.short_breakeven_price = None
+            else:
+                self.long_ask_breakeven_price = self.strike_price - self.ask_price
+                # self.short_breakeven_price = None
+        except:
+            self.long_ask_breakeven_price = None
+            # self.short_breakeven_price = None
     
     def __repr__(self):
-        return "{" + self.chain_symbol + " " + self.type + " " + self.expiration_date + " $" + str(self.strike_price) + " (adj_mark_price=$" + str(self.adjusted_mark_price) + ") (breakeven_price=$" + str(self.break_even_price) + ") (stock_price=$" + str(self.stock_price) + ")}"
+        return "{" + self.chain_symbol + " " + self.type + " " + self.expiration_date + " $" + str(self.strike_price) + " (ask_price=$" + str(self.ask_price) + ") (adj_mark_price=$" + str(self.adjusted_mark_price) + ") (long_ask_breakeven_price=$" + str(self.long_ask_breakeven_price) + ") (breakeven_price=$" + str(self.break_even_price) + ") (stock_price=$" + str(self.stock_price) + ")}"
     
     def is_later_date(self, str1, str2):
         """
@@ -299,13 +327,6 @@ class Option():
                     # Want later expiration date
                     return not self.is_later_date(self.expiration_date, other.expiration_date)
     
-    def __le__(self, other):
-        # <=
-        if self < other or self == other:
-            return True
-        else:
-            return False
-    
     def __gt__(self, other):
         # >
         if self.type == 'call':
@@ -345,13 +366,6 @@ class Option():
                     # Rank by expiration date
                     # Want later expiration date
                     return self.is_later_date(self.expiration_date, other.expiration_date)
-    
-    def __ge__(self, other):
-        # >=
-        if self > other or self == other:
-            return True
-        else:
-            return False
     
     def get_latest_stock_price(self):
         try:
