@@ -13,7 +13,7 @@ def black_scholes(S, K, T, r, sigma, is_call=True):
 
     return option_price
 
-def binomial_tree(S, K, T, r, sigma, n, is_call=True):
+def binomial_option_pricing(S, K, T, r, sigma, n, is_call=True):
     dt = T / n
     u = math.exp(sigma * math.sqrt(dt))
     d = 1 / u
@@ -37,12 +37,12 @@ def binomial_tree(S, K, T, r, sigma, n, is_call=True):
 
     return option_values[0][0]
 
-def monte_carlo(S, K, T, r, sigma, num_simulations, is_call=True):
-    dt = T / 252 # Is this correct?
-    S_simulations = np.zeros(num_simulations)
+def monte_carlo(S, K, T, r, sigma, steps, n, is_call=True):
+    dt = T / steps
+    S_simulations = np.zeros(n)
     payoff_sum = 0
 
-    for i in range(num_simulations):
+    for i in range(n):
         z = np.random.normal(0, 1)
         S_simulations[i] = S * math.exp((r - 0.5 * sigma**2) * dt + sigma * math.sqrt(dt) * z)
 
@@ -53,5 +53,5 @@ def monte_carlo(S, K, T, r, sigma, num_simulations, is_call=True):
 
         payoff_sum += payoff
 
-    option_price = math.exp(-r * T) * (payoff_sum / num_simulations)
+    option_price = math.exp(-r * T) * (payoff_sum / n)
     return option_price
