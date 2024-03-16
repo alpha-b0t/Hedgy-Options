@@ -38,7 +38,7 @@ def binomial_tree(S, K, T, r, sigma, n, is_call=True):
     return option_values[0][0]
 
 def monte_carlo(S, K, T, r, sigma, num_simulations, is_call=True):
-    dt = T / 252
+    dt = T / 252 # Is this correct?
     S_simulations = np.zeros(num_simulations)
     payoff_sum = 0
 
