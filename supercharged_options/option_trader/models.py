@@ -9,42 +9,97 @@ class OptionType(Enum):
 
 class Models():
     @staticmethod
-    def black_scholes(S, K, T, r, sigma, option_type: OptionType):
-        d1 = (math.log(S / K) + (r + 0.5 * sigma**2) * T) / (sigma * math.sqrt(T))
+    def black_scholes(S, K, T, r, sigma, q, option_type: OptionType):
+        # Time complexity: O(1)
+        # Space complexity: O(1)
+        d1 = (math.log(S / K) + (r - q + 0.5 * sigma**2) * T) / (sigma * math.sqrt(T))
         d2 = d1 - sigma * math.sqrt(T)
 
         if option_type == OptionType.CALL:
-            option_price = S * norm.cdf(d1) - K * math.exp(-r * T) * norm.cdf(d2)
+            option_price = S * math.exp(-q * T) * norm.cdf(d1) - K * math.exp(-r * T) * norm.cdf(d2)
         else:
-            option_price = K * math.exp(-r * T) * norm.cdf(-d2) - S * norm.cdf(-d1)
+            option_price = K * math.exp(-r * T) * norm.cdf(-d2) - S * math.exp(-q * T) * norm.cdf(-d1)
 
         return option_price
-
+    
     @staticmethod
-    def binomial_option_pricing(S, K, T, r, sigma, n, option_type: OptionType):
+    def european_bopm(S, K, T, r, sigma, q, n, option_type: OptionType):
+        # Time complexity: O(n^2)
+        # Space complexity: O(n^2)
         dt = T / n
         u = math.exp(sigma * math.sqrt(dt))
         d = 1 / u
-        p = (math.exp(r * dt) - d) / (u - d)
+        p = (math.exp((r-q) * dt) - d) / (u - d)
 
-        # Build binomial price tree
-        stock_prices = [[S * u**j * d**(n-j) for j in range(i+1)] for i in range(n+1)]
-        option_values = [[0 for j in range(i+1)] for i in range(n+1)]
+        # Create binomial price tree for the underlying asset
+        stock_prices = [[0.0 for j in range(i+1)] for i in range(n+1)]
 
-        # Calculate option values at expiration
+        for i in range(n+1):
+            for j in range(i+1):
+                stock_prices[i][j] = S * (u**(i-j)) * (d ** j)
+        
+        # Create option price tree
+        option_prices = [[0.0 for j in range(i+1)] for i in range(n+1)]
+
+        # Calculate option prices at expiration
         if option_type == OptionType.CALL:
             for j in range(n+1):
-                option_values[n][j] = max(0, stock_prices[n][j] - K)
+                option_prices[n][j] = max(0, stock_prices[n][j] - K)
         else:
             for j in range(n+1):
-                option_values[n][j] = max(0, K - stock_prices[n][j])
+                option_prices[n][j] = max(0, K - stock_prices[n][j])
 
-        # Calculate option values at earlier nodes
+        # Calculate option prices at each node
         for i in range(n-1, -1, -1):
             for j in range(i+1):
-                option_values[i][j] = math.exp(-r * dt) * (p * option_values[i+1][j] + (1 - p) * option_values[i+1][j+1])
+                option_prices[i][j] = math.exp(-r * dt) * (p * option_prices[i+1][j] + (1 - p) * option_prices[i+1][j+1])
 
-        return option_values[0][0], option_values
+        return option_prices, stock_prices
+
+    @staticmethod
+    def american_bopm(S, K, T, r, sigma, q, n, option_type: OptionType):
+        # Time complexity: O(n^2)
+        # Space complexity: O(n^2)
+        dt = T / n
+        u = math.exp(sigma * math.sqrt(dt))
+        d = 1 / u
+        p = (math.exp((r-q) * dt) - d) / (u - d)
+
+        # Create binomial price tree for the underlying asset
+        stock_prices = [[0.0 for j in range(i+1)] for i in range(n+1)]
+
+        for i in range(n+1):
+            for j in range(i+1):
+                stock_prices[i][j] = S * (u**(i-j)) * (d ** j)
+        
+        # Create option price tree
+        option_prices = [[0.0 for j in range(i+1)] for i in range(n+1)]
+
+        # Calculate option prices at expiration
+        if option_type == OptionType.CALL:
+            for j in range(n+1):
+                option_prices[n][j] = max(0, stock_prices[n][j] - K)
+        else:
+            for j in range(n+1):
+                option_prices[n][j] = max(0, K - stock_prices[n][j])
+
+        # Calculate option prices at each node
+        if option_type == OptionType.CALL:
+            for i in range(n-1, -1, -1):
+                for j in range(i+1):
+                    option_prices[i][j] = math.exp(-r * dt) * (p * option_prices[i+1][j] + (1 - p) * option_prices[i+1][j+1])
+
+                    # Check for early exercise
+                    option_prices[i][j] = max(option_prices[i][j], stock_prices[i][j] - K)
+        else:
+            for i in range(n-1, -1, -1):
+                for j in range(i+1):
+                    option_prices[i][j] = math.exp(-r * dt) * (p * option_prices[i+1][j] + (1 - p) * option_prices[i+1][j+1])
+
+                    # Check for early exercise
+                    option_prices[i][j] = max(option_prices[i][j], K - stock_prices[i][j])
+
+        return option_prices, stock_prices
 
     @staticmethod
     def monte_carlo(S, K, T, r, sigma, n, option_type: OptionType, steps=252):
@@ -73,20 +128,33 @@ class Models():
         return option_price
 
 if __name__ == '__main__':
-    S = 140.88
-    K = 65
-    T = 456/252
+    S = 0.7003
+    K = 2.50
+    T = 36/252
     r = 0.05
-    sigma = 0.3477
+    sigma = 4.8036
+    q = 0
     n_binom = 1000
     n_monte_carlo = 100000
     steps = 252
-    option_type = OptionType.CALL
+    option_type = OptionType.PUT
 
-    print(f"Black-Scholes: {Models.black_scholes(S, K, T, r, sigma, option_type)}")
+    print('*********************************************************************')
+    print(f"Black-Scholes: {Models.black_scholes(S, K, T, r, sigma, q, option_type)}")
 
-    binom_options_value_at_expiration, binom_options_values = Models.binomial_option_pricing(S, K, T, r, sigma, n_binom, option_type)
+    euro_bopm_options_prices, euro_bopm_stock_prices = Models.european_bopm(S, K, T, r, sigma, q, n_binom, option_type)
+
+    print('*********************************************************************')
+    print(f"European BOPM (current value): {euro_bopm_options_prices[0][0]}, stock price: {euro_bopm_stock_prices[0][0]}")
+    print(f"European BOPM (most bearish at expiration): {euro_bopm_options_prices[n_binom][n_binom]}, stock price: {euro_bopm_stock_prices[n_binom][n_binom]}")
+    print(f"European BOPM (most bullish at expiration): {euro_bopm_options_prices[n_binom][0]}, stock_price: {euro_bopm_stock_prices[n_binom][0]}")
     
-    print(f"BINOM: {binom_options_value_at_expiration}")
+    american_bopm_options_prices, american_bopm_stock_prices = Models.american_bopm(S, K, T, r, sigma, q, n_binom, option_type)
+    
+    print('*********************************************************************')
+    print(f"American BOPM (current value): {american_bopm_options_prices[0][0]}, stock price: {american_bopm_stock_prices[0][0]}")
+    print(f"American BOPM (most bearish at expiration): {american_bopm_options_prices[n_binom][n_binom]}, stock price: {american_bopm_stock_prices[n_binom][n_binom]}")
+    print(f"American BOPM (most bullish at expiration): {american_bopm_options_prices[n_binom][0]}, stock_price: {american_bopm_stock_prices[n_binom][0]}")
 
+    print('*********************************************************************')
     print(f"Monte Carlo: {Models.monte_carlo(S, K, T, r, sigma, n_monte_carlo, option_type, steps)}")
