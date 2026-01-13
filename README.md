@@ -1,2 +1,2 @@
-# supercharged-options
+# hedgy-options
 Options pricing application
