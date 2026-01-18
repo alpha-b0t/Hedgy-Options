@@ -1,2 +1,2 @@
-# hedgy-options
+# Hedgy-Options
 Options pricing application
