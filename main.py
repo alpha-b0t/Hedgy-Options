@@ -4,7 +4,9 @@
 import robin_stocks.robinhood as rh
 from dotenv import load_dotenv
 import os
+import math
 from option import Option
+from models import Models, OptionType
 
 def login(**kwargs):
     try:
@@ -59,17 +61,45 @@ if __name__ == '__main__':
                     
                     option = Option(tradable_options[i])
 
-                    print(f"{option}\n")
+                    print(f"{option}")
                     
                     if option.retrieved_market_data:
+                        S = option.get_latest_stock_price()
+                        K = option.strike_price
+                        T = option.get_T()
+                        print(f"T: {T}")
+                        r = 0.05
+                        sigma = option.implied_volatility
+                        print(f"sigma: {sigma}")
+                        q = 0
+
                         if tradable_options[i]["type"] == "call":
+                            if T > 0:
+                                if sigma > 0:
+                                    black_scholes_price = Models.black_scholes(S, K, T, r, sigma, q, OptionType.CALL)
+                                else:
+                                    black_scholes_price = max(S - K * math.exp(-r * T), 0)
+                            else:
+                                black_scholes_price = max(option.get_latest_stock_price() - option.strike_price, 0)
+                            
+                            print(f"Market price: {option.mark_price}, Black-Scholes: {round(black_scholes_price, 2)}, Price diff: {round(abs(option.mark_price - black_scholes_price) * 100 / black_scholes_price, 2)}%")
                             calls.append(option)
                         elif tradable_options[i]["type"] == "put":
+                            if T > 0:
+                                if sigma > 0:
+                                    black_scholes_price = Models.black_scholes(S, K, T, r, sigma, q, OptionType.PUT)
+                                else:
+                                    black_scholes_price = max(K * math.exp(-r * T) - S, 0)
+                            else:
+                                black_scholes_price = max(option.strike_price - option.get_latest_stock_price, 0)
+                            
+                            print(f"Market price: {option.mark_price}, Black-Scholes: {round(black_scholes_price, 2)}, Price diff: {round(abs(option.mark_price - black_scholes_price) * 100 / black_scholes_price, 2)}%")
                             puts.append(option)
                         else:
                             raise Exception("Option is neither a call nor a put")
                     else:
                         continue
+                    print()
                 
                 options[tickers[n].upper()] = {"calls": calls, "puts": puts}
             

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import robin_stocks.robinhood as rh
+from datetime import datetime
 
 class Option():
     def __init__(self, config):
@@ -261,6 +262,21 @@ class Option():
     
     def __repr__(self):
         return "{" + self.chain_symbol + " " + self.type + " " + self.expiration_date + " $" + str(self.strike_price) + " (ask_price=$" + str(self.ask_price) + ") (adj_mark_price=$" + str(self.adjusted_mark_price) + ") (long_ask_breakeven_price=$" + str(self.long_ask_breakeven_price) + ") (breakeven_price=$" + str(self.break_even_price) + ") (stock_price=$" + str(self.stock_price) + ")}"
+    
+    def get_T(self) -> float:
+        """
+        Calculate T (time to expiration) for Black-Scholes equation.
+        
+        Returns:
+            T: (days until expiration) / (trading days per year)
+        """
+        expiry = datetime.strptime(self.expiration_date, "%Y-%m-%d")
+        today = datetime.now()
+        
+        days_until_expiry = (expiry - today).days
+        trading_days_per_year = 252
+        
+        return days_until_expiry / trading_days_per_year
     
     def is_later_date(self, str1, str2):
         """
