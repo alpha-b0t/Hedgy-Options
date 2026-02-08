@@ -139,22 +139,22 @@ if __name__ == '__main__':
     steps = 252
     option_type = OptionType.PUT
 
-    print('*********************************************************************')
+    print('*' * 60)
     print(f"Black-Scholes: {Models.black_scholes(S, K, T, r, sigma, q, option_type)}")
 
     euro_bopm_options_prices, euro_bopm_stock_prices = Models.european_bopm(S, K, T, r, sigma, q, n_binom, option_type)
 
-    print('*********************************************************************')
+    print('*' * 60)
     print(f"European BOPM (current value): {euro_bopm_options_prices[0][0]}, stock price: {euro_bopm_stock_prices[0][0]}")
     print(f"European BOPM (most bearish at expiration): {euro_bopm_options_prices[n_binom][n_binom]}, stock price: {euro_bopm_stock_prices[n_binom][n_binom]}")
     print(f"European BOPM (most bullish at expiration): {euro_bopm_options_prices[n_binom][0]}, stock_price: {euro_bopm_stock_prices[n_binom][0]}")
     
     american_bopm_options_prices, american_bopm_stock_prices = Models.american_bopm(S, K, T, r, sigma, q, n_binom, option_type)
     
-    print('*********************************************************************')
+    print('*' * 60)
     print(f"American BOPM (current value): {american_bopm_options_prices[0][0]}, stock price: {american_bopm_stock_prices[0][0]}")
     print(f"American BOPM (most bearish at expiration): {american_bopm_options_prices[n_binom][n_binom]}, stock price: {american_bopm_stock_prices[n_binom][n_binom]}")
     print(f"American BOPM (most bullish at expiration): {american_bopm_options_prices[n_binom][0]}, stock_price: {american_bopm_stock_prices[n_binom][0]}")
 
-    print('*********************************************************************')
+    print('*' * 60)
     print(f"Monte Carlo: {Models.monte_carlo(S, K, T, r, sigma, n_monte_carlo, option_type, steps)}")
