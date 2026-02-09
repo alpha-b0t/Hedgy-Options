@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 import os
 import math
 from option import Option
-from models import Models, OptionType
+from models import Models
 
 def login(**kwargs):
     try:
@@ -76,7 +76,7 @@ if __name__ == '__main__':
                         if tradable_options[i]["type"] == "call":
                             if T > 0:
                                 if sigma > 0:
-                                    black_scholes_price = Models.black_scholes(S, K, T, r, sigma, q, OptionType.CALL)
+                                    black_scholes_price = Models.black_scholes(S, K, T, r, sigma, q, "call")
                                 else:
                                     black_scholes_price = max(S - K * math.exp(-r * T), 0)
                             else:
@@ -87,7 +87,7 @@ if __name__ == '__main__':
                         elif tradable_options[i]["type"] == "put":
                             if T > 0:
                                 if sigma > 0:
-                                    black_scholes_price = Models.black_scholes(S, K, T, r, sigma, q, OptionType.PUT)
+                                    black_scholes_price = Models.black_scholes(S, K, T, r, sigma, q, "put")
                                 else:
                                     black_scholes_price = max(K * math.exp(-r * T) - S, 0)
                             else:

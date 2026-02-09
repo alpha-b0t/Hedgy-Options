@@ -1,21 +1,16 @@
 import math
 from scipy.stats import norm
 import numpy as np
-from enum import Enum
-
-class OptionType(Enum):
-    CALL = 0
-    PUT = 1
 
 class Models():
     @staticmethod
-    def black_scholes(S, K, T, r, sigma, q, option_type: OptionType):
+    def black_scholes(S, K, T, r, sigma, q, option_type):
         # Time complexity: O(1)
         # Space complexity: O(1)
         d1 = (math.log(S / K) + (r - q + 0.5 * sigma**2) * T) / (sigma * math.sqrt(T))
         d2 = d1 - sigma * math.sqrt(T)
 
-        if option_type == OptionType.CALL:
+        if option_type == "call":
             option_price = S * math.exp(-q * T) * norm.cdf(d1) - K * math.exp(-r * T) * norm.cdf(d2)
         else:
             option_price = K * math.exp(-r * T) * norm.cdf(-d2) - S * math.exp(-q * T) * norm.cdf(-d1)
@@ -23,7 +18,7 @@ class Models():
         return option_price
     
     @staticmethod
-    def european_bopm(S, K, T, r, sigma, q, n, option_type: OptionType):
+    def european_bopm(S, K, T, r, sigma, q, n, option_type):
         # Time complexity: O(n^2)
         # Space complexity: O(n^2)
         dt = T / n
@@ -42,7 +37,7 @@ class Models():
         option_prices = [[0.0 for j in range(i+1)] for i in range(n+1)]
 
         # Calculate option prices at expiration
-        if option_type == OptionType.CALL:
+        if option_type == "call":
             for j in range(n+1):
                 option_prices[n][j] = max(0, stock_prices[n][j] - K)
         else:
@@ -57,7 +52,7 @@ class Models():
         return option_prices, stock_prices
 
     @staticmethod
-    def american_bopm(S, K, T, r, sigma, q, n, option_type: OptionType):
+    def american_bopm(S, K, T, r, sigma, q, n, option_type):
         # Time complexity: O(n^2)
         # Space complexity: O(n^2)
         dt = T / n
@@ -76,7 +71,7 @@ class Models():
         option_prices = [[0.0 for j in range(i+1)] for i in range(n+1)]
 
         # Calculate option prices at expiration
-        if option_type == OptionType.CALL:
+        if option_type == "call":
             for j in range(n+1):
                 option_prices[n][j] = max(0, stock_prices[n][j] - K)
         else:
@@ -84,7 +79,7 @@ class Models():
                 option_prices[n][j] = max(0, K - stock_prices[n][j])
 
         # Calculate option prices at each node
-        if option_type == OptionType.CALL:
+        if option_type == "call":
             for i in range(n-1, -1, -1):
                 for j in range(i+1):
                     option_prices[i][j] = math.exp(-r * dt) * (p * option_prices[i+1][j] + (1 - p) * option_prices[i+1][j+1])
@@ -102,12 +97,12 @@ class Models():
         return option_prices, stock_prices
 
     @staticmethod
-    def monte_carlo(S, K, T, r, sigma, n, option_type: OptionType, steps=252):
+    def monte_carlo(S, K, T, r, sigma, n, option_type, steps=252):
         dt = T / steps
         S_simulations = np.zeros(n)
         payoff_sum = 0
 
-        if option_type == OptionType.CALL:
+        if option_type == "call":
             for i in range(n):
                 z = np.random.normal(0, 1)
                 S_simulations[i] = S * math.exp((r - 0.5 * sigma**2) * dt + sigma * math.sqrt(dt) * z)
@@ -137,7 +132,7 @@ if __name__ == '__main__':
     n_binom = 1000
     n_monte_carlo = 100000
     steps = 252
-    option_type = OptionType.PUT
+    option_type = "put"
 
     print('*' * 60)
     print(f"Black-Scholes: {Models.black_scholes(S, K, T, r, sigma, q, option_type)}")
