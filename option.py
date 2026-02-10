@@ -278,23 +278,6 @@ class Option():
         
         return days_until_expiry / trading_days_per_year
     
-    def is_later_date(self, str1, str2):
-        """
-        Returns True if str1 is later than str2, and False otherwise.
-        Assumes that str1 and str2 are strings representing dates in the format of "YYYY-MM-DD".
-        """
-        date1 = [int(x) for x in str1.split("-")]
-        date2 = [int(x) for x in str2.split("-")]
-        
-        if date1[0] > date2[0]:
-            return True
-        elif date1[0] == date2[0] and date1[1] > date2[1]:
-            return True
-        elif date1[0] == date2[0] and date1[1] == date2[1] and date1[2] > date2[2]:
-            return True
-        else:
-            return False
-    
     def get_latest_stock_price(self):
         try:
             price = rh.stocks.get_latest_price(self.chain_symbol)[0]
