@@ -49,7 +49,7 @@ class OptionPricingModels():
             for j in range(i+1):
                 option_prices[i][j] = math.exp(-r * dt) * (p * option_prices[i+1][j] + (1 - p) * option_prices[i+1][j+1])
 
-        return option_prices, stock_prices
+        return option_prices[0][0], option_prices, stock_prices
 
     @staticmethod
     def american_bopm(S, K, T, r, sigma, q, n, option_type):
@@ -94,7 +94,7 @@ class OptionPricingModels():
                     # Check for early exercise
                     option_prices[i][j] = max(option_prices[i][j], K - stock_prices[i][j])
 
-        return option_prices, stock_prices
+        return option_prices[0][0], option_prices, stock_prices
 
     @staticmethod
     def monte_carlo(S, K, T, r, sigma, n, option_type, steps=252):
@@ -134,22 +134,13 @@ if __name__ == '__main__':
     steps = 252
     option_type = "put"
 
-    print('*' * 60)
     print(f"Black-Scholes: {OptionPricingModels.black_scholes(S, K, T, r, sigma, q, option_type)}")
 
-    euro_bopm_options_prices, euro_bopm_stock_prices = OptionPricingModels.european_bopm(S, K, T, r, sigma, q, n_binom, option_type)
+    euro_bopm_fair_price, euro_bopm_options_prices, euro_bopm_stock_prices = OptionPricingModels.european_bopm(S, K, T, r, sigma, q, n_binom, option_type)
 
-    print()
-    print(f"European BOPM (current value): {euro_bopm_options_prices[0][0]}, stock price: {euro_bopm_stock_prices[0][0]}")
-    print(f"European BOPM (most bearish at expiration): {euro_bopm_options_prices[n_binom][n_binom]}, stock price: {euro_bopm_stock_prices[n_binom][n_binom]}")
-    print(f"European BOPM (most bullish at expiration): {euro_bopm_options_prices[n_binom][0]}, stock_price: {euro_bopm_stock_prices[n_binom][0]}")
+    print(f"European BOPM (fair value): {euro_bopm_fair_price}, stock price: {euro_bopm_stock_prices[0][0]}")
     
-    american_bopm_options_prices, american_bopm_stock_prices = OptionPricingModels.american_bopm(S, K, T, r, sigma, q, n_binom, option_type)
+    american_bopm_fair_price, american_bopm_options_prices, american_bopm_stock_prices = OptionPricingModels.american_bopm(S, K, T, r, sigma, q, n_binom, option_type)
     
-    print()
-    print(f"American BOPM (current value): {american_bopm_options_prices[0][0]}, stock price: {american_bopm_stock_prices[0][0]}")
-    print(f"American BOPM (most bearish at expiration): {american_bopm_options_prices[n_binom][n_binom]}, stock price: {american_bopm_stock_prices[n_binom][n_binom]}")
-    print(f"American BOPM (most bullish at expiration): {american_bopm_options_prices[n_binom][0]}, stock_price: {american_bopm_stock_prices[n_binom][0]}")
-
-    print()
+    print(f"American BOPM (fair value): {american_bopm_fair_price}, stock price: {american_bopm_stock_prices[0][0]}")
     print(f"Monte Carlo: {OptionPricingModels.monte_carlo(S, K, T, r, sigma, n_monte_carlo, option_type, steps)}")
