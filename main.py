@@ -73,30 +73,26 @@ if __name__ == '__main__':
                         print(f"sigma: {sigma}")
                         q = 0
 
-                        if tradable_options[i]["type"] == "call":
-                            if T > 0:
-                                if sigma > 0:
-                                    black_scholes_price = OptionPricingModels.black_scholes(S, K, T, r, sigma, q, "call")
-                                else:
-                                    black_scholes_price = max(S - K * math.exp(-r * T), 0)
-                            else:
-                                black_scholes_price = max(option.get_latest_stock_price() - option.strike_price, 0)
-                            
-                            print(f"Market price: {option.mark_price}, Black-Scholes: {round(black_scholes_price, 2)}, Price diff: {round(abs(option.mark_price - black_scholes_price) * 100 / black_scholes_price, 2)}%")
+                        if option.type == "call":
                             calls.append(option)
-                        elif tradable_options[i]["type"] == "put":
-                            if T > 0:
-                                if sigma > 0:
-                                    black_scholes_price = OptionPricingModels.black_scholes(S, K, T, r, sigma, q, "put")
+                        else:
+                            puts.append(option)
+
+                        if T > 0:
+                            if sigma > 0:
+                                black_scholes_price = OptionPricingModels.black_scholes(S, K, T, r, sigma, q, option.type)
+                            else:
+                                if option.type == "call":
+                                    black_scholes_price = max(S - K * math.exp(-r * T), 0)
                                 else:
                                     black_scholes_price = max(K * math.exp(-r * T) - S, 0)
+                        else:
+                            if option.type == "call":
+                                black_scholes_price = max(option.get_latest_stock_price() - option.strike_price, 0)
                             else:
                                 black_scholes_price = max(option.strike_price - option.get_latest_stock_price, 0)
-                            
-                            print(f"Market price: {option.mark_price}, Black-Scholes: {round(black_scholes_price, 2)}, Price diff: {round(abs(option.mark_price - black_scholes_price) * 100 / black_scholes_price, 2)}%")
-                            puts.append(option)
-                        else:
-                            raise Exception("Option is neither a call nor a put")
+                        
+                        print(f"Market price: ${option.mark_price}, Black-Scholes: ${round(black_scholes_price, 2)}, Price diff: {round((option.mark_price - black_scholes_price) * 100 / black_scholes_price, 2)}%")
                     else:
                         continue
                     print()
