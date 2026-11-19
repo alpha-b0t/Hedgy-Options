@@ -1,0 +1,15 @@
+asset:
+  company: SK Hynix
+  ticker: 000660.KS
+  currency: KRW
+  exchange: KRX
+data:
+  start_date: 2015-01-01
+  raw_dir: data/raw
+  processed_dir: data/processed
+  reports_dir: reports
+  timezone: Asia/Seoul
+volatility:
+  annualization_days: 252
+  ewma_lambda: 0.94
+  horizons: [5, 20, 60]
