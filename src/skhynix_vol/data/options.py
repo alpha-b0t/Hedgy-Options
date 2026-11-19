@@ -1,0 +1,106 @@
+"""Import and normalize historical option quote files supplied by a provider."""
+from __future__ import annotations
+
+from datetime import datetime, timezone
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+REQUIRED_OPTION_COLUMNS = ("date", "underlying", "expiry", "option_type", "strike",
+                           "bid", "ask", "underlying_close", "implied_volatility")
+
+
+def normalize_option_quotes(frame: pd.DataFrame, iv_units: str = "decimal",
+                            source: str = "user_file") -> pd.DataFrame:
+    """Validate provider quotes; normalize IV to a decimal without fabricating data.
+
+    `iv_units` must be explicitly `decimal` or `percent`. Forward prices remain
+    missing unless supplied by the source; callers may request the documented
+    spot/carry approximation later when constructing a surface.
+    """
+    if iv_units not in {"decimal", "percent"}:
+        raise ValueError("iv_units must be 'decimal' or 'percent'")
+    data = frame.copy()
+    data.columns = [str(c).strip().lower().replace(" ", "_") for c in data.columns]
+    aliases = {"expiration": "expiry", "expiration_date": "expiry", "type": "option_type",
+               "iv": "implied_volatility", "spot": "underlying_close", "openinterest": "open_interest",
+               "risk_free": "risk_free_rate", "forward": "forward_price"}
+    data = data.rename(columns={c: aliases.get(c, c) for c in data.columns})
+    missing = set(REQUIRED_OPTION_COLUMNS) - set(data.columns)
+    if missing:
+        raise ValueError(f"Option quotes missing required columns: {', '.join(sorted(missing))}")
+    for col in ("date", "expiry"):
+        parsed = pd.to_datetime(data[col], errors="coerce")
+        if parsed.dt.tz is not None:
+            parsed = parsed.dt.tz_convert("Asia/Seoul").dt.tz_localize(None)
+        data[col] = parsed.dt.normalize()
+    if data[["date", "expiry"]].isna().any().any():
+        raise ValueError("Option quotes contain invalid observation or expiry dates")
+    data["option_type"] = data.option_type.astype(str).str.lower().str.strip()
+    data["option_type"] = data.option_type.replace({"c": "call", "p": "put"})
+    if not data.option_type.isin(["call", "put"]).all():
+        raise ValueError("option_type must contain call/put or C/P")
+    numeric = ["strike", "bid", "ask", "underlying_close", "implied_volatility"]
+    for col in numeric:
+        data[col] = pd.to_numeric(data[col], errors="coerce")
+    if data[numeric].isna().any().any():
+        raise ValueError("Required option quote fields contain missing or non-numeric values")
+    if iv_units == "percent":
+        data["implied_volatility"] /= 100.0
+    if (data[["strike", "underlying_close"]] <= 0).any().any():
+        raise ValueError("Strike and underlying_close must be positive")
+    if (data[["bid", "ask"]] < 0).any().any():
+        raise ValueError("Option bid and ask cannot be negative")
+    if ((data.implied_volatility <= 0) | (data.implied_volatility > 5.0)).any():
+        raise ValueError("Implied volatility must be in (0, 5]; if source IV is percent, pass iv_units='percent'")
+    for optional in ("risk_free_rate", "dividend_yield"):
+        if optional in data:
+            data[optional] = pd.to_numeric(data[optional], errors="coerce")
+    if "quote_timestamp" in data:
+        data["quote_timestamp"] = pd.to_datetime(data.quote_timestamp, errors="coerce", utc=True)
+    if (data.expiry <= data.date).any():
+        raise ValueError("Option expiry must be after its observation date")
+    data["quote_quality_flag"] = np.where(data.ask < data.bid, "crossed_market", "ok")
+    data["dte"] = (data.expiry - data.date).dt.days
+    data["tenor_years"] = data.dte / 365.0
+    data["bid_ask_spread"] = data.ask - data.bid
+    data["relative_spread"] = np.where((data.ask + data.bid) > 0,
+        data.bid_ask_spread / ((data.ask + data.bid) / 2.0), np.nan)
+    data["source"] = source
+    data["retrieval_timestamp"] = pd.Timestamp.now(tz="UTC")
+    for col, default in (("volume", np.nan), ("open_interest", np.nan),
+                         ("risk_free_rate", np.nan), ("dividend_yield", np.nan),
+                         ("forward_price", np.nan), ("contract_multiplier", np.nan)):
+        if col not in data:
+            data[col] = default
+        data[col] = pd.to_numeric(data[col], errors="coerce")
+    data["log_forward_moneyness"] = np.nan
+    data["iv_units"] = "decimal"
+    return data.sort_values(["date", "expiry", "option_type", "strike"]).reset_index(drop=True)
+
+
+def load_option_file(path: str | Path, iv_units: str = "decimal") -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Load CSV/Parquet input and return untouched source data plus normalized quotes."""
+    path = Path(path)
+    if path.suffix.lower() == ".csv":
+        raw = pd.read_csv(path)
+    elif path.suffix.lower() in {".parquet", ".pq"}:
+        raw = pd.read_parquet(path)
+    else:
+        raise ValueError("Options input must be CSV or Parquet")
+    return raw, normalize_option_quotes(raw, iv_units=iv_units, source=f"file:{path.name}")
+
+
+def save_option_quotes(raw: pd.DataFrame, normalized: pd.DataFrame,
+                       raw_dir: str | Path = "data/raw",
+                       processed_dir: str | Path = "data/processed") -> tuple[Path, Path]:
+    """Store provider input separately from normalized quotes as Parquet."""
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    raw_path = Path(raw_dir) / f"option_quotes_{stamp}.parquet"
+    processed_path = Path(processed_dir) / "option_quotes.parquet"
+    raw_path.parent.mkdir(parents=True, exist_ok=True)
+    processed_path.parent.mkdir(parents=True, exist_ok=True)
+    raw.to_parquet(raw_path, index=False)
+    normalized.to_parquet(processed_path, index=False)
+    return raw_path, processed_path

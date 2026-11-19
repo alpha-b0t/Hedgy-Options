@@ -73,3 +73,40 @@ def walk_forward_rv(data: pd.DataFrame, horizons: tuple[int, ...] = (5, 20, 60),
                                 "n_train": int(group.n_train.iloc[0]),
                                 **forecast_metrics(group.actual_rv.to_numpy(), group[model].to_numpy())})
     return pred, pd.DataFrame(metric_rows)
+
+
+def forecast_latest_rv(data: pd.DataFrame, horizons: tuple[int, ...] = (5, 20, 60)) -> pd.DataFrame:
+    """Fit on all fully observed labels and forecast forward from the latest close.
+
+    Labels at the right edge are naturally omitted from training because their
+    future return windows are incomplete. Forecast date is the latest close;
+    horizons count subsequent observed trading sessions.
+    """
+    frame = data.copy()
+    if "date" not in frame:
+        raise ValueError("data must contain a date column")
+    frame["date"] = pd.to_datetime(frame.date)
+    frame = frame.sort_values("date").reset_index(drop=True)
+    if frame.empty or frame.date.isna().any() or frame.date.duplicated().any():
+        raise ValueError("data must have non-empty, valid, unique dates")
+    latest = frame.iloc[[-1]]
+    latest_date = latest.date.iloc[0]
+    records = []
+    for horizon in horizons:
+        target = f"target_rv_{horizon}d"
+        if target not in frame:
+            raise ValueError(f"Missing target column {target}")
+        train = frame.dropna(subset=[target, "rv_1", "rv_5", "rv_20", "rv_60"])
+        if len(train) <= 4:
+            raise ValueError(f"Insufficient labeled observations for {horizon}-session forecast")
+        if latest[["rv_1", "rv_5", "rv_20", "rv_60"]].isna().to_numpy().any():
+            raise ValueError("Latest row is missing one or more HAR-RV features")
+        beta = fit_har_rv(train, target)
+        har = float(max(predict_har_rv(latest, beta)[0], 0.0))
+        records.append({"as_of_date": latest_date, "horizon_sessions": horizon,
+            "har_rv_forecast": har, "rolling_rv_forecast": float(latest[f"rv_{horizon}"].iloc[0]),
+            "ewma_vol_forecast": float(latest.ewma_vol_20.iloc[0]),
+            "training_start": train.date.min(), "training_end": train.date.max(),
+            "n_train": len(train), "har_intercept": beta[0], "har_beta_rv_1": beta[1],
+            "har_beta_rv_5": beta[2], "har_beta_rv_20": beta[3], "har_beta_rv_60": beta[4]})
+    return pd.DataFrame(records)
