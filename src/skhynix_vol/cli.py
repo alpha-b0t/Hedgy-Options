@@ -8,6 +8,7 @@ import pandas as pd
 from skhynix_vol.data.prices import download_prices, save_price_data
 from skhynix_vol.data.options import load_option_file, save_option_quotes
 from skhynix_vol.evaluation.walk_forward import forecast_latest_rv, walk_forward_rv
+from skhynix_vol.evaluation.iv_walk_forward import walk_forward_iv
 from skhynix_vol.features.implied import build_iv_surface, forecast_next_iv_surface
 from skhynix_vol.features.realized import build_realized_dataset
 from skhynix_vol.strategies.backtest import backtest_straddles
@@ -124,6 +125,29 @@ def make_iv_surface(quote_path: str, spot_forward_approximation: bool,
         print(f"Saved image: {image_path}")
 
 
+def evaluate_iv_surface(quote_path: str, spot_forward_approximation: bool,
+                        n_components: int, min_training_dates: int) -> None:
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}; import provider quotes first")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        from skhynix_vol.data.options import normalize_option_quotes
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    predictions, metrics = walk_forward_iv(surface, n_components=n_components,
+                                            min_training_dates=min_training_dates)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    predictions.to_csv(out / "iv_surface_walk_forward_predictions.csv", index=False)
+    metrics.to_csv(out / "iv_surface_walk_forward_metrics.csv", index=False)
+    if metrics.empty:
+        print("No IV walk-forward folds met the minimum coverage requirements.")
+    else:
+        summary_cols = ["mae", "rmse", "atm_mae", "downside_skew_mae", "upside_skew_mae"]
+        print(metrics.groupby("model")[summary_cols].mean().to_string())
+    print("Saved IV out-of-sample predictions and metrics under reports/.")
+
+
 def backtest(quotes_path: str, predictions_path: str, prices_path: str,
              horizons: list[int], min_vol_edge: float, fee_per_contract: float,
              contract_multiplier: float | None) -> None:
@@ -168,6 +192,11 @@ def main() -> None:
     ivf.add_argument("--quotes", default="data/processed/option_quotes.parquet")
     ivf.add_argument("--spot-forward-approximation", action="store_true", help="Use documented spot/carry approximation when forward is absent")
     ivf.add_argument("--n-components", type=int, default=3)
+    ive = commands.add_parser("evaluate-iv", help="Run leakage-safe next-session IV surface evaluation")
+    ive.add_argument("--quotes", default="data/processed/option_quotes.parquet")
+    ive.add_argument("--spot-forward-approximation", action="store_true")
+    ive.add_argument("--n-components", type=int, default=3)
+    ive.add_argument("--min-training-dates", type=int, default=8)
     bt = commands.add_parser("backtest", help="Simulate historical quote-based long/short straddles")
     bt.add_argument("--quotes", default="data/processed/option_quotes.parquet")
     bt.add_argument("--forecasts", default="reports/rv_walk_forward_predictions.csv")
@@ -192,6 +221,9 @@ def main() -> None:
     elif args.command == "forecast-iv":
         make_iv_surface(args.quotes, args.spot_forward_approximation, forecast=True,
                         n_components=args.n_components)
+    elif args.command == "evaluate-iv":
+        evaluate_iv_surface(args.quotes, args.spot_forward_approximation,
+                            args.n_components, args.min_training_dates)
     elif args.command == "backtest":
         horizons = [int(x.strip()) for x in args.horizons.split(",") if x.strip()]
         if not horizons or any(h < 1 for h in horizons):

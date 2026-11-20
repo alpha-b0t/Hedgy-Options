@@ -4,6 +4,7 @@ import pytest
 
 from skhynix_vol.data.options import normalize_option_quotes
 from skhynix_vol.evaluation.walk_forward import forecast_latest_rv
+from skhynix_vol.evaluation.iv_walk_forward import walk_forward_iv
 from skhynix_vol.features.implied import build_iv_surface, forecast_next_iv_surface
 from skhynix_vol.strategies.backtest import backtest_straddles
 from skhynix_vol.visualization.iv_charts import plot_iv_surface
@@ -46,6 +47,15 @@ def test_surface_forecast_and_image_keep_supported_cells(tmp_path):
     assert forecast.implied_volatility_forecast.ge(0).all()
     image = plot_iv_surface(forecast, tmp_path / "iv.png", value_column="implied_volatility_forecast")
     assert image.exists() and image.stat().st_size > 0
+
+
+def test_iv_walk_forward_scores_only_future_surface_dates():
+    surface = build_iv_surface(surface_quotes())
+    predictions, metrics = walk_forward_iv(surface, min_training_dates=8)
+    assert not predictions.empty and not metrics.empty
+    assert set(metrics.model) == {"PCA_VAR1", "persistence", "historical_mean"}
+    assert (predictions.as_of_date < predictions.date).all()
+    assert predictions.date.nunique() == 4
 
 
 def test_surface_requires_explicit_forward_approximation():

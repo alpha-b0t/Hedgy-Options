@@ -111,7 +111,15 @@ With at least eight dates and enough repeated grid coverage, forecast the next-s
 skhynix-vol forecast-iv --spot-forward-approximation
 ```
 
-The forecast grid is exported to `reports/iv_surface_forecast.csv` and rendered to `reports/iv_surface_forecast.png`. This interpolated surface is not constrained to be arbitrage-free. Forecast accuracy should be evaluated chronologically before economic interpretation.
+The forecast grid is exported to `reports/iv_surface_forecast.csv` and rendered to `reports/iv_surface_forecast.png`. This interpolated surface is not constrained to be arbitrage-free; use the chronological evaluator before economic interpretation.
+
+Evaluate one-step-ahead IV surfaces on expanding chronological folds against persistence and historical-mean baselines:
+
+```bash
+skhynix-vol evaluate-iv --spot-forward-approximation
+```
+
+Each target-date surface is forecast using earlier dates only. Outputs are `reports/iv_surface_walk_forward_predictions.csv` and `reports/iv_surface_walk_forward_metrics.csv`; metrics include surface MAE/RMSE, ATM error, and downside/upside skew error where those grid points are supported.
 
 The quote-based historical benchmark is an ATM straddle strategy driven by out-of-sample HAR-RV predictions. It selects a same-strike call/put pair with expiry near the forecast horizon, buys when forecast RV exceeds IV by the edge threshold, and sells when it is lower. It executes entries/exits at bid/ask and charges the supplied per-leg fee. Contract multiplier must be present in the quote file or passed explicitly:
 
