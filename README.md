@@ -35,7 +35,7 @@ After downloading, run the first chronological forecasting comparison:
 skhynix-vol evaluate
 ```
 
-This runs annual expanding-window folds for rolling-volatility, EWMA, and HAR-RV forecasts at 5-, 20-, and 60-session horizons. Five initial calendar years are reserved for the first training window. Training labels whose forward return windows touch the test period are purged. Predictions and fold metrics are written under `reports/`.
+This runs annual expanding-window folds for rolling-volatility, EWMA, HAR-RV, GARCH(1,1), EGARCH(1,1,1), and GJR-GARCH(1,1) forecasts at 5-, 20-, and 60-session horizons. Five initial calendar years are reserved for the first training window. HAR training labels whose forward return windows touch the test period are purged. GARCH parameters are estimated on prior returns only; conditional variance then updates sequentially with observed test-period returns. EGARCH multi-step forecasts use seeded simulation. Baseline and GARCH predictions and fold metrics are written separately under `reports/`.
 
 Fit the RV baselines on all available labeled history and export forecasts from the latest close:
 
@@ -43,7 +43,25 @@ Fit the RV baselines on all available labeled history and export forecasts from 
 skhynix-vol forecast-rv
 ```
 
-This writes `reports/rv_forecasts_latest.csv` with 5-, 20-, and 60-session HAR-RV forecasts plus rolling and EWMA benchmarks. The as-of date is the last observed close; future labels are never used as features.
+This writes `reports/rv_forecasts_latest.csv` with 5-, 20-, and 60-session HAR-RV forecasts plus rolling and EWMA benchmarks, and `reports/rv_garch_forecasts_latest.csv` with the three GARCH-family estimates. The as-of date is the last observed close; future labels are never used as features.
+
+## Phase 3: machine-learning RV forecasts
+
+Run expanding-window, annual out-of-sample model comparisons and export predictions and fold metrics:
+
+```bash
+skhynix-vol evaluate-ml
+```
+
+The evaluator fits Random Forest, histogram gradient boosting, and RBF-SVR on each training fold. XGBoost joins automatically when installed with `python -m pip install -e '.[ml-boosting]'`; LightGBM is available with `python -m pip install -e '.[ml-lightgbm]'`. All preprocessing is fit inside each fold, features are limited to information available at the forecast close, and training rows are purged by the target horizon. Fixed model settings and a fixed random seed are used; the reported test years are not used for tuning. Outputs are `reports/rv_ml_walk_forward_predictions.csv` and `reports/rv_ml_walk_forward_metrics.csv`.
+
+Fit each installed model on all available labeled history and export the latest-close forecasts:
+
+```bash
+skhynix-vol forecast-ml
+```
+
+The output is `reports/rv_ml_forecasts_latest.csv`. A model is a forecast benchmark, not evidence of trading profitability; compare all models on the same historical folds and inspect the per-year metrics.
 
 The downloader uses Yahoo Finance via `yfinance`, requests unadjusted OHLC, adjusted close, dividends, and splits, and fails clearly if the provider returns no data. The date range, actual observation coverage, and generated paths are printed after success. Yahoo Finance is an initial research source, not an exchange-grade licensed feed; verify important observations against KRX or a suitable vendor before using them in consequential research.
 
@@ -81,7 +99,7 @@ Trailing windows count observed daily rows (sessions), not calendar days. Featur
 pytest
 ```
 
-The current implementation includes latest-date RV forecasts, historical RV evaluation, a provider-file IV-surface workflow, and a quote-based straddle simulation engine. GARCH variants, machine-learning models, arbitrage-aware surface constraints, and automatic discovery of a reliable KRX options data feed remain future work.
+The current implementation includes latest-date RV forecasts, chronological RV evaluation with GARCH-family models, a machine-learning RV comparison, a provider-file IV-surface workflow, and a quote-based straddle simulation engine. Arbitrage-aware surface constraints and automatic discovery of a reliable KRX options data feed remain future work.
 
 ## Options, IV surfaces, and research backtests
 

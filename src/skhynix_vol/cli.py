@@ -9,6 +9,8 @@ from skhynix_vol.data.prices import download_prices, save_price_data
 from skhynix_vol.data.options import load_option_file, save_option_quotes
 from skhynix_vol.evaluation.walk_forward import forecast_latest_rv, walk_forward_rv
 from skhynix_vol.evaluation.iv_walk_forward import walk_forward_iv
+from skhynix_vol.evaluation.garch_walk_forward import forecast_latest_garch, walk_forward_garch
+from skhynix_vol.evaluation.ml_walk_forward import forecast_latest_ml, walk_forward_ml
 from skhynix_vol.features.implied import build_iv_surface, forecast_next_iv_surface
 from skhynix_vol.features.realized import build_realized_dataset
 from skhynix_vol.strategies.backtest import backtest_straddles
@@ -43,9 +45,12 @@ def evaluate() -> None:
     prices = pd.read_parquet(path)
     features = build_realized_dataset(prices)
     predictions, metrics = walk_forward_rv(features)
+    garch_predictions, garch_metrics = walk_forward_garch(features)
     out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
     predictions.to_csv(out / "rv_walk_forward_predictions.csv", index=False)
     metrics.to_csv(out / "rv_walk_forward_metrics.csv", index=False)
+    garch_predictions.to_csv(out / "rv_garch_walk_forward_predictions.csv", index=False)
+    garch_metrics.to_csv(out / "rv_garch_walk_forward_metrics.csv", index=False)
     metadata = {
         "ticker": "000660.KS",
         "source": "Yahoo Finance (yfinance), as recorded in processed daily prices",
@@ -56,7 +61,8 @@ def evaluate() -> None:
         "evaluation": {"folds": "expanding calendar-year test folds", "min_train_years": 5,
                        "purge_sessions": [5, 20, 60], "models": ["rolling_rv", "ewma_vol", "har_rv"],
                        "har_features": ["rv_1", "rv_5", "rv_20", "rv_60"],
-                       "ewma_lambda": 0.94, "metrics": ["mae", "rmse", "qlike_variance_scale", "r2", "directional_accuracy"]},
+                       "ewma_lambda": 0.94, "garch_models": ["garch", "egarch", "gjr_garch"],
+                       "metrics": ["mae", "rmse", "qlike_variance_scale", "r2", "directional_accuracy"]},
     }
     (out / "rv_walk_forward_run.json").write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
     if metrics.empty:
@@ -64,7 +70,27 @@ def evaluate() -> None:
     else:
         summary = metrics.groupby(["horizon", "model"])[["mae", "rmse", "qlike"]].mean()
         print(summary.to_string())
+        if not garch_metrics.empty:
+            print("\nGARCH family (annual-fold mean):")
+            print(garch_metrics.groupby(["horizon", "model"])[["mae", "rmse", "qlike"]].mean().to_string())
         print("Saved annual fold predictions and metrics under reports/.")
+
+
+def evaluate_ml() -> None:
+    """Run fold-local ML models and save their out-of-sample forecasts."""
+    path = Path("data/processed/daily_prices.parquet")
+    if not path.exists():
+        raise FileNotFoundError("Run `skhynix-vol download` before `skhynix-vol evaluate-ml`")
+    features = build_realized_dataset(pd.read_parquet(path))
+    predictions, metrics = walk_forward_ml(features)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    predictions.to_csv(out / "rv_ml_walk_forward_predictions.csv", index=False)
+    metrics.to_csv(out / "rv_ml_walk_forward_metrics.csv", index=False)
+    if metrics.empty:
+        print("No ML walk-forward folds were available.")
+    else:
+        print(metrics.groupby(["horizon", "model"])[["mae", "rmse", "qlike"]].mean().to_string())
+    print("Saved ML fold predictions and metrics under reports/.")
 
 
 def forecast_rv() -> None:
@@ -75,11 +101,30 @@ def forecast_rv() -> None:
     prices = pd.read_parquet(path)
     dataset = build_realized_dataset(prices)
     forecasts = forecast_latest_rv(dataset)
+    garch_forecasts = forecast_latest_garch(dataset)
     out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
     target = out / "rv_forecasts_latest.csv"
     forecasts.to_csv(target, index=False)
+    garch_target = out / "rv_garch_forecasts_latest.csv"
+    garch_forecasts.to_csv(garch_target, index=False)
     print(f"As-of {forecasts.as_of_date.iloc[0].date()}:\n{forecasts[['horizon_sessions','har_rv_forecast','rolling_rv_forecast','ewma_vol_forecast']].to_string(index=False)}")
     print(f"Saved forecasts to {target}")
+    print("Latest GARCH-family forecasts:")
+    print(garch_forecasts[["horizon_sessions", "model", "forecast_rv"]].to_string(index=False))
+    print(f"Saved GARCH forecasts to {garch_target}")
+
+
+def forecast_ml() -> None:
+    path = Path("data/processed/daily_prices.parquet")
+    if not path.exists():
+        raise FileNotFoundError("Run `skhynix-vol download` before `skhynix-vol forecast-ml`")
+    features = build_realized_dataset(pd.read_parquet(path))
+    forecasts = forecast_latest_ml(features)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    target = out / "rv_ml_forecasts_latest.csv"
+    forecasts.to_csv(target, index=False)
+    print(forecasts[["horizon_sessions", "model", "forecast_rv"]].to_string(index=False))
+    print(f"Saved latest ML forecasts to {target}")
 
 
 def import_options(path: str, iv_units: str) -> None:
@@ -181,6 +226,8 @@ def main() -> None:
     download.add_argument("--end", default=None, help="Last requested date (exclusive; default today)")
     commands.add_parser("evaluate", help="Run expanding-window RV baseline evaluation")
     commands.add_parser("forecast-rv", help="Fit RV baselines and export current forward forecasts")
+    commands.add_parser("evaluate-ml", help="Run chronological walk-forward ML model comparison")
+    commands.add_parser("forecast-ml", help="Fit ML models and export current forward forecasts")
     imp = commands.add_parser("import-options", help="Import a provider-supplied options CSV or Parquet")
     imp.add_argument("path")
     imp.add_argument("--iv-units", choices=["decimal", "percent"], default="decimal")
@@ -214,6 +261,10 @@ def main() -> None:
         evaluate()
     elif args.command == "forecast-rv":
         forecast_rv()
+    elif args.command == "evaluate-ml":
+        evaluate_ml()
+    elif args.command == "forecast-ml":
+        forecast_ml()
     elif args.command == "import-options":
         import_options(args.path, args.iv_units)
     elif args.command == "iv-surface":
