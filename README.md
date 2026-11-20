@@ -158,7 +158,7 @@ The report `reports/option_quote_iv_validation.csv` preserves provider IV, adds 
 The quote-based historical benchmark is an ATM straddle strategy driven by out-of-sample HAR-RV predictions. It selects a same-strike call/put pair with expiry near the forecast horizon, buys when forecast RV exceeds IV by the edge threshold, and sells when it is lower. It executes entries/exits at bid/ask and charges the supplied per-leg fee. Use KRX's 10-share multiplier for SK hynix single-stock options; the override remains available for other products:
 
 ```bash
-skhynix-vol backtest --contract-multiplier 100 --fee-per-contract 10
+skhynix-vol backtest --contract-multiplier 10 --fee-per-contract 10
 ```
 
 This simulator requires historical options quotes aligned to both entry and exit dates; without them it cannot produce actual backtest results. It does not delta-hedge, model margin, slippage beyond quoted spreads, financing, or exchange-specific fees. Short straddles have potentially very large losses. Results are hypothetical research output, not a profitability claim. Trade ledger and summary are exported as `reports/straddle_backtest_trades.csv` and `reports/straddle_backtest_summary.csv`.
