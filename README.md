@@ -101,6 +101,12 @@ pytest
 
 The current implementation includes latest-date RV forecasts, chronological RV evaluation with GARCH-family models, a machine-learning RV comparison, a provider-file IV-surface workflow, and a quote-based straddle simulation engine. Arbitrage-aware surface constraints and automatic discovery of a reliable KRX options data feed remain future work.
 
+## Phase 4: KRX options and implied volatility
+
+The target instrument is KRX single-stock options on SK hynix (000660). KRX specifies a 10-share contract, European exercise, cash settlement, and monthly contracts. SK hynix is among the single-stock option underlyings; the planned weekly options for SK hynix and three other stocks were postponed in June 2026. Reconfirm the live KRX contract list and current listing status when acquiring a new dataset. See [KRX single-stock option specifications](https://global.krx.co.kr/contents/GLB/02/0201/0201040402/GLB0201040402.jsp) and [Yonhap's report on the weekly-options postponement](https://en.yna.co.kr/view/AEN20260625004000320).
+
+The code applies the verified 10-share multiplier and checks imported multiplier conflicts. It imports historical observations from a provider CSV or Parquet file; it does not scrape KRX or bypass vendor licensing. Yahoo Finance is not an options source. The quote file must identify the underlying, expiry, side, strike, bid, ask, spot, and source IV. Add a forward (preferred) or carry fields (rate and dividend yield) for independent IV recalculation.
+
 ## Options, IV surfaces, and research backtests
 
 Yahoo Finance is not used as an options source. Import a historical quote file from a licensed or otherwise verified provider. CSV or Parquet input must contain `date`, `underlying`, `expiry`, `option_type`, `strike`, `bid`, `ask`, `underlying_close`, and `implied_volatility`. Optional columns include `forward_price`, `risk_free_rate`, `dividend_yield`, `volume`, `open_interest`, `contract_multiplier`, and `quote_timestamp`. Rates, yields, and IV are decimals internally. Explicitly state source IV units when importing:
@@ -123,13 +129,15 @@ skhynix-vol iv-surface --spot-forward-approximation
 
 That approximation uses `F=S*exp((r-q)T)` and assumes missing rate/dividend yields are zero. The assumption is recorded with the surface values. The default grid uses log-forward-moneyness from -0.30 to +0.30 and tenors from 7 to 365 calendar days. Unsupported cells are not extrapolated. The surface values are saved in `data/processed/iv_surface.parquet` and the chart in `reports/iv_surface_YYYYMMDD.png`.
 
-With at least eight dates and enough repeated grid coverage, forecast the next-session surface using training-only mean imputation, PCA factors, and a VAR(1) factor forecast:
+With at least eight dates and enough repeated grid coverage, export historical PCA scores/loadings and forecast the next-session surface by forecasting PCA factor changes with an AR(1) benchmark:
 
 ```bash
 skhynix-vol forecast-iv --spot-forward-approximation
 ```
 
-The forecast grid is exported to `reports/iv_surface_forecast.csv` and rendered to `reports/iv_surface_forecast.png`. This interpolated surface is not constrained to be arbitrage-free; use the chronological evaluator before economic interpretation.
+Run `skhynix-vol iv-factors --spot-forward-approximation` to export historical factor scores and loadings. These are saved as `reports/iv_surface_pca_scores.csv` and `reports/iv_surface_pca_loadings.csv`. The forecast command also writes `reports/iv_surface_factor_change_forecast.csv`.
+
+The forecast grid is exported to `reports/iv_surface_forecast.csv` and rendered to `reports/iv_surface_forecast.png`. This interpolated surface is not constrained to be arbitrage-free; use the chronological evaluator before economic interpretation. PCA components are sign-indeterminate, so interpret them from exported loadings rather than assigning level/skew/curvature labels automatically.
 
 Evaluate one-step-ahead IV surfaces on expanding chronological folds against persistence and historical-mean baselines:
 
@@ -137,9 +145,17 @@ Evaluate one-step-ahead IV surfaces on expanding chronological folds against per
 skhynix-vol evaluate-iv --spot-forward-approximation
 ```
 
-Each target-date surface is forecast using earlier dates only. Outputs are `reports/iv_surface_walk_forward_predictions.csv` and `reports/iv_surface_walk_forward_metrics.csv`; metrics include surface MAE/RMSE, ATM error, and downside/upside skew error where those grid points are supported.
+Each target-date surface is forecast using earlier dates only. Outputs are `reports/iv_surface_walk_forward_predictions.csv` and `reports/iv_surface_walk_forward_metrics.csv`; metrics include surface MAE/RMSE, ATM error, and downside/upside skew error where those grid points are supported. The PCA model forecasts changes in factor scores; persistence and historical mean remain comparison baselines.
 
-The quote-based historical benchmark is an ATM straddle strategy driven by out-of-sample HAR-RV predictions. It selects a same-strike call/put pair with expiry near the forecast horizon, buys when forecast RV exceeds IV by the edge threshold, and sells when it is lower. It executes entries/exits at bid/ask and charges the supplied per-leg fee. Contract multiplier must be present in the quote file or passed explicitly:
+Validate imported quotes and independently reprice provider IV from the bid/ask midpoint. The calculation needs a source forward and risk-free rate, or spot, risk-free rate, and dividend yield:
+
+```bash
+skhynix-vol validate-options provider_quotes.csv --iv-units percent
+```
+
+The report `reports/option_quote_iv_validation.csv` preserves provider IV, adds calculated IV and the difference, and flags crossed quotes, no-arbitrage violations, missing carry inputs, and discrepancies over five volatility points. Missing carry inputs are reported rather than filled. Surface construction continues to use the provider IV; review validation flags and exclude suspect records as appropriate before research use.
+
+The quote-based historical benchmark is an ATM straddle strategy driven by out-of-sample HAR-RV predictions. It selects a same-strike call/put pair with expiry near the forecast horizon, buys when forecast RV exceeds IV by the edge threshold, and sells when it is lower. It executes entries/exits at bid/ask and charges the supplied per-leg fee. Use KRX's 10-share multiplier for SK hynix single-stock options; the override remains available for other products:
 
 ```bash
 skhynix-vol backtest --contract-multiplier 100 --fee-per-contract 10

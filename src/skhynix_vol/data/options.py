@@ -69,7 +69,7 @@ def normalize_option_quotes(frame: pd.DataFrame, iv_units: str = "decimal",
         data.bid_ask_spread / ((data.ask + data.bid) / 2.0), np.nan)
     data["source"] = source
     data["retrieval_timestamp"] = pd.Timestamp.now(tz="UTC")
-    for col, default in (("volume", np.nan), ("open_interest", np.nan),
+    for col, default in (("last", np.nan), ("volume", np.nan), ("open_interest", np.nan),
                          ("risk_free_rate", np.nan), ("dividend_yield", np.nan),
                          ("forward_price", np.nan), ("contract_multiplier", np.nan)):
         if col not in data:
@@ -78,6 +78,29 @@ def normalize_option_quotes(frame: pd.DataFrame, iv_units: str = "decimal",
     data["log_forward_moneyness"] = np.nan
     data["iv_units"] = "decimal"
     return data.sort_values(["date", "expiry", "option_type", "strike"]).reset_index(drop=True)
+
+
+def attach_krx_single_stock_option_spec(quotes: pd.DataFrame,
+                                        underlying: str = "000660") -> pd.DataFrame:
+    """Attach KRX SK hynix product facts and validate supplied multipliers."""
+    from skhynix_vol.data.instruments import instrument_spec
+    spec = instrument_spec(underlying)
+    data = quotes.copy()
+    if "underlying" in data:
+        names = data.underlying.astype(str).str.lower()
+        known = names.str.contains(r"000660|sk\s*hynix|^660$", regex=True)
+        if not known.all():
+            raise ValueError("KRX SK hynix specifications can only be attached to 000660 / SK hynix quotes")
+    multiplier = pd.to_numeric(data.get("contract_multiplier", pd.Series(np.nan, index=data.index)), errors="coerce")
+    conflict = multiplier.notna() & ~np.isclose(multiplier, float(spec["contract_multiplier"]))
+    if conflict.any():
+        raise ValueError("KRX SK hynix single-stock options use a 10-share contract multiplier; source conflicts found")
+    data["contract_multiplier"] = multiplier.fillna(spec["contract_multiplier"])
+    data["exchange"] = spec["exchange"]
+    data["exchange_product"] = spec["product"]
+    data["exercise_style"] = spec["exercise_style"]
+    data["settlement_type"] = spec["settlement_type"]
+    return data
 
 
 def load_option_file(path: str | Path, iv_units: str = "decimal") -> tuple[pd.DataFrame, pd.DataFrame]:

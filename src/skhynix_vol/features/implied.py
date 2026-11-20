@@ -107,7 +107,7 @@ def _bracketed_bilinear(points: pd.DataFrame, k_grid: np.ndarray,
 def forecast_next_iv_surface(surface: pd.DataFrame, n_components: int = 3,
                              min_cell_coverage: float = 0.60,
                              min_row_coverage: float = 0.30) -> pd.DataFrame:
-    """Forecast next-session surface with training-only PCA plus VAR(1) factors.
+    """Forecast next-session surface from AR(1) forecasts of PCA factor changes.
 
     Only grid cells observed in at least `min_cell_coverage` of training days
     are retained. Missing training cells are mean-imputed using training-only
@@ -139,9 +139,13 @@ def forecast_next_iv_surface(surface: pd.DataFrame, n_components: int = 3,
     scores = u[:, :components_count] * singular[:components_count]
     if len(scores) < 3:
         raise ValueError("At least three complete surface observations are required")
-    design = np.column_stack([np.ones(len(scores) - 1), scores[:-1]])
-    coefficients, *_ = np.linalg.lstsq(design, scores[1:], rcond=None)
-    next_scores = np.r_[1.0, scores[-1]] @ coefficients
+    # Forecast factor changes, then add the forecast change to the latest
+    # observed factor score. This directly targets the brief's Δ-factor goal.
+    changes = np.diff(scores, axis=0)
+    design = np.column_stack([np.ones(len(changes) - 1), changes[:-1]])
+    coefficients, *_ = np.linalg.lstsq(design, changes[1:], rcond=None)
+    next_change = np.r_[1.0, changes[-1]] @ coefficients
+    next_scores = scores[-1] + next_change
     prediction = center + next_scores @ components
     out = pd.DataFrame({"log_forward_moneyness": [c[0] for c in active],
         "tenor_days": [int(c[1]) for c in active], "implied_volatility_forecast": np.maximum(prediction, 0.0),
@@ -151,8 +155,58 @@ def forecast_next_iv_surface(surface: pd.DataFrame, n_components: int = 3,
     out["training_end"] = grid.index[-1]
     out["n_training_dates"] = len(grid)
     out["n_components"] = components_count
-    out["model"] = "PCA_VAR1"
+    out["model"] = "PCA_AR1_FACTOR_CHANGES"
+    for factor_index, value in enumerate(next_change, start=1):
+        out[f"factor_{factor_index}_change_forecast"] = float(value)
+        out[f"factor_{factor_index}_score_asof"] = float(scores[-1, factor_index - 1])
+        out[f"factor_{factor_index}_score_forecast"] = float(next_scores[factor_index - 1])
     if "forward_method" in data:
         methods = data.forward_method.dropna().unique()
         out["forward_method"] = methods[0] if len(methods) == 1 else "mixed"
     return out
+
+
+def iv_surface_pca_factors(surface: pd.DataFrame, n_components: int = 3,
+                           min_cell_coverage: float = 0.60,
+                           min_row_coverage: float = 0.30) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Return date-indexed PCA scores and grid-cell loadings for supported IV.
+
+    Missing cells are mean-imputed only after selecting cells and calculating
+    means from this supplied surface. Pass training data alone for evaluation.
+    """
+    required = {"date", "log_forward_moneyness", "tenor_days", "implied_volatility"}
+    if not required.issubset(surface.columns):
+        raise ValueError("Surface data is missing required grid columns")
+    data = surface.copy()
+    data["date"] = pd.to_datetime(data.date)
+    grid = data.pivot_table(index="date", columns=["log_forward_moneyness", "tenor_days"],
+                            values="implied_volatility", aggfunc="mean").sort_index()
+    coverage = grid.notna().mean(axis=0)
+    active = coverage[coverage >= min_cell_coverage].index
+    grid = grid.loc[:, active]
+    grid = grid.loc[grid.notna().mean(axis=1) >= min_row_coverage]
+    if len(grid) < 3 or grid.shape[1] < 2:
+        raise ValueError("Insufficient surface history for PCA factors")
+    x = grid.fillna(grid.mean(axis=0)).to_numpy(float)
+    centered = x - x.mean(axis=0)
+    u, singular, vt = np.linalg.svd(centered, full_matrices=False)
+    count = min(int(n_components), len(singular), grid.shape[1])
+    if count < 1:
+        raise ValueError("n_components must be positive")
+    scores = u[:, :count] * singular[:count]
+    variance = singular[:count] ** 2 / np.maximum((singular ** 2).sum(), 1e-15)
+    score_rows = []
+    for row_index, date in enumerate(grid.index):
+        row = {"date": date}
+        for factor_index in range(count):
+            row[f"factor_{factor_index + 1}"] = float(scores[row_index, factor_index])
+        score_rows.append(row)
+    loading_rows = []
+    for factor_index in range(count):
+        for cell_index, cell in enumerate(active):
+            loading_rows.append({"component": factor_index + 1,
+                "log_forward_moneyness": float(cell[0]), "tenor_days": int(cell[1]),
+                "loading": float(vt[factor_index, cell_index]),
+                "variance_explained": float(variance[factor_index]),
+                "historical_cell_coverage": float(coverage.loc[cell])})
+    return pd.DataFrame(score_rows), pd.DataFrame(loading_rows)

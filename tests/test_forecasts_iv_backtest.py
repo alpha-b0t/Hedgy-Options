@@ -53,7 +53,7 @@ def test_iv_walk_forward_scores_only_future_surface_dates():
     surface = build_iv_surface(surface_quotes())
     predictions, metrics = walk_forward_iv(surface, min_training_dates=8)
     assert not predictions.empty and not metrics.empty
-    assert set(metrics.model) == {"PCA_VAR1", "persistence", "historical_mean"}
+    assert set(metrics.model) == {"PCA_AR1_FACTOR_CHANGES", "persistence", "historical_mean"}
     assert (predictions.as_of_date < predictions.date).all()
     assert predictions.date.nunique() == 4
 

@@ -11,7 +11,7 @@ def walk_forward_iv(surface: pd.DataFrame, min_training_dates: int = 8,
                     min_cell_coverage: float = 0.60,
                     min_row_coverage: float = 0.30,
                     n_components: int = 3) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Compare persistence, training mean, and PCA/VAR(1) next-day forecasts.
+    """Compare persistence, training mean, and PCA AR(1) factor-change forecasts.
 
     Each forecast uses surfaces strictly earlier than the target observation.
     PCA, cell selection, and imputation are refit using only that training
@@ -21,7 +21,7 @@ def walk_forward_iv(surface: pd.DataFrame, min_training_dates: int = 8,
     if not required.issubset(surface.columns):
         raise ValueError("surface must contain date, moneyness, tenor, and IV columns")
     if min_training_dates < 8:
-        raise ValueError("min_training_dates must be at least 8 for the PCA/VAR model")
+        raise ValueError("min_training_dates must be at least 8 for the PCA factor-change model")
     data = surface.copy()
     data["date"] = pd.to_datetime(data.date).dt.normalize()
     if data.date.isna().any():
@@ -54,7 +54,7 @@ def walk_forward_iv(surface: pd.DataFrame, min_training_dates: int = 8,
         # Retain exactly the active keys represented by the PCA training fit.
         baseline = active_keys.merge(baseline, on=["log_forward_moneyness", "tenor_days"], how="inner")
         model_predictions = {
-            "PCA_VAR1": pca.rename(columns={"implied_volatility_forecast": "forecast"})[
+            "PCA_AR1_FACTOR_CHANGES": pca.rename(columns={"implied_volatility_forecast": "forecast"})[
                 ["log_forward_moneyness", "tenor_days", "forecast"]],
             "persistence": baseline.rename(columns={"persistence": "forecast"})[
                 ["log_forward_moneyness", "tenor_days", "forecast"]],
