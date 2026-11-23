@@ -1,4 +1,4 @@
-# SK Hynix Quantitative Volatility Research
+# SK Hynix Option Quantitative Volatility Research
 
 A reproducible Python research foundation for SK Hynix (KRX: 000660; Yahoo Finance: `000660.KS`). The initial pipeline downloads daily prices, validates and stores raw and normalized observations, and builds trailing realized-volatility features and forward 5-, 20-, and 60-session realized-volatility labels.
 
@@ -53,7 +53,7 @@ Run expanding-window, annual out-of-sample model comparisons and export predicti
 skhynix-vol evaluate-ml
 ```
 
-The evaluator fits Random Forest, histogram gradient boosting, and RBF-SVR on each training fold. XGBoost joins automatically when installed with `python -m pip install -e '.[ml-boosting]'`; LightGBM is available with `python -m pip install -e '.[ml-lightgbm]'`. All preprocessing is fit inside each fold, features are limited to information available at the forecast close, and training rows are purged by the target horizon. Fixed model settings and a fixed random seed are used; the reported test years are not used for tuning. Outputs are `reports/rv_ml_walk_forward_predictions.csv` and `reports/rv_ml_walk_forward_metrics.csv`.
+The evaluator fits Random Forest, histogram gradient boosting, RBF-SVR, and a compact feed-forward neural network (MLP) on each training fold. XGBoost joins automatically when installed with `python -m pip install -e '.[ml-boosting]'`; LightGBM is available with `python -m pip install -e '.[ml-lightgbm]'`. All preprocessing is fit inside each fold, features are limited to information available at the forecast close, and training rows are purged by the target horizon. Fixed model settings and a fixed random seed are used; the reported test years are not used for tuning. Outputs are `reports/rv_ml_walk_forward_predictions.csv` and `reports/rv_ml_walk_forward_metrics.csv`.
 
 Fit each installed model on all available labeled history and export the latest-close forecasts:
 
@@ -62,6 +62,16 @@ skhynix-vol forecast-ml
 ```
 
 The output is `reports/rv_ml_forecasts_latest.csv`. A model is a forecast benchmark, not evidence of trading profitability; compare all models on the same historical folds and inspect the per-year metrics.
+
+### Phase 5: neural RV benchmark
+
+The Phase 3 walk-forward suite includes a fold-local MLP neural network. For an optional recurrent model, install PyTorch and run the same `evaluate-ml` / `forecast-ml` commands:
+
+```bash
+python -m pip install -e '.[ml-deep]'
+```
+
+When PyTorch is available, an LSTM joins both commands automatically. It consumes 20-session sequences of the same eight close-known features; feature scaling and chronological early stopping are fit within each training fold. Training labels are purged by the forecast horizon, while earlier unlabeled feature rows may provide sequence context. Without the optional extra, the suite continues with its standard models and MLP.
 
 The downloader uses Yahoo Finance via `yfinance`, requests unadjusted OHLC, adjusted close, dividends, and splits, and fails clearly if the provider returns no data. The date range, actual observation coverage, and generated paths are printed after success. Yahoo Finance is an initial research source, not an exchange-grade licensed feed; verify important observations against KRX or a suitable vendor before using them in consequential research.
 
@@ -99,13 +109,35 @@ Trailing windows count observed daily rows (sessions), not calendar days. Featur
 pytest
 ```
 
-The current implementation includes latest-date RV forecasts, chronological RV evaluation with GARCH-family models, a machine-learning RV comparison, a provider-file IV-surface workflow, and a quote-based straddle simulation engine. Arbitrage-aware surface constraints and automatic discovery of a reliable KRX options data feed remain future work.
+The current implementation includes latest-date RV forecasts, chronological RV evaluation with GARCH-family models, a machine-learning and neural RV comparison, a provider-file IV-surface workflow, quote-level static-arbitrage diagnostics and surface projection, and a quote-based straddle simulation engine. Remaining work is connecting a licensed KRX options data source and validating the projection against genuine option chains; the synthetic fixture is only for interface verification.
 
 ## Phase 4: KRX options and implied volatility
 
 The target instrument is KRX single-stock options on SK hynix (000660). KRX specifies a 10-share contract, European exercise, cash settlement, and monthly contracts. SK hynix is among the single-stock option underlyings; the planned weekly options for SK hynix and three other stocks were postponed in June 2026. Reconfirm the live KRX contract list and current listing status when acquiring a new dataset. See [KRX single-stock option specifications](https://global.krx.co.kr/contents/GLB/02/0201/0201040402/GLB0201040402.jsp) and [Yonhap's report on the weekly-options postponement](https://en.yna.co.kr/view/AEN20260625004000320).
 
 The code applies the verified 10-share multiplier and checks imported multiplier conflicts. It imports historical observations from a provider CSV or Parquet file; it does not scrape KRX or bypass vendor licensing. Yahoo Finance is not an options source. The quote file must identify the underlying, expiry, side, strike, bid, ask, spot, and source IV. Add a forward (preferred) or carry fields (rate and dividend yield) for independent IV recalculation.
+
+For interface development only, generate a removable synthetic quote file from local price dates:
+
+```bash
+skhynix-vol generate-demo-options
+```
+
+The file is written to `data/demo_synthetic/options_quotes.csv`, outside the processed market-data directory. It carries `synthetic_data_flag=true` and `data_origin=SYNTHETIC_DEMO_DO_NOT_USE_FOR_RESEARCH`; its Black-76 prices, IVs, and weekly expiries are simulated. You can pass it directly to `iv-surface`, `evaluate-iv`, and `validate-options` to exercise those commands. Do not import it as historical option data or use it for strategy-performance claims. Delete `data/demo_synthetic/` to remove the fixture.
+
+Example chronological IV workflow:
+
+```bash
+skhynix-vol iv-surface --quotes data/demo_synthetic/options_quotes.csv
+skhynix-vol evaluate-iv --quotes data/demo_synthetic/options_quotes.csv
+skhynix-vol validate-options data/demo_synthetic/options_quotes.csv
+skhynix-vol project-iv --quotes data/demo_synthetic/options_quotes.csv
+skhynix-vol backtest --quotes data/demo_synthetic/options_quotes.csv --horizons 5
+```
+
+Synthetic runs write separate `*_synthetic_demo` report files and keep the surface under `data/demo_synthetic/`; they do not replace standard processed surfaces or reports.
+
+`project-iv` converts each supported IV grid to forward-normalized Black-76 call prices, then minimizes price adjustments subject to strike monotonicity/convexity, intrinsic and upper bounds, and nondecreasing tenor prices at shared moneyness. It converts projected prices back to IV and exports per-cell adjustments. This is a static European-option projection and does not cover discrete dividends, American exercise, or quote uncertainty.
 
 ## Options, IV surfaces, and research backtests
 
@@ -137,7 +169,7 @@ skhynix-vol forecast-iv --spot-forward-approximation
 
 Run `skhynix-vol iv-factors --spot-forward-approximation` to export historical factor scores and loadings. These are saved as `reports/iv_surface_pca_scores.csv` and `reports/iv_surface_pca_loadings.csv`. The forecast command also writes `reports/iv_surface_factor_change_forecast.csv`.
 
-The forecast grid is exported to `reports/iv_surface_forecast.csv` and rendered to `reports/iv_surface_forecast.png`. This interpolated surface is not constrained to be arbitrage-free; use the chronological evaluator before economic interpretation. PCA components are sign-indeterminate, so interpret them from exported loadings rather than assigning level/skew/curvature labels automatically.
+The forecast grid is exported to `reports/iv_surface_forecast.csv` and rendered to `reports/iv_surface_forecast.png`. Forecast grids are not constrained to be arbitrage-free; `project-iv` applies static European call-price constraints to a constructed grid. Use the chronological evaluator before economic interpretation. PCA components are sign-indeterminate, so interpret them from exported loadings rather than assigning level/skew/curvature labels automatically.
 
 Evaluate one-step-ahead IV surfaces on expanding chronological folds against persistence and historical-mean baselines:
 
@@ -153,7 +185,7 @@ Validate imported quotes and independently reprice provider IV from the bid/ask 
 skhynix-vol validate-options provider_quotes.csv --iv-units percent
 ```
 
-The report `reports/option_quote_iv_validation.csv` preserves provider IV, adds calculated IV and the difference, and flags crossed quotes, no-arbitrage violations, missing carry inputs, and discrepancies over five volatility points. Missing carry inputs are reported rather than filled. Surface construction continues to use the provider IV; review validation flags and exclude suspect records as appropriate before research use.
+The report `reports/option_quote_iv_validation.csv` preserves provider IV, adds calculated IV and the difference, and flags crossed quotes, quote bounds, missing carry inputs, and discrepancies over five volatility points. The companion `reports/option_static_arbitrage_diagnostics.csv` checks quoted vertical-spread monotonicity, call-price convexity, and put-call parity by date/expiry. Missing carry inputs are reported rather than filled. These are diagnostics, not an arbitrage-free surface projection; surface construction continues to use provider IV, so review flags before research use.
 
 The quote-based historical benchmark is an ATM straddle strategy driven by out-of-sample HAR-RV predictions. It selects a same-strike call/put pair with expiry near the forecast horizon, buys when forecast RV exceeds IV by the edge threshold, and sells when it is lower. It executes entries/exits at bid/ask and charges the supplied per-leg fee. Use KRX's 10-share multiplier for SK hynix single-stock options; the override remains available for other products:
 

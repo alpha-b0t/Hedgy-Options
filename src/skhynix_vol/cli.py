@@ -1,1 +1,425 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éíïM|N‹Z–‹­¦ëeŠw¬Ôˆˆ‰½µµ…¹µ±¥¹”•¹ÑÉäÁ½¥¹Ð™½ÈÑ¡”¥¹¥Ñ¥…°É•Í•…É Á¥Á•±¥¹”¸ˆˆˆ)¥µÁ½ÉÐ…ÉÁ…ÉÍ”)¥µÁ½ÉÐ©Í½¸)™É½´Á…Ñ¡±¥ˆ¥µÁ½ÉÐA…Ñ ()¥µÁ½ÉÐÁ…¹‘…Ì…ÌÁ()™É½´Í­¡å¹¥á}Ù½°¹‘…Ñ„¹ÁÉ¥•Ì¥µÁ½ÉÐ‘½Ý¹±½…‘}ÁÉ¥•Ì°Í…Ù•}ÁÉ¥•}‘…Ñ„)™É½´Í­¡å¹¥á}Ù½°¹‘…Ñ„¹½ÁÑ¥½¹Ì¥µÁ½ÉÐ€¡±½…‘}½ÁÑ¥½¹}™¥±”°Í…Ù•}½ÁÑ¥½¹}ÅÕ½Ñ•Ì°(€€€…ÑÑ…¡}­Éá}Í¥¹±•}ÍÑ½­}½ÁÑ¥½¹}ÍÁ•Œ°¹½Éµ…±¥é•}½ÁÑ¥½¹}ÅÕ½Ñ•Ì¤)™É½´Í­¡å¹¥á}Ù½°¹‘…Ñ„¹¥¹ÍÑÉÕµ•¹ÑÌ¥µÁ½ÉÐ¥¹ÍÑÉÕµ•¹Ñ}ÍÁ•Œ)™É½´Í­¡å¹¥á}Ù½°¹•Ù…±Õ…Ñ¥½¸¹Ý…±­}™½ÉÝ…É¥µÁ½ÉÐ™½É•…ÍÑ}±…Ñ•ÍÑ}ÉØ°Ý…±­}™½ÉÝ…É‘}ÉØ)™É½´Í­¡å¹¥á}Ù½°¹•Ù…±Õ…Ñ¥½¸¹¥Ù}Ý…±­}™½ÉÝ…É¥µÁ½ÉÐÝ…±­}™½ÉÝ…É‘}¥Ø)™É½´Í­¡å¹¥á}Ù½°¹•Ù…±Õ…Ñ¥½¸¹…É¡}Ý…±­}™½ÉÝ…É¥µÁ½ÉÐ™½É•…ÍÑ}±…Ñ•ÍÑ}…É °Ý…±­}™½ÉÝ…É‘}…É )™É½´Í­¡å¹¥á}Ù½°¹•Ù…±Õ…Ñ¥½¸¹µ±}Ý…±­}™½ÉÝ…É¥µÁ½ÉÐ™½É•…ÍÑ}±…Ñ•ÍÑ}µ°°Ý…±­}™½ÉÝ…É‘}µ°)™É½´Í­¡å¹¥á}Ù½°¹™•…ÑÕÉ•Ì¹¥µÁ±¥•¥µÁ½ÉÐ€¡‰Õ¥±‘}¥Ù}ÍÕÉ™…”°™½É•…ÍÑ}¹•áÑ}¥Ù}ÍÕÉ™…”°(€€€¥Ù}ÍÕÉ™…•}Á…}™…Ñ½ÉÌ¤)™É½´Í­¡å¹¥á}Ù½°¹™•…ÑÕÉ•Ì¹½ÁÑ¥½¹}ÁÉ¥¥¹œ¥µÁ½ÉÐÙ…±¥‘…Ñ•}½ÁÑ¥½¹}¥Ø)™É½´Í­¡å¹¥á}Ù½°¹™•…ÑÕÉ•Ì¹É•…±¥é•¥µÁ½ÉÐ‰Õ¥±‘}É•…±¥é•‘}‘…Ñ…Í•Ð)™É½´Í­¡å¹¥á}Ù½°¹ÍÑÉ…Ñ•¥•Ì¹‰…­Ñ•ÍÐ¥µÁ½ÉÐ‰…­Ñ•ÍÑ}ÍÑÉ…‘‘±•Ì(()‘•˜ÉÕ¸¡ÍÑ…ÉÐèÍÑÈ€ô€ˆÈÀÄÔ´ÀÄ´ÀÄˆ°•¹èÍÑÈð9½¹”€ô9½¹”¤€´ø9½¹”è(€€€™É½´Í­¡å¹¥á}Ù½°¹Ù¥ÍÕ…±¥é…Ñ¥½¸¹¡…ÉÑÌ¥µÁ½ÉÐÉ•…Ñ•}•áÁ±½É…Ñ½Éå}¡…ÉÑÌ(€€€É…Ü°ÁÉ¥•Ì€ô‘½Ý¹±½…‘}ÁÉ¥•Ì¡ÍÑ…ÉÐõÍÑ…ÉÐ°•¹õ•¹¤(€€€É…Ý}Á…Ñ °ÁÉ¥•}Á…Ñ €ôÍ…Ù•}ÁÉ¥•}‘…Ñ„¡É…Ü°ÁÉ¥•Ì¤(€€€™•…ÑÕÉ•Ì€ô‰Õ¥±‘}É•…±¥é•‘}‘…Ñ…Í•Ð¡ÁÉ¥•Ì¤(€€€Ñ…É•Ñ}½±Õµ¹Ì€ôm½°™½È½°¥¸™•…ÑÕÉ•Ì¥˜½°¹ÍÑ…ÉÑÍÝ¥Ñ  ‰Ñ…É•Ñ}ÉÙ|ˆ¥t(€€€™•…ÑÕÉ•}Á…Ñ €ô€‰‘…Ñ„½ÁÉ½•ÍÍ•½ÉÙ}™•…ÑÕÉ•Ì¹Á…ÉÅÕ•Ðˆ(€€€Ñ…É•Ñ}Á…Ñ €ô€‰‘…Ñ„½ÁÉ½•ÍÍ•½ÉÙ}Ñ…É•ÑÌ¹Á…ÉÅÕ•Ðˆ(€€€™•…ÑÕÉ•Ì¹‘É½À¡½±Õµ¹ÌõÑ…É•Ñ}½±Õµ¹Ì¤¹Ñ½}Á…ÉÅÕ•Ð¡™•…ÑÕÉ•}Á…Ñ °¥¹‘•àõ…±Í”¤(€€€™•…ÑÕÉ•Ì¹±½lè°l‰‘…Ñ”ˆ°€©Ñ…É•Ñ}½±Õµ¹Íut¹Ñ½}Á…ÉÅÕ•Ð¡Ñ…É•Ñ}Á…Ñ °¥¹‘•àõ…±Í”¤(€€€¡…ÉÑÌ€ôÉ•…Ñ•}•áÁ±½É…Ñ½Éå}¡…ÉÑÌ¡ÁÉ¥•Ì°™•…ÑÕÉ•Ì¤(€€€ÁÉ¥¹Ð¡˜‰I•ÑÉ¥•Ù•í±•¸¡ÁÉ¥•Ì¤è±ôÍ•ÍÍ¥½¹ÌèíÁÉ¥•Ì¹‘…Ñ”¹µ¥¸ ¤¹‘…Ñ” ¥ôÑ¼íÁÉ¥•Ì¹‘…Ñ”¹µ…à ¤¹‘…Ñ” ¥ôˆ¤(€€€™±…•€ôÁÉ¥•Ì¹±½mÁÉ¥•Ì¹½¡±}ÅÕ…±¥Ñå}™±…œ¹¹” ‰½¬ˆ¤°€‰‘…Ñ”‰t(€€€¥˜±•¸¡™±…•¤è(€€€€€€€‘…Ñ•Ì€ô€ˆ°€ˆ¹©½¥¸¡Á¹Ñ½}‘…Ñ•Ñ¥µ”¡™±…•¤¹‘Ð¹ÍÑÉ™Ñ¥µ” ˆ•d´•´´•ˆ¤¤(€€€€€€€ÁÉ¥¹Ð¡˜‰…Ñ„ÅÕ…±¥Ñäèí±•¸¡™±…•¥ô=!1É…¹”¥¹½¹Í¥ÍÑ•¹¥•Ì™±…•…¹É•Ñ…¥¹•èí‘…Ñ•Íôˆ¤(€€€ÁÉ¥¹Ð¡˜‰M…Ù•É…ÜèíÉ…Ý}Á…Ñ¡õq¹M…Ù•ÁÉ½•ÍÍ•ÁÉ¥•ÌèíÁÉ¥•}Á…Ñ¡ôˆ¤(€€€ÁÉ¥¹Ð¡˜‰M…Ù•™•…ÑÕÉ•Ìèí™•…ÑÕÉ•}Á…Ñ¡õq¹M…Ù•Ñ…É•ÑÌèíÑ…É•Ñ}Á…Ñ¡ôˆ¤(€€€ÁÉ¥¹Ð ‰¡…ÉÑÌè€ˆ€¬€ˆ°€ˆ¹©½¥¸¡ÍÑÈ¡Á…Ñ ¤™½ÈÁ…Ñ ¥¸¡…ÉÑÌ¤¤(()‘•˜•Ù…±Õ…Ñ” ¤€´ø9½¹”è(€€€€ˆˆ‰IÕ¸Ñ¡”•áÁ…¹‘¥¹œµÝ¥¹‘½ÜIX‰…Í•±¥¹•Ì™É½´Í…Ù•ÁÉ½•ÍÍ•ÁÉ¥•Ì¸ˆˆˆ(€€€Á…Ñ €ôA…Ñ  ‰‘…Ñ„½ÁÉ½•ÍÍ•½‘…¥±å}ÁÉ¥•Ì¹Á…ÉÅÕ•Ðˆ¤(€€€¥˜¹½ÐÁ…Ñ ¹•á¥ÍÑÌ ¤è(€€€€€€€É…¥Í”¥±•9½Ñ½Õ¹‘ÉÉ½È ‰IÕ¸Í­¡å¹¥àµÙ½°‘½Ý¹±½…‘€‰•™½É”Í­¡å¹¥àµÙ½°•Ù…±Õ…Ñ•€ˆ¤(€€€ÁÉ¥•Ì€ôÁ¹É•…‘}Á…ÉÅÕ•Ð¡Á…Ñ ¤(€€€™•…ÑÕÉ•Ì€ô‰Õ¥±‘}É•…±¥é•‘}‘…Ñ…Í•Ð¡ÁÉ¥•Ì¤(€€€ÁÉ•‘¥Ñ¥½¹Ì°µ•ÑÉ¥Ì€ôÝ…±­}™½ÉÝ…É‘}ÉØ¡™•…ÑÕÉ•Ì¤(€€€…É¡}ÁÉ•‘¥Ñ¥½¹Ì°…É¡}µ•ÑÉ¥Ì€ôÝ…±­}™½ÉÝ…É‘}…É ¡™•…ÑÕÉ•Ì¤(€€€½ÕÐ€ôA…Ñ  ‰É•Á½ÉÑÌˆ¤ì½ÕÐ¹µ­‘¥È¡Á…É•¹ÑÌõQÉÕ”°•á¥ÍÑ}½¬õQÉÕ”¤(€€€ÁÉ•‘¥Ñ¥½¹Ì¹Ñ½}ÍØ¡½ÕÐ€¼€‰ÉÙ}Ý…±­}™½ÉÝ…É‘}ÁÉ•‘¥Ñ¥½¹Ì¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€µ•ÑÉ¥Ì¹Ñ½}ÍØ¡½ÕÐ€¼€‰ÉÙ}Ý…±­}™½ÉÝ…É‘}µ•ÑÉ¥Ì¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€…É¡}ÁÉ•‘¥Ñ¥½¹Ì¹Ñ½}ÍØ¡½ÕÐ€¼€‰ÉÙ}…É¡}Ý…±­}™½ÉÝ…É‘}ÁÉ•‘¥Ñ¥½¹Ì¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€…É¡}µ•ÑÉ¥Ì¹Ñ½}ÍØ¡½ÕÐ€¼€‰ÉÙ}…É¡}Ý…±­}™½ÉÝ…É‘}µ•ÑÉ¥Ì¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€µ•Ñ…‘…Ñ„€ôì(€€€€€€€€‰Ñ¥­•Èˆè€ˆÀÀÀØØÀ¹-Lˆ°(€€€€€€€€‰Í½ÕÉ”ˆè€‰e…¡½¼¥¹…¹”€¡å™¥¹…¹”¤°…ÌÉ•½É‘•¥¸ÁÉ½•ÍÍ•‘…¥±äÁÉ¥•Ìˆ°(€€€€€€€€‰½‰Í•ÉÙ…Ñ¥½¹}½Õ¹Ðˆè¥¹Ð¡±•¸¡ÁÉ¥•Ì¤¤°(€€€€€€€€‰‘…Ñ…}ÍÑ…ÉÐˆèÍÑÈ¡Á¹Ñ½}‘…Ñ•Ñ¥µ”¡ÁÉ¥•Ì¹‘…Ñ”¤¹µ¥¸ ¤¹‘…Ñ” ¤¤¥˜±•¸¡ÁÉ¥•Ì¤•±Í”9½¹”°(€€€€€€€€‰‘…Ñ…}•¹ˆèÍÑÈ¡Á¹Ñ½}‘…Ñ•Ñ¥µ”¡ÁÉ¥•Ì¹‘…Ñ”¤¹µ…à ¤¹‘…Ñ” ¤¤¥˜±•¸¡ÁÉ¥•Ì¤•±Í”9½¹”°(€€€€€€€€‰™•…ÑÕÉ•}Ñ…É•Ñ}‘•™¥¹¥Ñ¥½¸ˆè€‰…‘©ÕÍÑ•µ±½Í”±½œÉ•ÑÕÉ¹Ìì€ÈÔÈµÍ•ÍÍ¥½¸…¹¹Õ…±¥é…Ñ¥½¸ì™½ÉÝ…ÉÉ•ÑÕÉ¹ÌÐ¬Ä¸¹Ð­ ˆ°(€€€€€€€€‰•Ù…±Õ…Ñ¥½¸ˆèì‰™½±‘Ìˆè€‰•áÁ…¹‘¥¹œ…±•¹‘…Èµå•…ÈÑ•ÍÐ™½±‘Ìˆ°€‰µ¥¹}ÑÉ…¥¹}å•…ÉÌˆè€Ô°(€€€€€€€€€€€€€€€€€€€€€€€‰ÁÕÉ•}Í•ÍÍ¥½¹ÌˆèlÔ°€ÈÀ°€ØÁt°€‰µ½‘•±Ìˆèl‰É½±±¥¹}ÉØˆ°€‰•Ýµ…}Ù½°ˆ°€‰¡…É}ÉØ‰t°(€€€€€€€€€€€€€€€€€€€€€€€‰¡…É}™•…ÑÕÉ•Ìˆèl‰ÉÙ|Äˆ°€‰ÉÙ|Ôˆ°€‰ÉÙ|ÈÀˆ°€‰ÉÙ|ØÀ‰t°(€€€€€€€€€€€€€€€€€€€€€€€‰•Ýµ…}±…µ‰‘„ˆè€À¸äÐ°€‰…É¡}µ½‘•±Ìˆèl‰…É ˆ°€‰•…É ˆ°€‰©É}…É ‰t°(€€€€€€€€€€€€€€€€€€€€€€€‰µ•ÑÉ¥Ìˆèl‰µ…”ˆ°€‰ÉµÍ”ˆ°€‰Å±¥­•}Ù…É¥…¹•}Í…±”ˆ°€‰ÈÈˆ°€‰‘¥É•Ñ¥½¹…±}…ÕÉ…ä‰uô°(€€€ô(€€€€¡½ÕÐ€¼€‰ÉÙ}Ý…±­}™½ÉÝ…É‘}ÉÕ¸¹©Í½¸ˆ¤¹ÝÉ¥Ñ•}Ñ•áÐ¡©Í½¸¹‘ÕµÁÌ¡µ•Ñ…‘…Ñ„°¥¹‘•¹ÐôÈ¤€¬€‰q¸ˆ°•¹½‘¥¹œô‰ÕÑ˜´àˆ¤(€€€¥˜µ•ÑÉ¥Ì¹•µÁÑäè(€€€€€€€ÁÉ¥¹Ð ‰9¼Ý…±¬µ™½ÉÝ…É™½±‘Ì…Ù…¥±…‰±”ì¡•¬Ñ¡”ÁÉ¥”¡¥ÍÑ½Éä±•¹Ñ ¸ˆ¤(€€€•±Í”è(€€€€€€€ÍÕµµ…Éä€ôµ•ÑÉ¥Ì¹É½ÕÁ‰ä¡l‰¡½É¥é½¸ˆ°€‰µ½‘•°‰t¥ml‰µ…”ˆ°€‰ÉµÍ”ˆ°€‰Å±¥­”‰ut¹µ•…¸ ¤(€€€€€€€ÁÉ¥¹Ð¡ÍÕµµ…Éä¹Ñ½}ÍÑÉ¥¹œ ¤¤(€€€€€€€¥˜¹½Ð…É¡}µ•ÑÉ¥Ì¹•µÁÑäè(€€€€€€€€€€€ÁÉ¥¹Ð ‰q¹I ™…µ¥±ä€¡…¹¹Õ…°µ™½±µ•…¸¤èˆ¤(€€€€€€€€€€€ÁÉ¥¹Ð¡…É¡}µ•ÑÉ¥Ì¹É½ÕÁ‰ä¡l‰¡½É¥é½¸ˆ°€‰µ½‘•°‰t¥ml‰µ…”ˆ°€‰ÉµÍ”ˆ°€‰Å±¥­”‰ut¹µ•…¸ ¤¹Ñ½}ÍÑÉ¥¹œ ¤¤(€€€€€€€ÁÉ¥¹Ð ‰M…Ù•…¹¹Õ…°™½±ÁÉ•‘¥Ñ¥½¹Ì…¹µ•ÑÉ¥ÌÕ¹‘•ÈÉ•Á½ÉÑÌ¼¸ˆ¤(()‘•˜•Ù…±Õ…Ñ•}µ° ¤€´ø9½¹”è(€€€€ˆˆ‰IÕ¸™½±µ±½…°50µ½‘•±Ì…¹Í…Ù”Ñ¡•¥È½ÕÐµ½˜µÍ…µÁ±”™½É•…ÍÑÌ¸ˆˆˆ(€€€Á…Ñ €ôA…Ñ  ‰‘…Ñ„½ÁÉ½•ÍÍ•½‘…¥±å}ÁÉ¥•Ì¹Á…ÉÅÕ•Ðˆ¤(€€€¥˜¹½ÐÁ…Ñ ¹•á¥ÍÑÌ ¤è(€€€€€€€É…¥Í”¥±•9½Ñ½Õ¹‘ÉÉ½È ‰IÕ¸Í­¡å¹¥àµÙ½°‘½Ý¹±½…‘€‰•™½É”Í­¡å¹¥àµÙ½°•Ù…±Õ…Ñ”µµ±€ˆ¤(€€€™•…ÑÕÉ•Ì€ô‰Õ¥±‘}É•…±¥é•‘}‘…Ñ…Í•Ð¡Á¹É•…‘}Á…ÉÅÕ•Ð¡Á…Ñ ¤¤(€€€ÁÉ•‘¥Ñ¥½¹Ì°µ•ÑÉ¥Ì€ôÝ…±­}™½ÉÝ…É‘}µ°¡™•…ÑÕÉ•Ì¤(€€€½ÕÐ€ôA…Ñ  ‰É•Á½ÉÑÌˆ¤ì½ÕÐ¹µ­‘¥È¡Á…É•¹ÑÌõQÉÕ”°•á¥ÍÑ}½¬õQÉÕ”¤(€€€ÁÉ•‘¥Ñ¥½¹Ì¹Ñ½}ÍØ¡½ÕÐ€¼€‰ÉÙ}µ±}Ý…±­}™½ÉÝ…É‘}ÁÉ•‘¥Ñ¥½¹Ì¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€µ•ÑÉ¥Ì¹Ñ½}ÍØ¡½ÕÐ€¼€‰ÉÙ}µ±}Ý…±­}™½ÉÝ…É‘}µ•ÑÉ¥Ì¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€¥˜µ•ÑÉ¥Ì¹•µÁÑäè(€€€€€€€ÁÉ¥¹Ð ‰9¼50Ý…±¬µ™½ÉÝ…É™½±‘ÌÝ•É”…Ù…¥±…‰±”¸ˆ¤(€€€•±Í”è(€€€€€€€ÁÉ¥¹Ð¡µ•ÑÉ¥Ì¹É½ÕÁ‰ä¡l‰¡½É¥é½¸ˆ°€‰µ½‘•°‰t¥ml‰µ…”ˆ°€‰ÉµÍ”ˆ°€‰Å±¥­”‰ut¹µ•…¸ ¤¹Ñ½}ÍÑÉ¥¹œ ¤¤(€€€ÁÉ¥¹Ð ‰M…Ù•50™½±ÁÉ•‘¥Ñ¥½¹Ì…¹µ•ÑÉ¥ÌÕ¹‘•ÈÉ•Á½ÉÑÌ¼¸ˆ¤(()‘•˜™½É•…ÍÑ}ÉØ ¤€´ø9½¹”è(€€€€ˆˆ‰]É¥Ñ”±…Ñ•ÍÐµ±½Í”€Ô¼ÈÀ¼ØÀÍ•ÍÍ¥½¸IX™½É•…ÍÑÌ¸ˆˆˆ(€€€Á…Ñ €ôA…Ñ  ‰‘…Ñ„½ÁÉ½•ÍÍ•½‘…¥±å}ÁÉ¥•Ì¹Á…ÉÅÕ•Ðˆ¤(€€€¥˜¹½ÐÁ…Ñ ¹•á¥ÍÑÌ ¤è(€€€€€€€É…¥Í”¥±•9½Ñ½Õ¹‘ÉÉ½È ‰IÕ¸Í­¡å¹¥àµÙ½°‘½Ý¹±½…‘€‰•™½É”Í­¡å¹¥àµÙ½°™½É•…ÍÐµÉÙ€ˆ¤(€€€ÁÉ¥•Ì€ôÁ¹É•…‘}Á…ÉÅÕ•Ð¡Á…Ñ ¤(€€€‘…Ñ…Í•Ð€ô‰Õ¥±‘}É•…±¥é•‘}‘…Ñ…Í•Ð¡ÁÉ¥•Ì¤(€€€™½É•…ÍÑÌ€ô™½É•…ÍÑ}±…Ñ•ÍÑ}ÉØ¡‘…Ñ…Í•Ð¤(€€€…É¡}™½É•…ÍÑÌ€ô™½É•…ÍÑ}±…Ñ•ÍÑ}…É ¡‘…Ñ…Í•Ð¤(€€€½ÕÐ€ôA…Ñ  ‰É•Á½ÉÑÌˆ¤ì½ÕÐ¹µ­‘¥È¡Á…É•¹ÑÌõQÉÕ”°•á¥ÍÑ}½¬õQÉÕ”¤(€€€Ñ…É•Ð€ô½ÕÐ€¼€‰ÉÙ}™½É•…ÍÑÍ}±…Ñ•ÍÐ¹ÍØˆ(€€€™½É•…ÍÑÌ¹Ñ½}ÍØ¡Ñ…É•Ð°¥¹‘•àõ…±Í”¤(€€€…É¡}Ñ…É•Ð€ô½ÕÐ€¼€‰ÉÙ}…É¡}™½É•…ÍÑÍ}±…Ñ•ÍÐ¹ÍØˆ(€€€…É¡}™½É•…ÍÑÌ¹Ñ½}ÍØ¡…É¡}Ñ…É•Ð°¥¹‘•àõ…±Í”¤(€€€ÁÉ¥¹Ð¡˜‰Ìµ½˜í™½É•…ÍÑÌ¹…Í}½™}‘…Ñ”¹¥±½lÁt¹‘…Ñ” ¥ôéq¹í™½É•…ÍÑÍml¡½É¥é½¹}Í•ÍÍ¥½¹Ìœ°¡…É}ÉÙ}™½É•…ÍÐœ°É½±±¥¹}ÉÙ}™½É•…ÍÐœ°•Ýµ…}Ù½±}™½É•…ÍÐut¹Ñ½}ÍÑÉ¥¹œ¡¥¹‘•àõ…±Í”¥ôˆ¤(€€€ÁÉ¥¹Ð¡˜‰M…Ù•™½É•…ÍÑÌÑ¼íÑ…É•Ñôˆ¤(€€€ÁÉ¥¹Ð ‰1…Ñ•ÍÐI µ™…µ¥±ä™½É•…ÍÑÌèˆ¤(€€€ÁÉ¥¹Ð¡…É¡}™½É•…ÍÑÍml‰¡½É¥é½¹}Í•ÍÍ¥½¹Ìˆ°€‰µ½‘•°ˆ°€‰™½É•…ÍÑ}ÉØ‰ut¹Ñ½}ÍÑÉ¥¹œ¡¥¹‘•àõ…±Í”¤¤(€€€ÁÉ¥¹Ð¡˜‰M…Ù•I ™½É•…ÍÑÌÑ¼í…É¡}Ñ…É•Ñôˆ¤(()‘•˜™½É•…ÍÑ}µ° ¤€´ø9½¹”è(€€€Á…Ñ €ôA…Ñ  ‰‘…Ñ„½ÁÉ½•ÍÍ•½‘…¥±å}ÁÉ¥•Ì¹Á…ÉÅÕ•Ðˆ¤(€€€¥˜¹½ÐÁ…Ñ ¹•á¥ÍÑÌ ¤è(€€€€€€€É…¥Í”¥±•9½Ñ½Õ¹‘ÉÉ½È ‰IÕ¸Í­¡å¹¥àµÙ½°‘½Ý¹±½…‘€‰•™½É”Í­¡å¹¥àµÙ½°™½É•…ÍÐµµ±€ˆ¤(€€€™•…ÑÕÉ•Ì€ô‰Õ¥±‘}É•…±¥é•‘}‘…Ñ…Í•Ð¡Á¹É•…‘}Á…ÉÅÕ•Ð¡Á…Ñ ¤¤(€€€™½É•…ÍÑÌ€ô™½É•…ÍÑ}±…Ñ•ÍÑ}µ°¡™•…ÑÕÉ•Ì¤(€€€½ÕÐ€ôA…Ñ  ‰É•Á½ÉÑÌˆ¤ì½ÕÐ¹µ­‘¥È¡Á…É•¹ÑÌõQÉÕ”°•á¥ÍÑ}½¬õQÉÕ”¤(€€€Ñ…É•Ð€ô½ÕÐ€¼€‰ÉÙ}µ±}™½É•…ÍÑÍ}±…Ñ•ÍÐ¹ÍØˆ(€€€™½É•…ÍÑÌ¹Ñ½}ÍØ¡Ñ…É•Ð°¥¹‘•àõ…±Í”¤(€€€ÁÉ¥¹Ð¡™½É•…ÍÑÍml‰¡½É¥é½¹}Í•ÍÍ¥½¹Ìˆ°€‰µ½‘•°ˆ°€‰™½É•…ÍÑ}ÉØ‰ut¹Ñ½}ÍÑÉ¥¹œ¡¥¹‘•àõ…±Í”¤¤(€€€ÁÉ¥¹Ð¡˜‰M…Ù•±…Ñ•ÍÐ50™½É•…ÍÑÌÑ¼íÑ…É•Ñôˆ¤(()‘•˜¥µÁ½ÉÑ}½ÁÑ¥½¹Ì¡Á…Ñ èÍÑÈ°¥Ù}Õ¹¥ÑÌèÍÑÈ¤€´ø9½¹”è(€€€É…Ü°¹½Éµ…±¥é•€ô±½…‘}½ÁÑ¥½¹}™¥±”¡Á…Ñ °¥Ù}Õ¹¥ÑÌõ¥Ù}Õ¹¥ÑÌ¤(€€€¹½Éµ…±¥é•€ô…ÑÑ…¡}­Éá}Í¥¹±•}ÍÑ½­}½ÁÑ¥½¹}ÍÁ•Œ¡¹½Éµ…±¥é•¤(€€€¹½Éµ…±¥é•€ôÙ…±¥‘…Ñ•}½ÁÑ¥½¹}¥Ø¡¹½Éµ…±¥é•¤(€€€É…Ý}Á…Ñ °ÁÉ½•ÍÍ•‘}Á…Ñ €ôÍ…Ù•}½ÁÑ¥½¹}ÅÕ½Ñ•Ì¡É…Ü°¹½Éµ…±¥é•¤(€€€A…Ñ  ‰É•Á½ÉÑÌˆ¤¹µ­‘¥È¡Á…É•¹ÑÌõQÉÕ”°•á¥ÍÑ}½¬õQÉÕ”¤(€€€¹½Éµ…±¥é•¹Ñ½}ÍØ ‰É•Á½ÉÑÌ½½ÁÑ¥½¹}ÅÕ½Ñ•}¥Ù}Ù…±¥‘…Ñ¥½¸¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€ÁÉ¥¹Ð¡˜‰%µÁ½ÉÑ•í±•¸¡¹½Éµ…±¥é•¤è±ô½ÁÑ¥½¸ÅÕ½Ñ•Ì™É½´íÁ…Ñ¡ôˆ¤(€€€ÁÉ¥¹Ð¡˜‰=‰Í•ÉÙ…Ñ¥½¸‘…Ñ•Ìèí¹½Éµ…±¥é•¹‘…Ñ”¹µ¥¸ ¤¹‘…Ñ” ¥ôÑ¼í¹½Éµ…±¥é•¹‘…Ñ”¹µ…à ¤¹‘…Ñ” ¥ôˆ¤(€€€ÁÉ¥¹Ð¡˜‰É½ÍÍ•µµ…É­•ÐÉ½ÝÌ™±…•èì¡¹½Éµ…±¥é•¹ÅÕ½Ñ•}ÅÕ…±¥Ñå}™±…œ€„ô€½¬œ¤¹ÍÕ´ ¥ôˆ¤(€€€ÁÉ¥¹Ð ‰%XÙ…±¥‘…Ñ¥½¸ÍÑ…ÑÕÍ•Ìèˆ¤(€€€ÁÉ¥¹Ð¡¹½Éµ…±¥é•¹¥Ù}Ù…±¥‘…Ñ¥½¹}ÍÑ…ÑÕÌ¹Ù…±Õ•}½Õ¹ÑÌ¡‘É½Á¹„õ…±Í”¤¹Ñ½}ÍÑÉ¥¹œ ¤¤(€€€ÍÁ•Œ€ô¥¹ÍÑÉÕµ•¹Ñ}ÍÁ•Œ ¤(€€€ÁÉ¥¹Ð¡˜‰%¹ÍÑÉÕµ•¹ÐèíÍÁ•l•á¡…¹”uôíÍÁ•lÁÉ½‘ÕÐuôìÕÉ½Á•…¸•á•É¥Í”ì…Í Í•ÑÑ±•ìµÕ±Ñ¥Á±¥•ÈíÍÁ•l½¹ÑÉ…Ñ}µÕ±Ñ¥Á±¥•ÈuôÍ¡…É•Ìˆ¤(€€€ÁÉ¥¹Ð¡˜‰M…Ù•É…ÜèíÉ…Ý}Á…Ñ¡õq¹M…Ù•¹½Éµ…±¥é•èíÁÉ½•ÍÍ•‘}Á…Ñ¡ôˆ¤(()‘•˜Ù…±¥‘…Ñ•}½ÁÑ¥½¹Í}™¥±”¡Á…Ñ èÍÑÈ°¥Ù}Õ¹¥ÑÌèÍÑÈ¤€´ø9½¹”è(€€€€ˆˆ‰É•…Ñ”ÅÕ½Ñ”µÅÕ…±¥Ñä…¹ÁÉ½Ù¥‘•Èµ%X½¹Í¥ÍÑ•¹ä‘¥…¹½ÍÑ¥Ì¸ˆˆˆ(€€€É…Ü°¹½Éµ…±¥é•€ô±½…‘}½ÁÑ¥½¹}™¥±”¡Á…Ñ °¥Ù}Õ¹¥ÑÌõ¥Ù}Õ¹¥ÑÌ¤(€€€¹½Éµ…±¥é•€ô…ÑÑ…¡}­Éá}Í¥¹±•}ÍÑ½­}½ÁÑ¥½¹}ÍÁ•Œ¡¹½Éµ…±¥é•¤(€€€É•Á½ÉÐ€ôÙ…±¥‘…Ñ•}½ÁÑ¥½¹}¥Ø¡¹½Éµ…±¥é•¤(€€€½ÕÐ€ôA…Ñ  ‰É•Á½ÉÑÌˆ¤ì½ÕÐ¹µ­‘¥È¡Á…É•¹ÑÌõQÉÕ”°•á¥ÍÑ}½¬õQÉÕ”¤(€€€Ñ…É•Ð€ô½ÕÐ€¼€‰½ÁÑ¥½¹}ÅÕ½Ñ•}¥Ù}Ù…±¥‘…Ñ¥½¸¹ÍØˆ(€€€É•Á½ÉÐ¹Ñ½}ÍØ¡Ñ…É•Ð°¥¹‘•àõ…±Í”¤(€€€ÁÉ¥¹Ð¡É•Á½ÉÐ¹¥Ù}Ù…±¥‘…Ñ¥½¹}ÍÑ…ÑÕÌ¹Ù…±Õ•}½Õ¹ÑÌ¡‘É½Á¹„õ…±Í”¤¹Ñ½}ÍÑÉ¥¹œ ¤¤(€€€ÁÉ¥¹Ð¡˜‰M…Ù•í±•¸¡É•Á½ÉÐ¤è±ôÅÕ½Ñ”‘¥…¹½ÍÑ¥ÌÑ¼íÑ…É•ÑôìÉ…ÜÍ½ÕÉ”É½ÝÌèí±•¸¡É…Ü¤è±ôˆ¤(()‘•˜µ…­•}¥Ù}ÍÕÉ™…”¡ÅÕ½Ñ•}Á…Ñ èÍÑÈ°ÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸è‰½½°°(€€€€€€€€€€€€€€€€€€€…Í}½˜èÍÑÈð9½¹”€ô9½¹”°™½É•…ÍÐè‰½½°€ô…±Í”°(€€€€€€€€€€€€€€€€€€€¹}½µÁ½¹•¹ÑÌè¥¹Ð€ô€Ì¤€´ø9½¹”è(€€€™É½´Í­¡å¹¥á}Ù½°¹Ù¥ÍÕ…±¥é…Ñ¥½¸¹¥Ù}¡…ÉÑÌ¥µÁ½ÉÐÁ±½Ñ}¥Ù}ÍÕÉ™…”(€€€Á…Ñ €ôA…Ñ ¡ÅÕ½Ñ•}Á…Ñ ¤(€€€¥˜¹½ÐÁ…Ñ ¹•á¥ÍÑÌ ¤è(€€€€€€€É…¥Í”¥±•9½Ñ½Õ¹‘ÉÉ½È¡˜‰=ÁÑ¥½¹Ì™¥±”¹½Ð™½Õ¹èíÁ…Ñ¡ôì¥µÁ½ÉÐÁÉ½Ù¥‘•ÈÅÕ½Ñ•Ì™¥ÉÍÐˆ¤(€€€ÅÕ½Ñ•Ì€ôÁ¹É•…‘}Á…ÉÅÕ•Ð¡Á…Ñ ¤¥˜Á…Ñ ¹ÍÕ™™¥à¹±½Ý•È ¤¥¸ìˆ¹Á…ÉÅÕ•Ðˆ°€ˆ¹ÁÄ‰ô•±Í”Á¹É•…‘}ÍØ¡Á…Ñ ¤(€€€¥˜€‰ÅÕ½Ñ•}ÅÕ…±¥Ñå}™±…œˆ¹½Ð¥¸ÅÕ½Ñ•Ìè(€€€€€€€™É½´Í­¡å¹¥á}Ù½°¹‘…Ñ„¹½ÁÑ¥½¹Ì¥µÁ½ÉÐ¹½Éµ…±¥é•}½ÁÑ¥½¹}ÅÕ½Ñ•Ì(€€€€€€€ÅÕ½Ñ•Ì€ô¹½Éµ…±¥é•}½ÁÑ¥½¹}ÅÕ½Ñ•Ì¡ÅÕ½Ñ•Ì°¥Ù}Õ¹¥ÑÌô‰‘•¥µ…°ˆ°Í½ÕÉ”õ˜‰™¥±”éíÁ…Ñ ¹¹…µ•ôˆ¤(€€€ÍÕÉ™…”€ô‰Õ¥±‘}¥Ù}ÍÕÉ™…”¡ÅÕ½Ñ•Ì°ÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸õÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸¤(€€€A…Ñ  ‰‘…Ñ„½ÁÉ½•ÍÍ•ˆ¤¹µ­‘¥È¡Á…É•¹ÑÌõQÉÕ”°•á¥ÍÑ}½¬õQÉÕ”¤(€€€ÍÕÉ™…”¹Ñ½}Á…ÉÅÕ•Ð ‰‘…Ñ„½ÁÉ½•ÍÍ•½¥Ù}ÍÕÉ™…”¹Á…ÉÅÕ•Ðˆ°¥¹‘•àõ…±Í”¤(€€€½ÕÐ€ôA…Ñ  ‰É•Á½ÉÑÌˆ¤ì½ÕÐ¹µ­‘¥È¡Á…É•¹ÑÌõQÉÕ”°•á¥ÍÑ}½¬õQÉÕ”¤(€€€¥˜…Í}½˜¥Ì¹½Ð9½¹”è(€€€€€€€…Í}‘…Ñ”€ôÁ¹Q¥µ•ÍÑ…µÀ¡…Í}½˜¤¹¹½Éµ…±¥é” ¤(€€€€€€€ÍÕÉ™…”€ôÍÕÉ™…•mÍÕÉ™…”¹‘…Ñ”¹•Ä¡…Í}‘…Ñ”¥t(€€€€€€€¥˜ÍÕÉ™…”¹•µÁÑäè(€€€€€€€€€€€É…¥Í”Y…±Õ•ÉÉ½È¡˜‰9¼ÍÕÁÁ½ÉÑ•%XÍÕÉ™…”É¥™½Èí…Í}‘…Ñ”¹‘…Ñ” ¥ôˆ¤(€€€¥˜™½É•…ÍÐè(€€€€€€€ÁÉ•‘¥Ñ¥½¸€ô™½É•…ÍÑ}¹•áÑ}¥Ù}ÍÕÉ™…”¡ÍÕÉ™…”°¹}½µÁ½¹•¹ÑÌõ¹}½µÁ½¹•¹ÑÌ¤(€€€€€€€ÁÉ•‘¥Ñ¥½¹}Á…Ñ €ô½ÕÐ€¼€‰¥Ù}ÍÕÉ™…•}™½É•…ÍÐ¹ÍØˆ(ƒ_-¢G§²ÚîÆ­yÝ”¤(€€€€€€€™…Ñ½É}½±Õµ¹Ì€ômŒ™½ÈŒ¥¸ÁÉ•‘¥Ñ¥½¸¥˜Œ¹•¹‘ÍÝ¥Ñ  ‰}¡…¹•}™½É•…ÍÐˆ¤½ÈŒ¹•¹‘ÍÝ¥Ñ  ‰}Í½É•}…Í½˜ˆ¤½ÈŒ¹•¹‘ÍÝ¥Ñ  ‰}Í½É•}™½É•…ÍÐˆ¥t(€€€€€€€™…Ñ½É}™½É•…ÍÐ€ôÁÉ•‘¥Ñ¥½¹ml‰…Í}½™}‘…Ñ”ˆ°€‰ÑÉ…¥¹¥¹}ÍÑ…ÉÐˆ°€‰ÑÉ…¥¹¥¹}•¹ˆ°€‰¹}ÑÉ…¥¹¥¹}‘…Ñ•Ìˆ°€‰¹}½µÁ½¹•¹ÑÌˆ°€‰µ½‘•°ˆ°€©™…Ñ½É}½±Õµ¹Íut¹‘É½Á}‘ÕÁ±¥…Ñ•Ì ¤(€€€€€€€™…Ñ½É}Á…Ñ €ô½ÕÐ€¼€‰¥Ù}ÍÕÉ™…•}™…Ñ½É}¡…¹•}™½É•…ÍÐ¹ÍØˆ(€€€€€€€™…Ñ½É}™½É•…ÍÐ¹Ñ½}ÍØ¡™…Ñ½É}Á…Ñ °¥¹‘•àõ…±Í”¤(€€€€€€€¥µ…•}Á…Ñ €ôÁ±½Ñ}¥Ù}ÍÕÉ™…”¡ÁÉ•‘¥Ñ¥½¸°½ÕÐ€¼€‰¥Ù}ÍÕÉ™…•}™½É•…ÍÐ¹Á¹œˆ°(€€€€€€€€€€€Ù…±Õ•}½±Õµ¸ô‰¥µÁ±¥•‘}Ù½±…Ñ¥±¥Ñå}™½É•…ÍÐˆ°Ñ¥Ñ±”ô‰M,!å¹¥à¹•áÐµÍ•ÍÍ¥½¸%XÍÕÉ™…”™½É•…ÍÐˆ¤(€€€€€€€ÁÉ¥¹Ð¡˜‰M…Ù•í±•¸¡ÁÉ•‘¥Ñ¥½¸¥ô™½É•…ÍÐÉ¥•±±ÌÑ¼íÁÉ•‘¥Ñ¥½¹}Á…Ñ¡ôˆ¤(€€€€€€€ÁÉ¥¹Ð¡˜‰M…Ù•A™…Ñ½È¡…¹”™½É•…ÍÐÑ¼í™…Ñ½É}Á…Ñ¡ôˆ¤(€€€€€€€ÁÉ¥¹Ð¡˜‰M…Ù•™½É•…ÍÐ¥µ…”èí¥µ…•}Á…Ñ¡ôˆ¤(€€€•±Í”è(€€€€€€€¥µ…•}Á…Ñ €ôÁ±½Ñ}¥Ù}ÍÕÉ™…”¡ÍÕÉ™…”°½ÕÐ€¼˜‰¥Ù}ÍÕÉ™…•}íÍÕÉ™…”¹‘…Ñ”¹µ…à ¤è•d•´•‘ô¹Á¹œˆ¤(€€€€€€€ÁÉ¥¹Ð¡˜‰M…Ù•ÍÕÁÁ½ÉÑ•ÍÕÉ™…”Á½¥¹ÑÌè‘…Ñ„½ÁÉ½•ÍÍ•½¥Ù}ÍÕÉ™…”¹Á…ÉÅÕ•Ðˆ¤(€€€€€€€ÁÉ¥¹Ð¡˜‰M…Ù•¥µ…”èí¥µ…•}Á…Ñ¡ôˆ¤(()‘•˜•Ù…±Õ…Ñ•}¥Ù}ÍÕÉ™…”¡ÅÕ½Ñ•}Á…Ñ èÍÑÈ°ÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸è‰½½°°(€€€€€€€€€€€€€€€€€€€€€€€¹}½µÁ½¹•¹ÑÌè¥¹Ð°µ¥¹}ÑÉ…¥¹¥¹}‘…Ñ•Ìè¥¹Ð¤€´ø9½¹”è(€€€Á…Ñ €ôA…Ñ ¡ÅÕ½Ñ•}Á…Ñ ¤(€€€¥˜¹½ÐÁ…Ñ ¹•á¥ÍÑÌ ¤è(€€€€€€€É…¥Í”¥±•9½Ñ½Õ¹‘ÉÉ½È¡˜‰=ÁÑ¥½¹Ì™¥±”¹½Ð™½Õ¹èíÁ…Ñ¡ôì¥µÁ½ÉÐÁÉ½Ù¥‘•ÈÅÕ½Ñ•Ì™¥ÉÍÐˆ¤(€€€ÅÕ½Ñ•Ì€ôÁ¹É•…‘}Á…ÉÅÕ•Ð¡Á…Ñ ¤¥˜Á…Ñ ¹ÍÕ™™¥à¹±½Ý•È ¤¥¸ìˆ¹Á…ÉÅÕ•Ðˆ°€ˆ¹ÁÄ‰ô•±Í”Á¹É•…‘}ÍØ¡Á…Ñ ¤(€€€¥˜€‰ÅÕ½Ñ•}ÅÕ…±¥Ñå}™±…œˆ¹½Ð¥¸ÅÕ½Ñ•Ìè(€€€€€€€™É½´Í­¡å¹¥á}Ù½°¹‘…Ñ„¹½ÁÑ¥½¹Ì¥µÁ½ÉÐ¹½Éµ…±¥é•}½ÁÑ¥½¹}ÅÕ½Ñ•Ì(€€€€€€€ÅÕ½Ñ•Ì€ô¹½Éµ…±¥é•}½ÁÑ¥½¹}ÅÕ½Ñ•Ì¡ÅÕ½Ñ•Ì°¥Ù}Õ¹¥ÑÌô‰‘•¥µ…°ˆ°Í½ÕÉ”õ˜‰™¥±”éíÁ…Ñ ¹¹…µ•ôˆ¤(€€€ÍÕÉ™…”€ô‰Õ¥±‘}¥Ù}ÍÕÉ™…”¡ÅÕ½Ñ•Ì°ÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸õÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸¤(€€€ÁÉ•‘¥Ñ¥½¹Ì°µ•ÑÉ¥Ì€ôÝ…±­}™½ÉÝ…É‘}¥Ø¡ÍÕÉ™…”°¹}½µÁ½¹•¹ÑÌõ¹}½µÁ½¹•¹ÑÌ°(€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€µ¥¹}ÑÉ…¥¹¥¹}‘…Ñ•Ìõµ¥¹}ÑÉ…¥¹¥¹}‘…Ñ•Ì¤(€€€½ÕÐ€ôA…Ñ  ‰É•Á½ÉÑÌˆ¤ì½ÕÐ¹µ­‘¥È¡Á…É•¹ÑÌõQÉÕ”°•á¥ÍÑ}½¬õQÉÕ”¤(€€€ÁÉ•‘¥Ñ¥½¹Ì¹Ñ½}ÍØ¡½ÕÐ€¼€‰¥Ù}ÍÕÉ™…•}Ý…±­}™½ÉÝ…É‘}ÁÉ•‘¥Ñ¥½¹Ì¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€µ•ÑÉ¥Ì¹Ñ½}ÍØ¡½ÕÐ€¼€‰¥Ù}ÍÕÉ™…•}Ý…±­}™½ÉÝ…É‘}µ•ÑÉ¥Ì¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€¥˜µ•ÑÉ¥Ì¹•µÁÑäè(€€€€€€€ÁÉ¥¹Ð ‰9¼%XÝ…±¬µ™½ÉÝ…É™½±‘Ìµ•ÐÑ¡”µ¥¹¥µÕ´½Ù•É…”É•ÅÕ¥É•µ•¹ÑÌ¸ˆ¤(€€€•±Í”è(€€€€€€€ÍÕµµ…Éå}½±Ì€ôl‰µ…”ˆ°€‰ÉµÍ”ˆ°€‰…Ñµ}µ…”ˆ°€‰‘½Ý¹Í¥‘•}Í­•Ý}µ…”ˆ°€‰ÕÁÍ¥‘•}Í­•Ý}µ…”‰t(€€€€€€€ÁÉ¥¹Ð¡µ•ÑÉ¥Ì¹É½ÕÁ‰ä ‰µ½‘•°ˆ¥mÍÕµµ…Éå}½±Ít¹µ•…¸ ¤¹Ñ½}ÍÑÉ¥¹œ ¤¤(€€€ÁÉ¥¹Ð ‰M…Ù•%X½ÕÐµ½˜µÍ…µÁ±”ÁÉ•‘¥Ñ¥½¹Ì…¹µ•ÑÉ¥ÌÕ¹‘•ÈÉ•Á½ÉÑÌ¼¸ˆ¤(()‘•˜•áÁ½ÉÑ}¥Ù}™…Ñ½ÉÌ¡ÅÕ½Ñ•}Á…Ñ èÍÑÈ°ÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸è‰½½°°(€€€€€€€€€€€€€€€€€€€€€¹}½µÁ½¹•¹ÑÌè¥¹Ð¤€´ø9½¹”è(€€€€ˆˆ‰áÁ½ÉÐ¡¥ÍÑ½É¥…°A™…Ñ½ÈÍ½É•Ì…¹ÍÕÉ™…”±½…‘¥¹Ì¸ˆˆˆ(€€€Á…Ñ €ôA…Ñ ¡ÅÕ½Ñ•}Á…Ñ ¤(€€€¥˜¹½ÐÁ…Ñ ¹•á¥ÍÑÌ ¤è(€€€€€€€É…¥Í”¥±•9½Ñ½Õ¹‘ÉÉ½È¡˜‰=ÁÑ¥½¹Ì™¥±”¹½Ð™½Õ¹èíÁ…Ñ¡ôì¥µÁ½ÉÐÁÉ½Ù¥‘•ÈÅÕ½Ñ•Ì™¥ÉÍÐˆ¤(€€€ÅÕ½Ñ•Ì€ôÁ¹É•…‘}Á…ÉÅÕ•Ð¡Á…Ñ ¤¥˜Á…Ñ ¹ÍÕ™™¥à¹±½Ý•È ¤¥¸ìˆ¹Á…ÉÅÕ•Ðˆ°€ˆ¹ÁÄ‰ô•±Í”Á¹É•…‘}ÍØ¡Á…Ñ ¤(€€€¥˜€‰ÅÕ½Ñ•}ÅÕ…±¥Ñå}™±…œˆ¹½Ð¥¸ÅÕ½Ñ•Ìè(€€€€€€€ÅÕ½Ñ•Ì€ô¹½Éµ…±¥é•}½ÁÑ¥½¹}ÅÕ½Ñ•Ì¡ÅÕ½Ñ•Ì°¥Ù}Õ¹¥ÑÌô‰‘•¥µ…°ˆ°Í½ÕÉ”õ˜‰™¥±”éíÁ…Ñ ¹¹…µ•ôˆ¤(€€€ÍÕÉ™…”€ô‰Õ¥±‘}¥Ù}ÍÕÉ™…”¡ÅÕ½Ñ•Ì°ÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸õÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸¤(€€€Í½É•Ì°±½…‘¥¹Ì€ô¥Ù}ÍÕÉ™…•}Á…}™…Ñ½ÉÌ¡ÍÕÉ™…”°¹}½µÁ½¹•¹ÑÌõ¹}½µÁ½¹•¹ÑÌ¤(€€€½ÕÐ€ôA…Ñ  ‰É•Á½ÉÑÌˆ¤ì½ÕÐ¹µ­‘¥È¡Á…É•¹ÑÌõQÉÕ”°•á¥ÍÑ}½¬õQÉÕ”¤(€€€Í½É•Ì¹Ñ½}ÍØ¡½ÕÐ€¼€‰¥Ù}ÍÕÉ™…•}Á…}Í½É•Ì¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€±½…‘¥¹Ì¹Ñ½}ÍØ¡½ÕÐ€¼€‰¥Ù}ÍÕÉ™…•}Á…}±½…‘¥¹Ì¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€ÁÉ¥¹Ð¡˜‰M…Ù•A™…Ñ½ÉÌ™½ÈíÍ½É•Ì¹‘…Ñ”¹¹Õ¹¥ÅÕ” ¥ô‘…Ñ•Ì…¹í±½…‘¥¹Ì¹½µÁ½¹•¹Ð¹¹Õ¹¥ÅÕ” ¥ô½µÁ½¹•¹ÑÌÕ¹‘•ÈÉ•Á½ÉÑÌ¼¸ˆ¤(()‘•˜‰…­Ñ•ÍÐ¡ÅÕ½Ñ•Í}Á…Ñ èÍÑÈ°ÁÉ•‘¥Ñ¥½¹Í}Á…Ñ èÍÑÈ°ÁÉ¥•Í}Á…Ñ èÍÑÈ°(€€€€€€€€€€€€¡½É¥é½¹Ìè±¥ÍÑm¥¹Ñt°µ¥¹}Ù½±}•‘”è™±½…Ð°™••}Á•É}½¹ÑÉ…Ðè™±½…Ð°(€€€€€€€€€€€€½¹ÑÉ…Ñ}µÕ±Ñ¥Á±¥•Èè™±½…Ðð9½¹”¤€´ø9½¹”è(€€€‘•˜É•…‘}Ñ…‰±”¡Á…Ñ èÍÑÈ¤€´øÁ¹…Ñ…É…µ”è(€€€€€€€É•ÑÕÉ¸Á¹É•…‘}Á…ÉÅÕ•Ð¡Á…Ñ ¤¥˜A…Ñ ¡Á…Ñ ¤¹ÍÕ™™¥à¹±½Ý•È ¤¥¸ìˆ¹Á…ÉÅÕ•Ðˆ°€ˆ¹ÁÄ‰ô•±Í”Á¹É•…‘}ÍØ¡Á…Ñ ¤(€€€ÅÕ½Ñ•Ì°ÁÉ•‘¥Ñ¥½¹Ì°ÁÉ¥•Ì€ôµ…À¡É•…‘}Ñ…‰±”°mÅÕ½Ñ•Í}Á…Ñ °ÁÉ•‘¥Ñ¥½¹Í}Á…Ñ °ÁÉ¥•Í}Á…Ñ¡t¤(€€€…±±}ÑÉ…‘•Ì°…±±}ÍÕµµ…É¥•Ì€ômt°mt(€€€™½È¡½É¥é½¸¥¸¡½É¥é½¹Ìè(€€€€€€€ÑÉ…‘•Ì°ÍÕµµ…Éä€ô‰…­Ñ•ÍÑ}ÍÑÉ…‘‘±•Ì¡ÅÕ½Ñ•Ì°ÁÉ•‘¥Ñ¥½¹Ì°ÁÉ¥•Ì°¡½É¥é½¸õ¡½É¥é½¸°(€€€€€€€€€€€µ¥¹}Ù½±}•‘”õµ¥¹}Ù½±}•‘”°™••}Á•É}½¹ÑÉ…Ðõ™••}Á•É}½¹ÑÉ…Ð°(€€€€€€€€€€€½¹ÑÉ…Ñ}µÕ±Ñ¥Á±¥•Èõ½¹ÑÉ…Ñ}µÕ±Ñ¥Á±¥•È¤(€€€€€€€…±±}ÑÉ…‘•Ì¹…ÁÁ•¹¡ÑÉ…‘•Ì¤ì…±±}ÍÕµµ…É¥•Ì¹…ÁÁ•¹¡ÍÕµµ…Éä¤(€€€½ÕÐ€ôA…Ñ  ‰É•Á½ÉÑÌˆ¤ì½ÕÐ¹µ­‘¥È¡Á…É•¹ÑÌõQÉÕ”°•á¥ÍÑ}½¬õQÉÕ”¤(€€€ÑÉ…‘•}™É…µ”€ôÁ¹½¹…Ð¡…±±}ÑÉ…‘•Ì°¥¹½É•}¥¹‘•àõQÉÕ”¤¥˜…±±}ÑÉ…‘•Ì•±Í”Á¹…Ñ…É…µ” ¤(€€€ÍÕµµ…Éå}™É…µ”€ôÁ¹½¹…Ð¡…±±}ÍÕµµ…É¥•Ì°¥¹½É•}¥¹‘•àõQÉÕ”¤¥˜…±±}ÍÕµµ…É¥•Ì•±Í”Á¹…Ñ…É…µ” ¤(€€€ÑÉ…‘•}™É…µ”¹Ñ½}ÍØ¡½ÕÐ€¼€‰ÍÑÉ…‘‘±•}‰…­Ñ•ÍÑ}ÑÉ…‘•Ì¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€ÍÕµµ…Éå}™É…µ”¹Ñ½}ÍØ¡½ÕÐ€¼€‰ÍÑÉ…‘‘±•}‰…­Ñ•ÍÑ}ÍÕµµ…Éä¹ÍØˆ°¥¹‘•àõ…±Í”¤(€€€ÍÕµµ…Éå}™É…µ”¹Ñ½}©Í½¸¡½ÕÐ€¼€‰ÍÑÉ…‘‘±•}‰…­Ñ•ÍÑ}ÍÕµµ…Éä¹©Í½¸ˆ°½É¥•¹Ðô‰É•½É‘Ìˆ°¥¹‘•¹ÐôÈ°‘…Ñ•}™½Éµ…Ðô‰¥Í¼ˆ¤(€€€¥˜ÍÕµµ…Éå}™É…µ”¹ÑÉ…‘•}½Õ¹Ð¹ÍÕ´ ¤€ôô€Àè(€€€€€€€ÁÉ¥¹Ð ‰9¼•±¥¥‰±”ÍÑÉ…‘‘±”ÑÉ…‘•Ì¸½¹™¥É´ÅÕ½Ñ”½Ù•É…”°½¹ÑÉ…ÐµÕ±Ñ¥Á±¥•ÉÌ°…¹™½É•…ÍÐ‘…Ñ•Ì¸ˆ¤(€€€•±Í”è(€€€€€€€ÁÉ¥¹Ð¡ÍÕµµ…Éå}™É…µ”¹Ñ½}ÍÑÉ¥¹œ¡¥¹‘•àõ…±Í”¤¤(€€€ÁÉ¥¹Ð ‰M…Ù•ÑÉ…‘”±•‘•È…¹ÍÕµµ…ÉäÕ¹‘•ÈÉ•Á½ÉÑÌ¼¸ˆ¤(()‘•˜µ…¥¸ ¤€´ø9½¹”è(€€€Á…ÉÍ•È€ô…ÉÁ…ÉÍ”¹ÉÕµ•¹ÑA…ÉÍ•È¡‘•ÍÉ¥ÁÑ¥½¸ô‰M,!å¹¥àÁÉ¥”…¹É•…±¥é•µÙ½±…Ñ¥±¥ÑäÉ•Í•…É Á¥Á•±¥¹”ˆ¤(€€€½µµ…¹‘Ì€ôÁ…ÉÍ•È¹…‘‘}ÍÕ‰Á…ÉÍ•ÉÌ¡‘•ÍÐô‰½µµ…¹ˆ°É•ÅÕ¥É•õQÉÕ”¤(€€€‘½Ý¹±½…€ô½µµ…¹‘Ì¹…‘‘}Á…ÉÍ•È ‰‘½Ý¹±½…ˆ°¡•±Àô‰½Ý¹±½…ÁÉ¥•Ì…¹½¹ÍÑÉÕÐIX‘…Ñ„ˆ¤(€€€‘½Ý¹±½…¹…‘‘}…ÉÕµ•¹Ð ˆ´µÍÑ…ÉÐˆ°‘•™…Õ±ÐôˆÈÀÄÔ´ÀÄ´ÀÄˆ°¡•±Àô‰¥ÉÍÐÉ•ÅÕ•ÍÑ•‘…Ñ”€¡¥¹±ÕÍ¥Ù”¤ˆ¤(€€€‘½Ý¹±½…¹…‘‘}…ÉÕµ•¹Ð ˆ´µ•¹ˆ°‘•™…Õ±Ðõ9½¹”°¡•±Àô‰1…ÍÐÉ•ÅÕ•ÍÑ•‘…Ñ”€¡•á±ÕÍ¥Ù”ì‘•™…Õ±ÐÑ½‘…ä¤ˆ¤(€€€½µµ…¹‘Ì¹…‘‘}Á…ÉÍ•È ‰•Ù…±Õ…Ñ”ˆ°¡•±Àô‰IÕ¸•áÁ…¹‘¥¹œµÝ¥¹‘½ÜIX‰…Í•±¥¹”•Ù…±Õ…Ñ¥½¸ˆ¤(€€€½µµ…¹‘Ì¹…‘‘}Á…ÉÍ•È ‰™½É•…ÍÐµÉØˆ°¡•±Àô‰¥ÐIX‰…Í•±¥¹•Ì…¹•áÁ½ÉÐÕÉÉ•¹Ð™½ÉÝ…É™½É•…ÍÑÌˆ¤(€€€½µµ…¹‘Ì¹…‘‘}Á…ÉÍ•È ‰•Ù…±Õ…Ñ”µµ°ˆ°¡•±Àô‰IÕ¸¡É½¹½±½¥…°Ý…±¬µ™½ÉÝ…É50µ½‘•°½µÁ…É¥Í½¸ˆ¤(€€€½µµ…¹‘Ì¹…‘‘}Á…ÉÍ•È ‰™½É•…ÍÐµµ°ˆ°¡•±Àô‰¥Ð50µ½‘•±Ì…¹•áÁ½ÉÐÕÉÉ•¹Ð™½ÉÝ…É™½É•…ÍÑÌˆ¤(€€€¥µÀ€ô½µµ…¹‘Ì¹…‘‘}Á…ÉÍ•È ‰¥µÁ½ÉÐµ½ÁÑ¥½¹Ìˆ°¡•±Àô‰%µÁ½ÉÐ„ÁÉ½Ù¥‘•ÈµÍÕÁÁ±¥•½ÁÑ¥½¹ÌMX½ÈA…ÉÅÕ•Ðˆ¤(€€€¥µÀ¹…‘‘}…ÉÕµ•¹Ð ‰Á…Ñ ˆ¤(€€€¥µÀ¹…‘‘}…ÉÕµ•¹Ð ˆ´µ¥ØµÕ¹¥ÑÌˆ°¡½¥•Ìõl‰‘•¥µ…°ˆ°€‰Á•É•¹Ð‰t°‘•™…Õ±Ðô‰‘•¥µ…°ˆ¤(€€€Ù…±¥‘…Ñ”€ô½µµ…¹‘Ì¹…‘‘}Á…ÉÍ•È ‰Ù…±¥‘…Ñ”µ½ÁÑ¥½¹Ìˆ°¡•±Àô‰Y…±¥‘…Ñ”ÅÕ½Ñ•Ì…¹¥¹‘•Á•¹‘•¹Ñ±äÉ•ÁÉ¥”ÁÉ½Ù¥‘•È%Xˆ¤(€€€Ù…±¥‘…Ñ”¹…‘‘}…ÉÕµ•¹Ð ‰Á…Ñ ˆ¤(€€€Ù…±¥‘…Ñ”¹…‘‘}…ÉÕµ•¹Ð ˆ´µ¥ØµÕ¹¥ÑÌˆ°¡½¥•Ìõl‰‘•¥µ…°ˆ°€‰Á•É•¹Ð‰t°‘•™…Õ±Ðô‰‘•¥µ…°ˆ¤(€€€¥Ø€ô½µµ…¹‘Ì¹…‘‘}Á…ÉÍ•È ‰¥ØµÍÕÉ™…”ˆ°¡•±Àô‰	Õ¥±…¹Á±½Ð½Ù•É…”µÍÕÁÁ½ÉÑ•‘…¥±ä%XÍÕÉ™…•Ìˆ¤(€€€¥Ø¹…‘‘}…ÉÕµ•¹Ð ˆ´µÅÕ½Ñ•Ìˆ°‘•™…Õ±Ðô‰‘…Ñ„½ÁÉ½•ÍÍ•½½ÁÑ¥½¹}ÅÕ½Ñ•Ì¹Á…ÉÅÕ•Ðˆ¤(€€€¥Ø¹…‘‘}…ÉÕµ•¹Ð ˆ´µ…Ìµ½˜ˆ°‘•™…Õ±Ðõ9½¹”°¡•±Àô‰=‰Í•ÉÙ…Ñ¥½¸‘…Ñ”Ñ¼Á±½Ðˆ¤(€€€¥Ø¹…‘‘}…ÉÕµ•¹Ð ˆ´µÍÁ½Ðµ™½ÉÝ…Éµ…ÁÁÉ½á¥µ…Ñ¥½¸ˆ°…Ñ¥½¸ô‰ÍÑ½É•}ÑÉÕ”ˆ°¡•±Àô‰UÍ”õL©•áÀ ¡ÈµÄ¥P¤°Ý¥Ñ µ¥ÍÍ¥¹œ…ÉÉäÉ…Ñ•ÌÍ•ÐÑ¼é•É¼ˆ¤(€€€¥Ù˜€ô½µµ…¹‘Ì¹…‘‘}Á…ÉÍ•È ‰™½É•…ÍÐµ¥Øˆ°¡•±Àô‰½É•…ÍÐ…¹•áÁ½ÉÐÑ¡”¹•áÐµÍ•ÍÍ¥½¸A%XÍÕÉ™…”ˆ¤(€€€¥Ù˜¹…‘‘}…ÉÕµ•¹Ð ˆ´µÅÕ½Ñ•Ìˆ°‘•™…Õ±Ðô‰‘…Ñ„½ÁÉ½•ÍÍ•½½ÁÑ¥½¹}ÅÕ½Ñ•Ì¹Á…ÉÅÕ•Ðˆ¤(€€€¥Ù˜¹…‘‘}…ÉÕµ•¹Ð ˆ´µÍÁ½Ðµ™½ÉÝ…Éµ…ÁÁÉ½á¥µ…Ñ¥½¸ˆ°…Ñ¥½¸ô‰ÍÑ½É•}ÑÉÕ”ˆ°¡•±Àô‰UÍ”‘½Õµ•¹Ñ•ÍÁ½Ð½…ÉÉä…ÁÁÉ½á¥µ…Ñ¥½¸Ý¡•¸™½ÉÝ…É¥Ì…‰Í•¹Ðˆ¤(€€€¥Ù˜¹…‘‘}…ÉÕµ•¹Ð ˆ´µ¸µ½µÁ½¹•¹ÑÌˆ°ÑåÁ”õ¥¹Ð°‘•™…Õ±ÐôÌ¤(€€€¥Ù”€ô½µµ…¹‘Ì¹…‘‘}Á…ÉÍ•È ‰•Ù…±Õ…Ñ”µ¥Øˆ°¡•±Àô‰IÕ¸±•…­…”µÍ…™”¹•áÐµÍ•ÍÍ¥½¸%XÍÕÉ™…”•Ù…±Õ…Ñ¥½¸ˆ¤(€€€¥Ù”¹…‘‘}…ÉÕµ•¹Ð ˆ´µÅÕ½Ñ•Ìˆ°‘•™…Õ±Ðô‰‘…Ñ„½ÁÉ½•ÍÍ•½½ÁÑ¥½¹}ÅÕ½Ñ•Ì¹Á…ÉÅÕ•Ðˆ¤(€€€¥Ù”¹…‘‘}…ÉÕµ•¹Ð ˆ´µÍÁ½Ðµ™½ÉÝ…Éµ…ÁÁÉ½á¥µ…Ñ¥½¸ˆ°…Ñ¥½¸ô‰ÍÑ½É•}ÑÉÕ”ˆ¤(€€€¥Ù”¹…‘‘}…ÉÕµ•¹Ð ˆ´µ¸µ½µÁ½¹•¹ÑÌˆ°ÑåÁ”õ¥¹Ð°‘•™…Õ±ÐôÌ¤(€€€¥Ù”¹…‘‘}…ÉÕµ•¹Ð ˆ´µµ¥¸µÑÉ…¥¹¥¹œµ‘…Ñ•Ìˆ°ÑåÁ”õ¥¹Ð°‘•™…Õ±Ðôà¤(€€€¥Ù™…Ñ½ÉÌ€ô½µµ…¹‘Ì¹…‘‘}Á…ÉÍ•È ‰¥Øµ™…Ñ½ÉÌˆ°¡•±Àô‰áÁ½ÉÐ¡¥ÍÑ½É¥…°%XA™…Ñ½ÈÍ½É•Ì…¹±½…‘¥¹Ìˆ¤(€€€¥Ù™…Ñ½ÉÌ¹…‘‘}…ÉÕµ•¹Ð ˆ´µÅÕ½Ñ•Ìˆ°‘•™…Õ±Ðô‰‘…Ñ„½ÁÉ½•ÍÍ•½½ÁÑ¥½¹}ÅÕ½Ñ•Ì¹Á…ÉÅÕ•Ðˆ¤(€€€¥Ù™…Ñ½ÉÌ¹…‘‘}…ÉÕµ•¹Ð ˆ´µÍÁ½Ðµ™½ÉÝ…Éµ…ÁÁÉ½á¥µ…Ñ¥½¸ˆ°…Ñ¥½¸ô‰ÍÑ½É•}ÑÉÕ”ˆ¤(€€€¥Ù™…Ñ½ÉÌ¹…‘‘}…ÉÕµ•¹Ð ˆ´µ¸µ½µÁ½¹•¹ÑÌˆ°ÑåÁ”õ¥¹Ð°‘•™…Õ±ÐôÌ¤(€€€‰Ð€ô½µµ…¹‘Ì¹…‘‘}Á…ÉÍ•È ‰‰…­Ñ•ÍÐˆ°¡•±Àô‰M¥µÕ±…Ñ”¡¥ÍÑ½É¥…°ÅÕ½Ñ”µ‰…Í•±½¹œ½Í¡½ÉÐÍÑÉ…‘‘±•Ìˆ¤(€€€‰Ð¹…‘‘}…ÉÕµ•¹Ð ˆ´µÅÕ½Ñ•Ìˆ°‘•™…Õ±Ðô‰‘…Ñ„½ÁÉ½•ÍÍ•½½ÁÑ¥½¹}ÅÕ½Ñ•Ì¹Á…ÉÅÕ•Ðˆ¤(€€€‰Ð¹…‘‘}…ÉÕµ•¹Ð ˆ´µ™½É•…ÍÑÌˆ°‘•™…Õ±Ðô‰É•Á½ÉÑÌ½ÉÙ}Ý…±­}™½ÉÝ…É‘}ÁÉ•‘¥Ñ¥½¹Ì¹ÍØˆ¤(€€€‰Ð¹…‘‘}…ÉÕµ•¹Ð ˆ´µÁÉ¥•Ìˆ°‘•™…Õ±Ðô‰‘…Ñ„½ÁÉ½•ÍÍ•½‘…¥±å}ÁÉ¥•Ì¹Á…ÉÅÕ•Ðˆ¤(€€€‰Ð¹…‘‘}…ÉÕµ•¹Ð ˆ´µ¡½É¥é½¹Ìˆ°‘•™…Õ±ÐôˆÔ°ÈÀ°ØÀˆ¤(€€€‰Ð¹…‘‘}…ÉÕµ•¹Ð ˆ´µµ¥¸µÙ½°µ•‘”ˆ°ÑåÁ”õ™±½…Ð°‘•™…Õ±ÐôÀ¸ÀÈ¤(€€€‰Ð¹…‘‘}…ÉÕµ•¹Ð ˆ´µ™•”µÁ•Èµ½¹ÑÉ…Ðˆ°ÑåÁ”õ™±½…Ð°‘•™…Õ±ÐôÀ¸À°(€€€€€€€€€€€€€€€€€€€¡•±Àô‰-I\™•”Á•È½ÁÑ¥½¸½¹ÑÉ…ÐÁ•È•á•ÕÑ¥½¸±•œˆ¤(€€€‰Ð¹…‘‘}…ÉÕµ•¹Ð ˆ´µ½¹ÑÉ…ÐµµÕ±Ñ¥Á±¥•Èˆ°ÑåÁ”õ™±½…Ð°‘•™…Õ±Ðõ9½¹”°(€€€€€€€€€€€€€€€€€€€¡•±Àô‰UÍ”½¹±ä¥˜Ñ¡”ÅÕ½Ñ”™¥±”½µ¥ÑÌÑ¡”Ù•É¥™¥•½¹ÑÉ…ÐµÕ±Ñ¥Á±¥•Èˆ¤(€€€…ÉÌ€ôÁ…ÉÍ•È¹Á…ÉÍ•}…ÉÌ ¤(€€€¥˜…ÉÌ¹½µµ…¹€ôô€‰‘½Ý¹±½…ˆè(€€€€€€€ÉÕ¸¡ÍÑ…ÉÐõ…ÉÌ¹ÍÑ…ÉÐ°•¹õ…ÉÌ¹•¹¤(€€€•±¥˜…ÉÌ¹½µµ…¹€ôô€‰•Ù…±Õ…Ñ”ˆè(€€€€€€€•Ù…±Õ…Ñ” ¤(€€€•±¥˜…ÉÌ¹½µµ…¹€ôô€‰™½É•…ÍÐµÉØˆè(€€€€€€€™½É•…ÍÑ}ÉØ ¤(€€€•±¥˜…ÉÌ¹½µµ…¹€ôô€‰•Ù…±Õ…Ñ”µµ°ˆè(€€€€€€€•Ù…±Õ…Ñ•}µ° ¤(€€€•±¥˜…ÉÌ¹½µµ…¹€ôô€‰™½É•…ÍÐµµ°ˆè(€€€€€€€™½É•…ÍÑ}µ° ¤(€€€•±¥˜…ÉÌ¹½µµ…¹€ôô€‰¥µÁ½ÉÐµ½ÁÑ¥½¹Ìˆè(€€€€€€€¥µÁ½ÉÑ}½ÁÑ¥½¹Ì¡…ÉÌ¹Á…Ñ °…ÉÌ¹¥Ù}Õ¹¥ÑÌ¤(€€€•±¥˜…ÉÌ¹½µµ…¹€ôô€‰Ù…±¥‘…Ñ”µ½ÁÑ¥½¹Ìˆè(€€€€€€€Ù…±¥‘…Ñ•}½ÁÑ¥½¹Í}™¥±”¡…ÉÌ¹Á…Ñ °…ÉÌ¹¥Ù}Õ¹¥ÑÌ¤(€€€•±¥˜…ÉÌ¹½µµ…¹€ôô€‰¥ØµÍÕÉ™…”ˆè(€€€€€€€µ…­•}¥Ù}ÍÕÉ™…”¡…ÉÌ¹ÅÕ½Ñ•Ì°…ÉÌ¹ÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸°…Í}½˜õ…ÉÌ¹…Í}½˜¤(€€€•±¥˜…ÉÌ¹½µµ…¹€ôô€‰™½É•…ÍÐµ¥Øˆè(€€€€€€€µ…­•}¥Ù}ÍÕÉ™…”¡…ÉÌ¹ÅÕ½Ñ•Ì°…ÉÌ¹ÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸°™½É•…ÍÐõQÉÕ”°(€€€€€€€€€€€€€€€€€€€€€€€¹}½µÁ½¹•¹ÑÌõ…ÉÌ¹¹}½µÁ½¹•¹ÑÌ¤(€€€•±¥˜…ÉÌ¹½µµ…¹€ôô€‰•Ù…±Õ…Ñ”µ¥Øˆè(€€€€€€€•Ù…±Õ…Ñ•}¥Ù}ÍÕÉ™…”¡…ÉÌ¹ÅÕ½Ñ•Ì°…ÉÌ¹ÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸°(€€€€€€€€€€€€€€€€€€€€€€€€€€€…ÉÌ¹¹}½µÁ½¹•¹ÑÌ°…ÉÌ¹µ¥¹}ÑÉ…¥¹¥¹}‘…Ñ•Ì¤(€€€•±¥˜…ÉÌ¹½µµ…¹€ôô€‰¥Øµ™…Ñ½ÉÌˆè(€€€€€€€•áÁ½ÉÑ}¥Ù}™…Ñ½ÉÌ¡…ÉÌ¹ÅÕ½Ñ•Ì°…ÉÌ¹ÍÁ½Ñ}™½ÉÝ…É‘}…ÁÁÉ½á¥µ…Ñ¥½¸°…ÉÌ¹¹}½µÁ½¹•¹ÑÌ¤(€€€•±¥˜…ÉÌ¹½µµ…¹€ôô€‰‰…­Ñ•ÍÐˆè(€€€€€€€¡½É¥é½¹Ì€ôm¥¹Ð¡à¹ÍÑÉ¥À ¤¤™½Èà¥¸…ÉÌ¹¡½É¥é½¹Ì¹ÍÁ±¥Ð ˆ°ˆ¤¥˜à¹ÍÑÉ¥À ¥t(€€€€€€€¥˜¹½Ð¡½É¥é½¹Ì½È…¹ä¡ €ð€Ä™½È ¥¸¡½É¥é½¹Ì¤è(€€€€€€€€€€€Á…ÉÍ•È¹•ÉÉ½È ˆ´µ¡½É¥é½¹ÌµÕÍÐ‰”½µµ„µÍ•Á…É…Ñ•Á½Í¥Ñ¥Ù”Í•ÍÍ¥½¸½Õ¹ÑÌˆ¤(€€€€€€€‰…­Ñ•ÍÐ¡…ÉÌ¹ÅÕ½Ñ•Ì°…ÉÌ¹™½É•…ÍÑÌ°…ÉÌ¹ÁÉ¥•Ì°¡½É¥é½¹Ì°…ÉÌ¹µ¥¹}Ù½±}•‘”°(€€€€€€€€€€€€€€€€…ÉÌ¹™••}Á•É}½¹ÑÉ…Ð°…ÉÌ¹½¹ÑÉ…Ñ}µÕ±Ñ¥Á±¥•È¤(()¥˜}}¹…µ•}|€ôô€‰}}µ…¥¹}|ˆè(€€€µ…¥¸ ¤
+"""Command-line entry point for the initial research pipeline."""
+import argparse
+import json
+from pathlib import Path
+
+import pandas as pd
+
+from skhynix_vol.data.prices import download_prices, save_price_data
+from skhynix_vol.data.options import (load_option_file, save_option_quotes,
+    attach_krx_single_stock_option_spec, normalize_option_quotes)
+from skhynix_vol.data.demo_options import generate_synthetic_option_quotes
+from skhynix_vol.data.instruments import instrument_spec
+from skhynix_vol.evaluation.walk_forward import forecast_latest_rv, walk_forward_rv
+from skhynix_vol.evaluation.iv_walk_forward import walk_forward_iv
+from skhynix_vol.evaluation.garch_walk_forward import forecast_latest_garch, walk_forward_garch
+from skhynix_vol.evaluation.ml_walk_forward import forecast_latest_ml, walk_forward_ml
+from skhynix_vol.models.lstm import lstm_available
+from skhynix_vol.features.implied import (build_iv_surface, forecast_next_iv_surface,
+    iv_surface_pca_factors)
+from skhynix_vol.features.option_pricing import validate_option_iv
+from skhynix_vol.features.arbitrage import static_arbitrage_diagnostics
+from skhynix_vol.features.arbitrage_surface import project_iv_surface
+from skhynix_vol.features.realized import build_realized_dataset
+from skhynix_vol.strategies.backtest import backtest_straddles
+
+
+def run(start: str = "2015-01-01", end: str | None = None) -> None:
+    from skhynix_vol.visualization.charts import create_exploratory_charts
+    raw, prices = download_prices(start=start, end=end)
+    raw_path, price_path = save_price_data(raw, prices)
+    features = build_realized_dataset(prices)
+    target_columns = [col for col in features if col.startswith("target_rv_")]
+    feature_path = "data/processed/rv_features.parquet"
+    target_path = "data/processed/rv_targets.parquet"
+    features.drop(columns=target_columns).to_parquet(feature_path, index=False)
+    features.loc[:, ["date", *target_columns]].to_parquet(target_path, index=False)
+    charts = create_exploratory_charts(prices, features)
+    print(f"Retrieved {len(prices):,} sessions: {prices.date.min().date()} to {prices.date.max().date()}")
+    flagged = prices.loc[prices.ohlc_quality_flag.ne("ok"), "date"]
+    if len(flagged):
+        dates = ", ".join(pd.to_datetime(flagged).dt.strftime("%Y-%m-%d"))
+        print(f"Data quality: {len(flagged)} OHLC range inconsistencies flagged and retained: {dates}")
+    print(f"Saved raw: {raw_path}\nSaved processed prices: {price_path}")
+    print(f"Saved features: {feature_path}\nSaved targets: {target_path}")
+    print("Charts: " + ", ".join(str(path) for path in charts))
+
+
+def evaluate() -> None:
+    """Run the expanding-window RV baselines from saved processed prices."""
+    path = Path("data/processed/daily_prices.parquet")
+    if not path.exists():
+        raise FileNotFoundError("Run `skhynix-vol download` before `skhynix-vol evaluate`")
+    prices = pd.read_parquet(path)
+    features = build_realized_dataset(prices)
+    predictions, metrics = walk_forward_rv(features)
+    garch_predictions, garch_metrics = walk_forward_garch(features)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    predictions.to_csv(out / "rv_walk_forward_predictions.csv", index=False)
+    metrics.to_csv(out / "rv_walk_forward_metrics.csv", index=False)
+    garch_predictions.to_csv(out / "rv_garch_walk_forward_predictions.csv", index=False)
+    garch_metrics.to_csv(out / "rv_garch_walk_forward_metrics.csv", index=False)
+    metadata = {
+        "ticker": "000660.KS",
+        "source": "Yahoo Finance (yfinance), as recorded in processed daily prices",
+        "observation_count": int(len(prices)),
+        "data_start": str(pd.to_datetime(prices.date).min().date()) if len(prices) else None,
+        "data_end": str(pd.to_datetime(prices.date).max().date()) if len(prices) else None,
+        "feature_target_definition": "adjusted-close log returns; 252-session annualization; forward returns t+1..t+h",
+        "evaluation": {"folds": "expanding calendar-year test folds", "min_train_years": 5,
+                       "purge_sessions": [5, 20, 60], "models": ["rolling_rv", "ewma_vol", "har_rv"],
+                       "har_features": ["rv_1", "rv_5", "rv_20", "rv_60"],
+                       "ewma_lambda": 0.94, "garch_models": ["garch", "egarch", "gjr_garch"],
+                       "metrics": ["mae", "rmse", "qlike_variance_scale", "r2", "directional_accuracy"]},
+    }
+    (out / "rv_walk_forward_run.json").write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
+    if metrics.empty:
+        print("No walk-forward folds available; check the price history length.")
+    else:
+        summary = metrics.groupby(["horizon", "model"])[["mae", "rmse", "qlike"]].mean()
+        print(summary.to_string())
+        if not garch_metrics.empty:
+            print("\nGARCH family (annual-fold mean):")
+            print(garch_metrics.groupby(["horizon", "model"])[["mae", "rmse", "qlike"]].mean().to_string())
+        print("Saved annual fold predictions and metrics under reports/.")
+
+
+def evaluate_ml() -> None:
+    """Run fold-local ML models and save their out-of-sample forecasts."""
+    path = Path("data/processed/daily_prices.parquet")
+    if not path.exists():
+        raise FileNotFoundError("Run `skhynix-vol download` before `skhynix-vol evaluate-ml`")
+    features = build_realized_dataset(pd.read_parquet(path))
+    predictions, metrics = walk_forward_ml(features)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    predictions.to_csv(out / "rv_ml_walk_forward_predictions.csv", index=False)
+    metrics.to_csv(out / "rv_ml_walk_forward_metrics.csv", index=False)
+    if not lstm_available():
+        print("LSTM skipped; install the optional dependency with `python -m pip install -e '.[ml-deep]'`.")
+    if metrics.empty:
+        print("No ML walk-forward folds were available.")
+    else:
+        print(metrics.groupby(["horizon", "model"])[["mae", "rmse", "qlike"]].mean().to_string())
+    print("Saved ML fold predictions and metrics under reports/.")
+
+
+def forecast_rv() -> None:
+    """Write latest-close 5/20/60 session RV forecasts."""
+    path = Path("data/processed/daily_prices.parquet")
+    if not path.exists():
+        raise FileNotFoundError("Run `skhynix-vol download` before `skhynix-vol forecast-rv`")
+    prices = pd.read_parquet(path)
+    dataset = build_realized_dataset(prices)
+    forecasts = forecast_latest_rv(dataset)
+    garch_forecasts = forecast_latest_garch(dataset)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    target = out / "rv_forecasts_latest.csv"
+    forecasts.to_csv(target, index=False)
+    garch_target = out / "rv_garch_forecasts_latest.csv"
+    garch_forecasts.to_csv(garch_target, index=False)
+    print(f"As-of {forecasts.as_of_date.iloc[0].date()}:\n{forecasts[['horizon_sessions','har_rv_forecast','rolling_rv_forecast','ewma_vol_forecast']].to_string(index=False)}")
+    print(f"Saved forecasts to {target}")
+    print("Latest GARCH-family forecasts:")
+    print(garch_forecasts[["horizon_sessions", "model", "forecast_rv"]].to_string(index=False))
+    print(f"Saved GARCH forecasts to {garch_target}")
+
+
+def forecast_ml() -> None:
+    path = Path("data/processed/daily_prices.parquet")
+    if not path.exists():
+        raise FileNotFoundError("Run `skhynix-vol download` before `skhynix-vol forecast-ml`")
+    features = build_realized_dataset(pd.read_parquet(path))
+    forecasts = forecast_latest_ml(features)
+    if not lstm_available():
+        print("LSTM skipped; install the optional dependency with `python -m pip install -e '.[ml-deep]'`.")
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    target = out / "rv_ml_forecasts_latest.csv"
+    forecasts.to_csv(target, index=False)
+    print(forecasts[["horizon_sessions", "model", "forecast_rv"]].to_string(index=False))
+    print(f"Saved latest ML forecasts to {target}")
+
+
+def import_options(path: str, iv_units: str) -> None:
+    raw, normalized = load_option_file(path, iv_units=iv_units)
+    if ("synthetic_data_flag" in normalized and normalized.synthetic_data_flag.fillna(False)
+            .astype(str).str.lower().isin({"true", "1", "yes"}).any()):
+        raise ValueError("Synthetic demo quotes cannot be imported into data/processed; use them directly with demo workflows")
+    normalized = attach_krx_single_stock_option_spec(normalized)
+    normalized = validate_option_iv(normalized)
+    arbitrage_report = static_arbitrage_diagnostics(normalized)
+    raw_path, processed_path = save_option_quotes(raw, normalized)
+    Path("reports").mkdir(parents=True, exist_ok=True)
+    normalized.to_csv("reports/option_quote_iv_validation.csv", index=False)
+    arbitrage_report.to_csv("reports/option_static_arbitrage_diagnostics.csv", index=False)
+    print(f"Imported {len(normalized):,} option quotes from {path}")
+    print(f"Observation dates: {normalized.date.min().date()} to {normalized.date.max().date()}")
+    print(f"Crossed-market rows flagged: {(normalized.quote_quality_flag != 'ok').sum()}")
+    print("IV validation statuses:")
+    print(normalized.iv_validation_status.value_counts(dropna=False).to_string())
+    spec = instrument_spec()
+    print(f"Instrument: {spec['exchange']} {spec['product']}; European exercise; cash settled; multiplier {spec['contract_multiplier']} shares")
+    print(f"Saved raw: {raw_path}\nSaved normalized: {processed_path}")
+
+
+def generate_demo_options(prices_path: str, output_path: str, days: int) -> None:
+    """Write explicitly synthetic option quotes outside processed market data."""
+    source = Path(prices_path)
+    if not source.exists():
+        raise FileNotFoundError(f"Price history not found: {source}; run download first")
+    prices = pd.read_parquet(source) if source.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(source)
+    quotes = generate_synthetic_option_quotes(prices, days=days)
+    target = Path(output_path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    quotes.to_csv(target, index=False)
+    print(f"Generated {len(quotes):,} SYNTHETIC quote rows at {target}")
+    print("These are simulated Black-76 premiums and IVs; do not use for model performance or trading claims.")
+
+
+def validate_options_file(path: str, iv_units: str) -> None:
+    """Create quote-quality and provider-IV consistency diagnostics."""
+    raw, normalized = load_option_file(path, iv_units=iv_units)
+    normalized = attach_krx_single_stock_option_spec(normalized)
+    report = validate_option_iv(normalized)
+    arbitrage_report = static_arbitrage_diagnostics(normalized)
+    synthetic = (normalized.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in normalized else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    target = out / f"option_quote_iv_validation{suffix}.csv"
+    report.to_csv(target, index=False)
+    arb_target = out / f"option_static_arbitrage_diagnostics{suffix}.csv"
+    arbitrage_report.to_csv(arb_target, index=False)
+    print(report.iv_validation_status.value_counts(dropna=False).to_string())
+    print(f"Saved {len(report):,} quote diagnostics to {target}; raw source rows: {len(raw):,}")
+    print(f"Static-arbitrage flagged expiry groups: {int(arbitrage_report.arbitrage_flag.sum())}; saved to {arb_target}")
+
+
+def make_iv_surface(quote_path: str, spot_forward_approximation: bool,
+                    as_of: str | None = None, forecast: bool = False,
+                    n_components: int = 3) -> None:
+    from skhynix_vol.visualization.iv_charts import plot_iv_surface
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}; import provider quotes first")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        from skhynix_vol.data.options import normalize_option_quotes
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    surface_path = Path("data/demo_synthetic/iv_surface.parquet") if synthetic else Path("data/processed/iv_surface.parquet")
+    surface_path.parent.mkdir(parents=True, exist_ok=True)
+    surface.to_parquet(surface_path, index=False)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    if as_of is not None:
+        as_date = pd.Timestamp(as_of).normalize()
+        surface = surface[surface.date.eq(as_date)]
+        if surface.empty:
+            raise ValueError(f"No supported IV surface grid for {as_date.date()}")
+    if forecast:
+        prediction = forecast_next_iv_surface(surface, n_components=n_components)
+        prediction_path = out / f"iv_surface_forecast{suffix}.csv"
+        prediction.to_csv(prediction_path, index=False)
+        factor_columns = [c for c in prediction if c.endswith("_change_forecast") or c.endswith("_score_asof") or c.endswith("_score_forecast")]
+        factor_forecast = prediction[["as_of_date", "training_start", "training_end", "n_training_dates", "n_components", "model", *factor_columns]].drop_duplicates()
+        factor_path = out / f"iv_surface_factor_change_forecast{suffix}.csv"
+        factor_forecast.to_csv(factor_path, index=False)
+        title = "SYNTHETIC DEMO â€” SK Hynix next-session IV surface forecast" if synthetic else "SK Hynix next-session IV surface forecast"
+        image_path = plot_iv_surface(prediction, out / f"iv_surface_forecast{suffix}.png",
+            value_column="implied_volatility_forecast", title=title)
+        print(f"Saved {len(prediction)} forecast grid cells to {prediction_path}")
+        print(f"Saved PCA factor change forecast to {factor_path}")
+        print(f"Saved forecast image: {image_path}")
+    else:
+        title = "SYNTHETIC DEMO â€” SK Hynix implied-volatility surface" if synthetic else "SK Hynix implied-volatility surface"
+        image_path = plot_iv_surface(surface, out / f"iv_surface{suffix}_{surface.date.max():%Y%m%d}.png", title=title)
+        print(f"Saved supported surface points: {surface_path}")
+        print(f"Saved image: {image_path}")
+
+
+def evaluate_iv_surface(quote_path: str, spot_forward_approximation: bool,
+                        n_components: int, min_training_dates: int) -> None:
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}; import provider quotes first")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        from skhynix_vol.data.options import normalize_option_quotes
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    predictions, metrics = walk_forward_iv(surface, n_components=n_components,
+                                            min_training_dates=min_training_dates)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    predictions.to_csv(out / f"iv_surface_walk_forward_predictions{suffix}.csv", index=False)
+    metrics.to_csv(out / f"iv_surface_walk_forward_metrics{suffix}.csv", index=False)
+    if metrics.empty:
+        print("No IV walk-forward folds met the minimum coverage requirements.")
+    else:
+        summary_cols = ["mae", "rmse", "atm_mae", "downside_skew_mae", "upside_skew_mae"]
+        print(metrics.groupby("model")[summary_cols].mean().to_string())
+    print(f"Saved IV out-of-sample predictions and metrics under reports/ (synthetic={synthetic}).")
+
+
+def project_iv(quote_path: str, spot_forward_approximation: bool) -> None:
+    """Project supported call prices onto static-arbitrage constraints."""
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    projected = project_iv_surface(surface)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    target = out / f"iv_surface_arbitrage_projection{suffix}.csv"
+    projected.to_csv(target, index=False)
+    failed = projected.loc[projected.projection_status.ne("optimal"), "date"].nunique()
+    print(f"Projected {len(projected):,} surface cells; solver-failed dates: {failed}; max IV adjustment: {projected.absolute_iv_adjustment.max():.6f}")
+    print(f"Saved projected surface to {target}")
+
+
+def export_iv_factors(quote_path: str, spot_forward_approximation: bool,
+                      n_components: int) -> None:
+    """Export historical PCA factor scores and surface loadings."""
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}; import provider quotes first")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    scores, loadings = iv_surface_pca_factors(surface, n_components=n_components)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    scores.to_csv(out / f"iv_surface_pca_scores{suffix}.csv", index=False)
+    loadings.to_csv(out / f"iv_surface_pca_loadings{suffix}.csv", index=False)
+    print(f"Saved PCA factors for {scores.date.nunique()} dates and {loadings.component.nunique()} components under reports/.")
+
+
+def backtest(quotes_path: str, predictions_path: str, prices_path: str,
+             horizons: list[int], min_vol_edge: float, fee_per_contract: float,
+             contract_multiplier: float | None) -> None:
+    def read_table(path: str) -> pd.DataFrame:
+        return pd.read_parquet(path) if Path(path).suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    quotes, predictions, prices = map(read_table, [quotes_path, predictions_path, prices_path])
+    all_trades, all_summaries = [], []
+    for horizon in horizons:
+        trades, summary = backtest_straddles(quotes, predictions, prices, horizon=horizon,
+            min_vol_edge=min_vol_edge, fee_per_contract=fee_per_contract,
+            contract_multiplier=contract_multiplier)
+        all_trades.append(trades); all_summaries.append(summary)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    trade_frame = pd.concat(all_trades, ignore_index=True) if all_trades else pd.DataFrame()
+    summary_frame = pd.concat(all_summaries, ignore_index=True) if all_summaries else pd.DataFrame()
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    trade_frame.to_csv(out / f"straddle_backtest_trades{suffix}.csv", index=False)
+    summary_frame.to_csv(out / f"straddle_backtest_summary{suffix}.csv", index=False)
+    summary_frame.to_json(out / f"straddle_backtest_summary{suffix}.json", orient="records", indent=2, date_format="iso")
+    if summary_frame.trade_count.sum() == 0:
+        print("No eligible straddle trades. Confirm quote coverage, contract multipliers, and forecast dates.")
+    else:
+        print(summary_frame.to_string(index=False))
+    print(f"Saved trade ledger and summary under reports/ (synthetic={synthetic}).")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="SK Hynix price and realized-volatility research pipeline")
+    commands = parser.add_subparsers(dest="command", required=True)
+    download = commands.add_parser("download", help="Download prices and construct RV data")
+    download.add_argument("--start", default="2015-01-01", help="First requested date (inclusive)")
+    download.add_argument("--end", default=None, help="Last requested date (exclusive; default today)")
+    commands.add_parser("evaluate", help="Run expanding-window RV baseline evaluation")
+    commands.add_parser("forecast-rv", help="Fit RV baselines and export current forward forecasts")
+    commands.add_parser("evaluate-ml", help="Run chronological walk-forward ML model comparison")
+    commands.add_parser("forecast-ml", help="Fit ML models and export current forward forecasts")
+    demo = commands.add_parser("generate-demo-options", help="Generate removable, clearly labeled synthetic options data")
+    demo.add_argument("--prices", default="data/processed/daily_prices.parquet")
+    demo.add_argument("--out", default="data/demo_synthetic/options_quotes.csv")
+    demo.add_argument("--days", type=int, default=65, help="Recent underlying sessions to simulate")
+    imp = commands.add_parser("import-options", help="Import a provider-supplied options CSV or Parquet")
+    imp.add_argument("path")
+    imp.add_argument("--iv-units", choices=["decimal", "percent"], default="decimal")
+    validate = commands.add_parser("validate-options", help="Validate quotes and independently reprice provider IV")
+    validate.add_argument("path")
+    validate.add_argument("--iv-units", choices=["decimal", "percent"], default="decimal")
+    iv = commands.add_parser("iv-surface", help="Build and plot coverage-supported daily IV surfaces")
+    iv.add_argument("--quotes", default="data/processed/option_quotes.parquet")
+    iv.add_argument("--as-of", default=None, help="Observation date to plot")
+    iv.add_argument("--spot-forward-approximation", action="store_true", help="Use F=S*exp((r-q)T), with missing carry rates set to zero")
+    ivf = commands.add_parser("forecast-iv", help="Forecast and export the next-session PCA IV surface")
+    ivf.add_argument("--quotes", default="data/processed/option_quotes.parquet")
+    ivf.add_argument("--spot-forward-approximation", action="store_true", help="Use documented spot/carry approximation when forward is absent")
+    ivf.add_argument("--n-components", type=int, default=3)
+    ive = commands.add_parser("evaluate-iv", help="Run leakage-safe next-session IV surface evaluation")
+    ive.add_argument("--quotes", default="data/processed/option_quotes.parquet")
+    ive.add_argument("--spot-forward-approximation", action="store_true")
+    ive.add_argument("--n-components", type=int, default=3)
+    ive.add_argument("--min-training-dates", type=int, default=8)
+    projection = commands.add_parser("project-iv", help="Project IV grid onto static-arbitrage constraints")
+    projection.add_argument("--quotes", default="data/processed/option_quotes.parquet")
+    projection.add_argument("--spot-forward-approximation", action="store_true")
+    ivfactors = commands.add_parser("iv-factors", help="Export historical IV PCA factor scores and loadings")
+    ivfactors.add_argument("--quotes", default="data/processed/option_quotes.parquet")
+    ivfactors.add_argument("--spot-forward-approximation", action="store_true")
+    ivfactors.add_argument("--n-components", type=int, default=3)
+    bt = commands.add_parser("backtest", help="Simulate historical quote-based long/short straddles")
+    bt.add_argument("--quotes", default="data/processed/option_quotes.parquet")
+    bt.add_argument("--forecasts", default="reports/rv_walk_forward_predictions.csv")
+    bt.add_argument("--prices", default="data/processed/daily_prices.parquet")
+    bt.add_argument("--horizons", default="5,20,60")
+    bt.add_argument("--min-vol-edge", type=float, default=0.02)
+    bt.add_argument("--fee-per-contract", type=float, default=0.0,
+                    help="KRW fee per option contract per execution leg")
+    bt.add_argument("--contract-multiplier", type=float, default=None,
+                    help="Use only if the quote file omits the verified contract multiplier")
+    args = parser.parse_args()
+    if args.command == "download":
+        run(start=args.start, end=args.end)
+    elif args.command == "evaluate":
+        evaluate()
+    elif args.command == "forecast-rv":
+        forecast_rv()
+    elif args.command == "evaluate-ml":
+        evaluate_ml()
+    elif args.command == "forecast-ml":
+        forecast_ml()
+    elif args.command == "generate-demo-options":
+        generate_demo_options(args.prices, args.out, args.days)
+    elif args.command == "import-options":
+        import_options(args.path, args.iv_units)
+    elif args.command == "validate-options":
+        validate_options_file(args.path, args.iv_units)
+    elif args.command == "iv-surface":
+        make_iv_surface(args.quotes, args.spot_forward_approximation, as_of=args.as_of)
+    elif args.command == "forecast-iv":
+        make_iv_surface(args.quotes, args.spot_forward_approximation, forecast=True,
+                        n_components=args.n_components)
+    elif args.command == "evaluate-iv":
+        evaluate_iv_surface(args.quotes, args.spot_forward_approximation,
+                            args.n_components, args.min_training_dates)
+    elif args.command == "project-iv":
+        project_iv(args.quotes, args.spot_forward_approximation)
+    elif args.command == "iv-factors":
+        export_iv_factors(args.quotes, args.spot_forward_approximation, args.n_components)
+    elif args.command == "backtest":
+        horizons = [int(x.strip()) for x in args.horizons.split(",") if x.strip()]
+        if not horizons or any(h < 1 for h in horizons):
+            parser.error("--horizons must be comma-separated positive session counts")
+        backtest(args.quotes, args.forecasts, args.prices, horizons, args.min_vol_edge,
+                 args.fee_per_contract, args.contract_multiplier)
+
+
+if __name__ == "__main__":
+    main()

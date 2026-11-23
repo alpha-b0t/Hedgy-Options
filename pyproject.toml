@@ -7,12 +7,13 @@ name = "skhynix-volatility"
 version = "0.1.0"
 description = "Reproducible SK Hynix realized-volatility research pipeline"
 requires-python = ">=3.10"
-dependencies = ["pandas>=2.0", "numpy>=1.24", "scikit-learn>=1.4", "arch>=7.0", "statsmodels>=0.14", "yfinance>=0.2.40", "pyarrow>=14.0", "matplotlib>=3.7"]
+dependencies = ["pandas>=2.0", "numpy>=1.24", "scikit-learn>=1.4", "scipy>=1.10", "arch>=7.0", "statsmodels>=0.14", "yfinance>=0.2.40", "pyarrow>=14.0", "matplotlib>=3.7"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
 ml-boosting = ["xgboost>=2.0"]
 ml-lightgbm = ["lightgbm>=4.0"]
+ml-deep = ["torch>=2.3.1"]
 
 [project.scripts]
 skhynix-vol = "skhynix_vol.cli:main"

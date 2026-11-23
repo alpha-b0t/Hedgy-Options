@@ -6,6 +6,7 @@ import pandas as pd
 
 from skhynix_vol.evaluation.metrics import forecast_metrics
 from skhynix_vol.models.ml import ML_FEATURES, fit_predict_ml, make_ml_models
+from skhynix_vol.models.lstm import fit_predict_lstm, lstm_available
 
 
 def walk_forward_ml(data: pd.DataFrame, horizons: tuple[int, ...] = (5, 20, 60),
@@ -28,6 +29,7 @@ def walk_forward_ml(data: pd.DataFrame, horizons: tuple[int, ...] = (5, 20, 60),
     if missing_features:
         raise ValueError(f"Missing ML features: {', '.join(sorted(missing_features))}")
     years = sorted(frame.date.dt.year.unique())
+    use_lstm = lstm_available()
     rows = []
     for horizon in horizons:
         target = f"target_rv_{horizon}d"
@@ -54,6 +56,16 @@ def walk_forward_ml(data: pd.DataFrame, horizons: tuple[int, ...] = (5, 20, 60),
                         "test_year": year, "training_start": train.date.min(),
                         "training_end": train.date.max(), "n_train": len(train),
                         "seed": seed})
+            if use_lstm:
+                lstm_values = fit_predict_lstm(frame, target, test_start - horizon,
+                    test.index.to_numpy(), seed=seed)
+                for date, actual, predicted in zip(test.date, test[target], lstm_values):
+                    if np.isfinite(predicted):
+                        rows.append({"date": date, "horizon": horizon, "model": "lstm",
+                            "actual_rv": float(actual), "forecast_rv": float(predicted),
+                            "test_year": year, "training_start": train.date.min(),
+                            "training_end": train.date.max(), "n_train": len(train),
+                            "seed": seed})
     pred = pd.DataFrame(rows)
     if pred.empty:
         return pred, pd.DataFrame(columns=["horizon", "model", "test_year", "n", "mae", "rmse", "qlike", "r2", "directional_accuracy"])
@@ -77,10 +89,18 @@ def forecast_latest_ml(data: pd.DataFrame, horizons: tuple[int, ...] = (5, 20, 6
         raise ValueError("Latest row is missing one or more ML features")
     rows = []
     model_names = list(make_ml_models(seed))
+    use_lstm = lstm_available()
+    if use_lstm:
+        model_names.append("lstm")
     for horizon in horizons:
         target = f"target_rv_{horizon}d"
         train = frame.dropna(subset=[target, *ML_FEATURES])
         forecasts = fit_predict_ml(train, latest, target, seed=seed)
+        if use_lstm:
+            lstm_value = fit_predict_lstm(frame, target, len(frame),
+                np.array([len(frame) - 1]), seed=seed)
+            if len(lstm_value) and np.isfinite(lstm_value[0]):
+                forecasts["lstm"] = lstm_value
         for model_name in model_names:
             if model_name not in forecasts:
                 continue

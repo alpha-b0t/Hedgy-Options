@@ -34,6 +34,10 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
     q["option_type"] = q.option_type.astype(str).str.lower().replace({"c": "call", "p": "put"})
     if "quote_quality_flag" in q:
         q = q[q.quote_quality_flag.eq("ok")]
+    data_origins = q.data_origin.dropna().astype(str).unique() if "data_origin" in q else []
+    data_origin = data_origins[0] if len(data_origins) == 1 else "mixed" if len(data_origins) > 1 else None
+    is_synthetic = (q.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                    .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in q else False
     contract_keys = ["date", "expiry", "option_type", "strike"]
     if q.duplicated(contract_keys).any():
         if "quote_timestamp" not in q:
@@ -109,7 +113,17 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
                    "target_tenor_days", "forecast_rv", "matched_atm_iv", "vol_edge", "contract_multiplier",
                    "entry_premium_per_share", "exit_premium_per_share", "gross_pnl_krw", "fees_krw",
                    "net_pnl_krw", "entry_underlying"]
-        return pd.DataFrame(columns=columns), pd.DataFrame([_empty_summary(horizon)])
+        trades = pd.DataFrame(columns=columns)
+        summary = _empty_summary(horizon)
+        if data_origin is not None:
+            trades["data_origin"] = data_origin
+            summary["data_origin"] = data_origin
+        trades["synthetic_data_flag"] = is_synthetic
+        summary["synthetic_data_flag"] = is_synthetic
+        return trades, pd.DataFrame([summary])
+    if data_origin is not None:
+        trade_frame["data_origin"] = data_origin
+    trade_frame["synthetic_data_flag"] = is_synthetic
     pnl = trade_frame.net_pnl_krw.to_numpy(float)
     equity = np.r_[0.0, np.cumsum(pnl)]
     drawdowns = np.maximum.accumulate(equity) - equity
@@ -125,6 +139,9 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         "first_entry": trade_frame.entry_date.min(), "last_exit": trade_frame.exit_date.max(),
         "fee_per_leg_per_contract_krw": fee_per_contract,
         "delta_hedging": False, "margin_model": False}
+    if data_origin is not None:
+        summary["data_origin"] = data_origin
+    summary["synthetic_data_flag"] = is_synthetic
     return trade_frame, pd.DataFrame([summary])
 
 

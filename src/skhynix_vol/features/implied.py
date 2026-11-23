@@ -60,10 +60,16 @@ def build_iv_surface(quotes: pd.DataFrame, moneyness_grid: np.ndarray = DEFAULT_
             for j, dte in enumerate(d_grid):
                 iv = float(iv_grid[i, j])
                 if np.isfinite(iv):
-                    rows.append({"date": date, "log_forward_moneyness": float(k),
+                    row = {"date": date, "log_forward_moneyness": float(k),
                         "tenor_days": int(dte), "tenor_years": float(dte / 365.0),
                         "implied_volatility": iv, "n_quote_points": int(len(coords)),
-                        "forward_method": forward_method})
+                        "forward_method": forward_method}
+                    if "data_origin" in daily:
+                        origins = daily.data_origin.dropna().astype(str).unique()
+                        row["data_origin"] = origins[0] if len(origins) == 1 else "mixed"
+                    if "synthetic_data_flag" in daily:
+                        row["synthetic_data_flag"] = bool(daily.synthetic_data_flag.fillna(False).astype(bool).any())
+                    rows.append(row)
     surface = pd.DataFrame(rows)
     if surface.empty:
         raise ValueError("No grid points are supported inside observed quote coverage")
@@ -163,6 +169,11 @@ def forecast_next_iv_surface(surface: pd.DataFrame, n_components: int = 3,
     if "forward_method" in data:
         methods = data.forward_method.dropna().unique()
         out["forward_method"] = methods[0] if len(methods) == 1 else "mixed"
+    if "data_origin" in data:
+        origins = data.data_origin.dropna().astype(str).unique()
+        out["data_origin"] = origins[0] if len(origins) == 1 else "mixed"
+    if "synthetic_data_flag" in data:
+        out["synthetic_data_flag"] = bool(data.synthetic_data_flag.fillna(False).astype(bool).any())
     return out
 
 

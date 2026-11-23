@@ -73,9 +73,20 @@ def walk_forward_iv(surface: pd.DataFrame, min_training_dates: int = 8,
             if "forward_method" in train:
                 methods = train.forward_method.dropna().unique()
                 scored["forward_method"] = methods[0] if len(methods) == 1 else "mixed"
+            if "data_origin" in train:
+                origins = train.data_origin.dropna().astype(str).unique()
+                scored["data_origin"] = origins[0] if len(origins) == 1 else "mixed"
+            if "synthetic_data_flag" in train:
+                scored["synthetic_data_flag"] = bool(
+                    train.synthetic_data_flag.fillna(False).astype(bool).any())
             prediction_frames.append(scored)
-            metric_rows.append({"date": target_date, "as_of_date": pd.Timestamp(train.date.max()),
-                "model": model, "n_training_dates": train.date.nunique(), **_iv_metrics(scored)})
+            metric = {"date": target_date, "as_of_date": pd.Timestamp(train.date.max()),
+                "model": model, "n_training_dates": train.date.nunique(), **_iv_metrics(scored)}
+            if "data_origin" in scored:
+                metric["data_origin"] = scored.data_origin.iloc[0]
+            if "synthetic_data_flag" in scored:
+                metric["synthetic_data_flag"] = bool(scored.synthetic_data_flag.iloc[0])
+            metric_rows.append(metric)
     if not prediction_frames:
         predictions = pd.DataFrame(columns=["date", "as_of_date", "model", "log_forward_moneyness",
             "tenor_days", "forecast", "actual_iv", "n_training_dates"])
