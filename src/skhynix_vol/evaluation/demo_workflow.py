@@ -85,6 +85,7 @@ def run_synthetic_research_demo(output_dir: str | Path = "data/demo_synthetic",
             capital_base_krw=20_000_000.0,
             annual_financing_rate=0.04,
             annual_stock_borrow_rate=0.03,
+            max_cumulative_drawdown_krw=2_000_000.0,
         )
         all_trades.append(trades)
         all_summaries.append(summary)
@@ -113,6 +114,7 @@ def run_synthetic_research_demo(output_dir: str | Path = "data/demo_synthetic",
         "backtest_option_slippage_bps": 5.0,
         "backtest_hedge_slippage_bps": 3.0,
         "backtest_contracts_per_trade": 2,
+        "backtest_max_cumulative_drawdown_krw": 2_000_000.0,
         "backtest_max_volume_participation": 0.10,
         "backtest_max_open_interest_participation": 0.05,
         "backtest_short_margin_proxy_per_contract_krw": 1_000_000.0,

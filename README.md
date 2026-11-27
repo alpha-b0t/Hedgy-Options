@@ -128,12 +128,13 @@ Run the quote-based straddle benchmark with explicit position size, slippage, li
 skhynix-vol backtest --contracts 2 --fee-per-contract 10 \
   --option-slippage-bps 5 --max-relative-spread 0.25 \
   --max-volume-participation 0.10 --max-open-interest-participation 0.05 \
-  --max-cumulative-loss-krw 500000 --short-margin-per-contract-krw 1000000 \
+  --max-cumulative-loss-krw 500000 --max-cumulative-drawdown-krw 750000 \
+  --short-margin-per-contract-krw 1000000 \
   --capital-base-krw 20000000 --annual-financing-rate 0.04 \
   --annual-stock-borrow-rate 0.03
 ```
 
-Participation limits require volume/open-interest fields and apply to both legs at entry and exit, as well as each hedge date. Add `--min-option-volume` or `--min-open-interest` for absolute cutoffs. The cumulative-loss budget halts new entries after a realized portfolio loss reaches the limit; it does not liquidate an open position. When a capital base is supplied, short trades also require an explicit margin proxy; trades are skipped if the estimated premium/margin plus peak hedge-notional reserve exceeds the budget. The margin value is a user assumption, not a KRX margin formula or maximum-loss bound.
+Participation limits require volume/open-interest fields and apply to both legs at entry and exit, as well as each hedge date. Add `--min-option-volume` or `--min-open-interest` for absolute cutoffs. The cumulative-loss budget halts new entries after a realized portfolio loss reaches the limit; the drawdown budget halts after realized P&L falls by that amount from its prior peak. Neither liquidates an open position. When a capital base is supplied, short trades also require an explicit margin proxy; trades are skipped if the estimated premium/margin plus peak hedge-notional reserve exceeds the budget. The margin value is a user assumption, not a KRX margin formula or maximum-loss bound.
 
 Enable daily delta hedging using same-contract option quotes at each holding-session close and underlying close prices:
 

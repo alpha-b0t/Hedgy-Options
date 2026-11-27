@@ -411,7 +411,8 @@ def backtest(quotes_path: str, predictions_path: str, prices_path: str,
              short_margin_per_contract_krw: float | None = None,
              capital_base_krw: float | None = None,
              annual_financing_rate: float = 0.0,
-             annual_stock_borrow_rate: float = 0.0) -> None:
+             annual_stock_borrow_rate: float = 0.0,
+             max_cumulative_drawdown_krw: float | None = None) -> None:
     def read_table(path: str) -> pd.DataFrame:
         return pd.read_parquet(path) if Path(path).suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
     quotes, predictions, prices = map(read_table, [quotes_path, predictions_path, prices_path])
@@ -431,7 +432,8 @@ def backtest(quotes_path: str, predictions_path: str, prices_path: str,
             short_margin_per_contract_krw=short_margin_per_contract_krw,
             capital_base_krw=capital_base_krw,
             annual_financing_rate=annual_financing_rate,
-            annual_stock_borrow_rate=annual_stock_borrow_rate)
+            annual_stock_borrow_rate=annual_stock_borrow_rate,
+            max_cumulative_drawdown_krw=max_cumulative_drawdown_krw)
         all_trades.append(trades); all_summaries.append(summary)
     out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
     trade_frame = pd.concat(all_trades, ignore_index=True) if all_trades else pd.DataFrame()
@@ -548,6 +550,8 @@ def main() -> None:
                     help="Maximum contracts as a fraction of reported open interest (0, 1]")
     bt.add_argument("--max-cumulative-loss-krw", type=float, default=None,
                     help="Halt new entries once realized net P&L reaches this loss budget")
+    bt.add_argument("--max-cumulative-drawdown-krw", type=float, default=None,
+                    help="Halt new entries when realized P&L falls this far below its previous peak")
     bt.add_argument("--short-margin-per-contract-krw", type=float, default=None,
                     help="User-supplied short-option margin proxy; this is not a KRX margin calculation")
     bt.add_argument("--capital-base-krw", type=float, default=None,
@@ -607,7 +611,8 @@ def main() -> None:
                  args.contracts, args.max_volume_participation,
                  args.max_open_interest_participation, args.max_cumulative_loss_krw,
                  args.short_margin_per_contract_krw, args.capital_base_krw,
-                 args.annual_financing_rate, args.annual_stock_borrow_rate)
+                 args.annual_financing_rate, args.annual_stock_borrow_rate,
+                 args.max_cumulative_drawdown_krw)
 
 
 if __name__ == "__main__":

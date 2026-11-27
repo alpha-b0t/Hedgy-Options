@@ -22,7 +22,8 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
                        short_margin_per_contract_krw: float | None = None,
                        capital_base_krw: float | None = None,
                        annual_financing_rate: float = 0.0,
-                       annual_stock_borrow_rate: float = 0.0) -> tuple[pd.DataFrame, pd.DataFrame]:
+                       annual_stock_borrow_rate: float = 0.0,
+                       max_cumulative_drawdown_krw: float | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Simulate non-overlapping ATM straddles from historical forecast/quote data.
 
     A forecast above matched call/put IV by `min_vol_edge` buys a straddle;
@@ -59,6 +60,8 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
             raise ValueError(f"{name} must be in (0, 1]")
     if max_cumulative_loss_krw is not None and (not np.isfinite(max_cumulative_loss_krw) or max_cumulative_loss_krw <= 0):
         raise ValueError("max_cumulative_loss_krw must be a finite positive loss budget")
+    if max_cumulative_drawdown_krw is not None and (not np.isfinite(max_cumulative_drawdown_krw) or max_cumulative_drawdown_krw <= 0):
+        raise ValueError("max_cumulative_drawdown_krw must be a finite positive drawdown limit")
     if (horizon < 1 or min_vol_edge < 0 or fee_per_contract < 0 or
         option_slippage_bps < 0 or hedge_slippage_bps < 0 or hedge_fee_per_share < 0 or
         min_option_volume < 0 or min_open_interest < 0):
@@ -114,6 +117,9 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
     last_exit_index = -1
     realized_net_pnl = 0.0
     risk_halt = False
+    drawdown_halt = False
+    peak_realized_pnl = 0.0
+    peak_realized_pnl = 0.0
     for forecast in preds.itertuples(index=False):
         if risk_halt:
             break
@@ -260,6 +266,11 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         realized_net_pnl += gross_total - all_costs
         if max_cumulative_loss_krw is not None and realized_net_pnl <= -max_cumulative_loss_krw:
             risk_halt = True
+        peak_realized_pnl = max(peak_realized_pnl, realized_net_pnl)
+        if (max_cumulative_drawdown_krw is not None and
+                peak_realized_pnl - realized_net_pnl >= max_cumulative_drawdown_krw):
+            drawdown_halt = True
+        risk_halt = risk_halt or drawdown_halt
         last_exit_index = entry_index + horizon
     trade_frame = pd.DataFrame(trades)
     if trade_frame.empty:
@@ -285,7 +296,9 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         summary["max_volume_participation"] = max_volume_participation
         summary["max_open_interest_participation"] = max_open_interest_participation
         summary["max_cumulative_loss_krw"] = max_cumulative_loss_krw
+        summary["max_cumulative_drawdown_krw"] = max_cumulative_drawdown_krw
         summary["risk_halt_triggered"] = risk_halt
+        summary["drawdown_halt_triggered"] = drawdown_halt
         summary["capital_base_krw"] = capital_base_krw
         summary["short_margin_per_contract_krw"] = short_margin_per_contract_krw
         summary["annual_financing_rate"] = annual_financing_rate
@@ -346,11 +359,13 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         "max_volume_participation": max_volume_participation,
         "max_open_interest_participation": max_open_interest_participation,
         "max_cumulative_loss_krw": max_cumulative_loss_krw,
+        "max_cumulative_drawdown_krw": max_cumulative_drawdown_krw,
         "short_margin_per_contract_krw": short_margin_per_contract_krw,
         "annual_financing_rate": annual_financing_rate,
         "annual_stock_borrow_rate": annual_stock_borrow_rate,
         "estimated_capital_model": "user_supplied_margin_plus_peak_hedge_notional",
         "risk_halt_triggered": risk_halt,
+        "drawdown_halt_triggered": drawdown_halt,
         "delta_hedging": hedge_mode == "daily_delta", "margin_model": False,
         "liquidity_filters": (max_relative_spread is not None or min_option_volume > 0 or
             min_open_interest > 0 or max_volume_participation is not None or
