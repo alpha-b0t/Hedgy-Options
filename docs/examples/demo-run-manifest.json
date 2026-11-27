@@ -1,0 +1,35 @@
+{
+  "synthetic_data": true,
+  "data_origin": "SYNTHETIC_DEMO_DO_NOT_USE_FOR_RESEARCH",
+  "pytorch_version": "2.2.2",
+  "numpy_version": "2.5.5",
+  "intel_macos_torch_wheel": "2.2.2",
+  "rv_models": [
+    "random_forest",
+    "hist_gradient_boosting",
+    "svr_rbf",
+    "mlp_neural_network",
+    "lstm"
+  ],
+  "rv_lstm_holdout_year": 2025,
+  "rv_lstm_holdout_rows": 380,
+  "rv_lstm_fit_max_epochs": 12,
+  "iv_model": "LSTM_SEQUENCE_TO_SURFACE",
+  "iv_sequence_length": 5,
+  "iv_walk_forward_training_dates_min": 30,
+  "iv_walk_forward_folds": 10,
+  "iv_lstm_fit_max_epochs": 8,
+  "iv_forecast_as_of": "2025-08-05",
+  "outputs": {
+    "rv_latest_csv": "reports/rv_ml_forecasts_latest_synthetic_demo.csv",
+    "rv_walk_forward_csv": "reports/rv_ml_walk_forward_predictions_synthetic_demo.csv",
+    "rv_metrics_csv": "reports/rv_ml_walk_forward_metrics_synthetic_demo.csv",
+    "rv_latest_image": "reports/rv_ml_forecasts_latest_synthetic_demo.png",
+    "rv_walk_forward_image": "reports/rv_ml_walk_forward_synthetic_demo.png",
+    "iv_walk_forward_csv": "reports/iv_surface_lstm_walk_forward_predictions_synthetic_demo.csv",
+    "iv_metrics_csv": "reports/iv_surface_lstm_walk_forward_metrics_synthetic_demo.csv",
+    "iv_forecast_csv": "reports/iv_surface_lstm_forecast_synthetic_demo.csv",
+    "iv_forecast_image": "reports/iv_surface_lstm_forecast_synthetic_demo.png"
+  },
+  "interpretation": "Generated data verifies pipeline behavior only; metrics are not empirical market evidence."
+}
