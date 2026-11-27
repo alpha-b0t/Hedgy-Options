@@ -16,7 +16,7 @@ The repository is a reproducible research prototype. Forecasting, quote diagnost
 | 5. IV research | Coverage-supported surfaces, PCA forecast, optional direct multi-output LSTM, chronological scoring, static projection | Implemented | Validate with genuine snapshots, including edge cases and projection residuals |
 | 6. Reproducible quote ingestion | Source labels, file hashes, import manifest, chain coverage report | Implemented | Provider identity and units documented for every imported dataset |
 | 7. Offline integration | Generated prices and chains run through RV evaluation, quote audit, IV surface, projection, and walk-forward IV scoring | Implemented | Workflow executes and all artifacts remain labeled synthetic |
-| 8. Strategy research | Bid/ask straddle simulator, fees, contract multiplier, ledger and summary metrics | Implemented as a simplified simulator | Validate fills and assumptions against real quotes; add risk controls before interpretation |
+| 8. Strategy research | Bid/ask straddle simulator, optional daily delta hedge, explicit slippage/fees, liquidity filters, trade ledger and tail-risk summaries | Implemented as a simplified simulator | Validate hedge/fill assumptions against real quotes; add margin, financing, and contract-life controls before interpretation |
 | 9. Licensed data and empirical validation | Provider connector, real-chain validation, sensitivity analysis, performance review | Blocked on external data/access | Genuine KRX history, reconciled contract terms, realistic costs, and robust out-of-sample findings |
 
 ## Offline end-to-end workflow
@@ -36,6 +36,6 @@ The command generates a deterministic regime-switching underlying path and simul
 3. Reconcile genuine quotes, underlying timestamps, forwards/carry, expiry conventions, multiplier, and settlement terms.
 4. Examine real-chain quote quality, IV repricing, static-arbitrage violations, projection changes, and supported surface coverage.
 5. Re-run chronological evaluations on genuine data and report uncertainty, turnover, fees, spread sensitivity, drawdown, and benchmark comparisons.
-6. Extend the simplified strategy model for the research question (e.g. contract rolls, exercise/settlement cash flows, margin, financing, hedge policy) before making economic claims.
+6. Extend the simplified strategy model for the research question (e.g. contract rolls, exercise/settlement cash flows, margin and financing) before making economic claims.
 
 No provider-specific connector, licensed dataset, or trading-ready strategy is included in the current completion status.

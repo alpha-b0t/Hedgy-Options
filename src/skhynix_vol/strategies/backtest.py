@@ -1,6 +1,7 @@
 """Quote-based hypothetical ATM straddle backtest with bid/ask execution."""
 from __future__ import annotations
 
+import math
 import numpy as np
 import pandas as pd
 
@@ -8,15 +9,21 @@ import pandas as pd
 def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
                        underlying_prices: pd.DataFrame, horizon: int = 20,
                        min_vol_edge: float = 0.02, fee_per_contract: float = 0.0,
-                       contract_multiplier: float | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
+                       contract_multiplier: float | None = None,
+                       hedge_mode: str = "none", option_slippage_bps: float = 0.0,
+                       hedge_slippage_bps: float = 0.0, hedge_fee_per_share: float = 0.0,
+                       max_relative_spread: float | None = None,
+                       min_option_volume: float = 0.0, min_open_interest: float = 0.0,
+                       hedge_risk_free_rate: float | None = None,
+                       hedge_dividend_yield: float | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Simulate non-overlapping ATM straddles from historical forecast/quote data.
 
     A forecast above matched call/put IV by `min_vol_edge` buys a straddle;
     below by that amount sells one. Enter at ask for buys/bid for sells, exit
-    exactly `horizon` underlying sessions later at bid/ask respectively. Rows
-    without exact entry/exit quote coverage are skipped. Fee is charged on all
-    four option legs. No delta hedge or margin model is applied; results are
-    grossly limited to quoted straddle P&L less explicit fees and spread costs.
+    exactly `horizon` underlying sessions later at bid/ask respectively. The
+    optional daily delta hedge uses European Black-Scholes deltas from the
+    same-date option quotes and close prices. Missing daily quotes/carry inputs
+    cause a hedged trade to be skipped instead of silently interpolated.
     """
     required_q = {"date", "expiry", "option_type", "strike", "bid", "ask", "implied_volatility", "underlying_close"}
     if not required_q.issubset(quotes.columns):
@@ -26,14 +33,30 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         raise ValueError(f"RV predictions missing: {', '.join(sorted(required_p - set(rv_predictions.columns)))}")
     if "date" not in underlying_prices:
         raise ValueError("underlying_prices must contain date")
-    if horizon < 1 or min_vol_edge < 0 or fee_per_contract < 0:
-        raise ValueError("horizon must be positive; edge and fees cannot be negative")
+    if not np.isfinite([min_vol_edge, fee_per_contract, option_slippage_bps,
+                        hedge_slippage_bps, hedge_fee_per_share,
+                        min_option_volume, min_open_interest]).all():
+        raise ValueError("Edges, costs, and liquidity thresholds must be finite")
+    if (horizon < 1 or min_vol_edge < 0 or fee_per_contract < 0 or
+        option_slippage_bps < 0 or hedge_slippage_bps < 0 or hedge_fee_per_share < 0 or
+        min_option_volume < 0 or min_open_interest < 0):
+        raise ValueError("horizon must be positive; edges, costs, and liquidity thresholds cannot be negative")
+    if hedge_mode not in {"none", "daily_delta"}:
+        raise ValueError("hedge_mode must be 'none' or 'daily_delta'")
+    if max_relative_spread is not None and (not np.isfinite(max_relative_spread) or not 0 <= max_relative_spread <= 2):
+        raise ValueError("max_relative_spread must be between 0 and 2")
+    if hedge_mode == "daily_delta" and "close" not in underlying_prices:
+        raise ValueError("Daily delta hedging requires unadjusted close prices")
     q = quotes.copy()
     q["date"] = pd.to_datetime(q.date).dt.normalize()
     q["expiry"] = pd.to_datetime(q.expiry).dt.normalize()
     q["option_type"] = q.option_type.astype(str).str.lower().replace({"c": "call", "p": "put"})
+    q["bid"] = pd.to_numeric(q.bid, errors="coerce")
+    q["ask"] = pd.to_numeric(q.ask, errors="coerce")
     if "quote_quality_flag" in q:
         q = q[q.quote_quality_flag.eq("ok")]
+    else:
+        q = q[q.bid.ge(0) & q.ask.ge(q.bid)]
     data_origins = q.data_origin.dropna().astype(str).unique() if "data_origin" in q else []
     data_origin = data_origins[0] if len(data_origins) == 1 else "mixed" if len(data_origins) > 1 else None
     is_synthetic = (q.synthetic_data_flag.fillna(False).astype(str).str.lower()
@@ -46,7 +69,13 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         q = q.sort_values("quote_timestamp").drop_duplicates(contract_keys, keep="last")
     prices = underlying_prices.copy()
     prices["date"] = pd.to_datetime(prices.date).dt.normalize()
-    calendar = pd.Index(prices.date.drop_duplicates().sort_values())
+    prices = prices.sort_values("date").drop_duplicates("date", keep="last").set_index("date")
+    if "close" in prices:
+        prices["close"] = pd.to_numeric(prices.close, errors="coerce")
+    if "dividends" not in prices:
+        prices["dividends"] = 0.0
+    prices["dividends"] = pd.to_numeric(prices.dividends, errors="coerce").fillna(0.0)
+    calendar = pd.Index(prices.index.sort_values())
     index_by_date = {date: i for i, date in enumerate(calendar)}
     quotes_by_date = {date: group for date, group in q.groupby("date", sort=False)}
     preds = rv_predictions[rv_predictions.horizon.eq(horizon)].copy()
@@ -57,6 +86,8 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
     preds = preds[preds.date.isin(quotes_by_date)]
     preds = preds.sort_values("date")
     trades = []
+    skipped_liquidity = 0
+    skipped_hedge_coverage = 0
     last_exit_index = -1
     for forecast in preds.itertuples(index=False):
         entry_date = forecast.date
@@ -75,6 +106,24 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         pairs = pairs[pairs.expiry > exit_date].copy()
         if pairs.empty:
             continue
+        for side in ("call", "put"):
+            bid, ask = pairs[f"bid_{side}"], pairs[f"ask_{side}"]
+            pairs[f"relative_spread_{side}"] = np.where((ask + bid) > 0, (ask - bid) / ((ask + bid) / 2.0), np.inf)
+        pairs["pair_relative_spread"] = pairs[["relative_spread_call", "relative_spread_put"]].max(axis=1)
+        eligible = pd.Series(True, index=pairs.index)
+        if max_relative_spread is not None:
+            eligible &= pairs.pair_relative_spread.le(max_relative_spread)
+        for side in ("call", "put"):
+            if min_option_volume > 0:
+                field = f"volume_{side}"
+                eligible &= pd.to_numeric(pairs[field], errors="coerce").ge(min_option_volume) if field in pairs else False
+            if min_open_interest > 0:
+                field = f"open_interest_{side}"
+                eligible &= pd.to_numeric(pairs[field], errors="coerce").ge(min_open_interest) if field in pairs else False
+        if not eligible.any():
+            skipped_liquidity += 1
+            continue
+        pairs = pairs.loc[eligible].copy()
         spot = float(pairs.underlying_close_call.iloc[0])
         pairs["abs_log_moneyness"] = np.abs(np.log(pairs.strike / spot))
         target_tenor_days = horizon * 365.0 / 252.0
@@ -85,6 +134,10 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         exit_put = on_exit_date[(on_exit_date.option_type.eq("put")) &
             on_exit_date.expiry.eq(pair.expiry) & np.isclose(on_exit_date.strike, pair.strike)]
         if exit_call.empty or exit_put.empty:
+            continue
+        exit_quote_pair = pd.concat([exit_call.iloc[[0]], exit_put.iloc[[0]]], ignore_index=True)
+        if not _passes_quote_liquidity(exit_quote_pair, max_relative_spread, min_option_volume, min_open_interest):
+            skipped_liquidity += 1
             continue
         forecast_rv = float(forecast.har_rv)
         atm_iv = float((pair.implied_volatility_call + pair.implied_volatility_put) / 2.0)
@@ -103,24 +156,61 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
             gross = (entry_cash - exit_cash) * multiplier
         else:
             continue
-        fees = 4.0 * fee_per_contract
+        option_slippage = (entry_cash + exit_cash) * multiplier * option_slippage_bps / 10_000.0
+        hedge_pnl = hedge_fees = hedge_slippage = hedge_turnover = 0.0
+        hedge_max_abs_shares = 0.0
+        if hedge_mode == "daily_delta":
+            contract_quotes = q[q.expiry.eq(pair.expiry) & np.isclose(q.strike, pair.strike)]
+            try:
+                hedge_pnl, hedge_fees, hedge_slippage, hedge_turnover, hedge_max_abs_shares = _daily_delta_hedge(
+                    contract_quotes, prices, calendar, entry_index, horizon, exit_date,
+                    side, multiplier, hedge_slippage_bps, hedge_fee_per_share,
+                    hedge_risk_free_rate, hedge_dividend_yield,
+                    max_relative_spread, min_option_volume, min_open_interest)
+            except (ValueError, KeyError, IndexError):
+                skipped_hedge_coverage += 1
+                continue
+        fees = 4.0 * fee_per_contract + hedge_fees
+        gross_total = gross + hedge_pnl
+        all_costs = fees + option_slippage + hedge_slippage
         trades.append({"entry_date": entry_date, "exit_date": exit_date, "horizon_sessions": horizon,
             "side": side, "strike": float(pair.strike), "expiry": pair.expiry,
             "entry_dte": int((pair.expiry - entry_date).days), "target_tenor_days": target_tenor_days,
             "forecast_rv": forecast_rv,
             "matched_atm_iv": atm_iv, "vol_edge": edge, "contract_multiplier": multiplier,
             "entry_premium_per_share": entry_cash, "exit_premium_per_share": exit_cash,
-            "gross_pnl_krw": gross, "fees_krw": fees, "net_pnl_krw": gross - fees,
-            "entry_underlying": spot})
+            "option_pnl_krw": gross, "hedge_pnl_krw": hedge_pnl,
+            "gross_pnl_krw": gross_total, "option_fees_krw": 4.0 * fee_per_contract,
+            "hedge_fees_krw": hedge_fees, "fees_krw": fees,
+            "option_slippage_krw": option_slippage, "hedge_slippage_krw": hedge_slippage,
+            "hedge_turnover_shares": hedge_turnover, "hedge_max_abs_shares": hedge_max_abs_shares,
+            "net_pnl_krw": gross_total - all_costs, "entry_underlying": spot,
+            "hedge_mode": hedge_mode, "option_slippage_bps": option_slippage_bps,
+            "hedge_slippage_bps": hedge_slippage_bps,
+            "max_relative_spread": max_relative_spread,
+            "min_option_volume": min_option_volume, "min_open_interest": min_open_interest})
         last_exit_index = entry_index + horizon
     trade_frame = pd.DataFrame(trades)
     if trade_frame.empty:
         columns = ["entry_date", "exit_date", "horizon_sessions", "side", "strike", "expiry", "entry_dte",
                    "target_tenor_days", "forecast_rv", "matched_atm_iv", "vol_edge", "contract_multiplier",
-                   "entry_premium_per_share", "exit_premium_per_share", "gross_pnl_krw", "fees_krw",
-                   "net_pnl_krw", "entry_underlying"]
+                   "entry_premium_per_share", "exit_premium_per_share", "option_pnl_krw", "hedge_pnl_krw",
+                   "gross_pnl_krw", "option_fees_krw", "hedge_fees_krw", "fees_krw",
+                   "option_slippage_krw", "hedge_slippage_krw", "hedge_turnover_shares",
+                   "hedge_max_abs_shares", "net_pnl_krw", "entry_underlying", "hedge_mode"]
         trades = pd.DataFrame(columns=columns)
         summary = _empty_summary(horizon)
+        summary["delta_hedging"] = hedge_mode == "daily_delta"
+        summary["hedge_mode"] = hedge_mode
+        summary["option_slippage_bps"] = option_slippage_bps
+        summary["hedge_slippage_bps"] = hedge_slippage_bps
+        summary["hedge_fee_per_share_krw"] = hedge_fee_per_share
+        summary["max_relative_spread"] = max_relative_spread
+        summary["min_option_volume"] = min_option_volume
+        summary["min_open_interest"] = min_open_interest
+        summary["liquidity_filters"] = max_relative_spread is not None or min_option_volume > 0 or min_open_interest > 0
+        summary["skipped_liquidity_candidates"] = skipped_liquidity
+        summary["skipped_hedge_coverage_candidates"] = skipped_hedge_coverage
         if data_origin is not None:
             trades["data_origin"] = data_origin
             summary["data_origin"] = data_origin
@@ -138,13 +228,29 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
     summary = {"horizon_sessions": horizon, "trade_count": len(trade_frame),
         "long_trades": int(trade_frame.side.eq("long").sum()), "short_trades": int(trade_frame.side.eq("short").sum()),
         "total_gross_pnl_krw": float(trade_frame.gross_pnl_krw.sum()),
-        "total_fees_krw": float(trade_frame.fees_krw.sum()), "total_net_pnl_krw": float(pnl.sum()),
+        "total_fees_krw": float(trade_frame.fees_krw.sum()),
+        "total_slippage_krw": float((trade_frame.option_slippage_krw + trade_frame.hedge_slippage_krw).sum()),
+        "total_hedge_pnl_krw": float(trade_frame.hedge_pnl_krw.sum()),
+        "total_hedge_turnover_shares": float(trade_frame.hedge_turnover_shares.sum()),
+        "total_net_pnl_krw": float(pnl.sum()), "mean_net_pnl_krw": float(np.mean(pnl)),
+        "median_net_pnl_krw": float(np.median(pnl)),
+        "pnl_std_krw": float(np.std(pnl, ddof=1)) if len(pnl) > 1 else np.nan,
+        "var_95_loss_krw": float(max(0.0, -np.quantile(pnl, 0.05))),
+        "expected_shortfall_95_loss_krw": float(max(0.0, -np.mean(pnl[pnl <= np.quantile(pnl, 0.05)]))),
         "win_rate": float(np.mean(pnl > 0)),
         "profit_factor": float(positives / negatives) if negatives else (float("inf") if positives else np.nan),
         "max_realized_drawdown_krw": float(drawdowns.max()),
         "first_entry": trade_frame.entry_date.min(), "last_exit": trade_frame.exit_date.max(),
         "fee_per_leg_per_contract_krw": fee_per_contract,
-        "delta_hedging": False, "margin_model": False}
+        "hedge_mode": hedge_mode, "option_slippage_bps": option_slippage_bps,
+        "hedge_slippage_bps": hedge_slippage_bps,
+        "hedge_fee_per_share_krw": hedge_fee_per_share,
+        "max_relative_spread": max_relative_spread,
+        "min_option_volume": min_option_volume, "min_open_interest": min_open_interest,
+        "delta_hedging": hedge_mode == "daily_delta", "margin_model": False,
+        "liquidity_filters": max_relative_spread is not None or min_option_volume > 0 or min_open_interest > 0,
+        "skipped_liquidity_candidates": skipped_liquidity,
+        "skipped_hedge_coverage_candidates": skipped_hedge_coverage}
     if data_origin is not None:
         summary["data_origin"] = data_origin
     summary["synthetic_data_flag"] = is_synthetic
@@ -170,4 +276,130 @@ def _empty_summary(horizon: int) -> dict:
             "total_gross_pnl_krw": 0.0, "total_fees_krw": 0.0, "total_net_pnl_krw": 0.0,
             "win_rate": np.nan, "profit_factor": np.nan, "max_realized_drawdown_krw": 0.0,
             "first_entry": pd.NaT, "last_exit": pd.NaT,
-            "delta_hedging": False, "margin_model": False}
+            "delta_hedging": False, "margin_model": False,
+            "total_slippage_krw": 0.0, "total_hedge_pnl_krw": 0.0,
+            "total_hedge_turnover_shares": 0.0, "var_95_loss_krw": np.nan,
+            "expected_shortfall_95_loss_krw": np.nan,
+            "mean_net_pnl_krw": np.nan, "median_net_pnl_krw": np.nan,
+            "pnl_std_krw": np.nan, "liquidity_filters": False,
+            "skipped_liquidity_candidates": 0,
+            "skipped_hedge_coverage_candidates": 0}
+
+
+def _passes_quote_liquidity(quotes: pd.DataFrame, max_relative_spread: float | None,
+                            min_volume: float, min_open_interest: float) -> bool:
+    if quotes.empty:
+        return False
+    bid = pd.to_numeric(quotes.bid, errors="coerce")
+    ask = pd.to_numeric(quotes.ask, errors="coerce")
+    if (bid.isna() | ask.isna() | bid.lt(0) | ask.lt(bid)).any():
+        return False
+    spread = (ask - bid) / ((ask + bid) / 2.0).replace(0, np.nan)
+    if max_relative_spread is not None and (spread.isna() | spread.gt(max_relative_spread)).any():
+        return False
+    for column, minimum in (("volume", min_volume), ("open_interest", min_open_interest)):
+        if minimum <= 0:
+            continue
+        if column not in quotes or pd.to_numeric(quotes[column], errors="coerce").lt(minimum).any():
+            return False
+    return True
+
+
+def _daily_delta_hedge(contract_quotes: pd.DataFrame, prices: pd.DataFrame,
+                       calendar: pd.Index, entry_index: int, horizon: int,
+                       exit_date: pd.Timestamp, option_side: str, multiplier: float,
+                       slippage_bps: float, fee_per_share: float,
+                       rate_override: float | None, dividend_override: float | None,
+                       max_relative_spread: float | None, min_volume: float,
+                       min_open_interest: float) -> tuple[float, float, float, float, float]:
+    """Close-to-close delta hedge with explicit hedge execution costs."""
+    entry_date = calendar[entry_index]
+    entry_quotes = contract_quotes[contract_quotes.date.eq(entry_date)]
+    entry_spot = float(prices.loc[entry_date, "close"])
+    entry_delta = _straddle_delta(entry_quotes, entry_date, entry_spot,
+        float(entry_quotes.strike.iloc[0]), rate_override, dividend_override)
+    position_sign = 1.0 if option_side == "long" else -1.0
+    hedge_shares = -position_sign * multiplier * entry_delta
+    turnover = abs(hedge_shares)
+    hedge_slippage = turnover * entry_spot * slippage_bps / 10_000.0
+    hedge_fees = turnover * fee_per_share
+    hedge_pnl = 0.0
+    previous_spot = entry_spot
+    max_abs_shares = abs(hedge_shares)
+    strike = float(entry_quotes.strike.iloc[0])
+    expiry = pd.Timestamp(entry_quotes.expiry.iloc[0])
+    for step in range(1, horizon + 1):
+        date = calendar[entry_index + step]
+        daily = contract_quotes[contract_quotes.date.eq(date)]
+        if not _passes_quote_liquidity(daily[daily.option_type.isin(["call", "put"])],
+                max_relative_spread, min_volume, min_open_interest):
+            raise ValueError("Missing or illiquid option quote during hedge window")
+        daily = daily[daily.option_type.isin(["call", "put"])]
+        if set(daily.option_type) != {"call", "put"}:
+            raise ValueError("Missing call or put during hedge window")
+        spot = float(prices.loc[date, "close"])
+        dividends = float(prices.loc[date, "dividends"])
+        hedge_pnl += hedge_shares * (spot - previous_spot + dividends)
+        if date == exit_date:
+            traded = abs(hedge_shares)
+            turnover += traded
+            hedge_slippage += traded * spot * slippage_bps / 10_000.0
+            hedge_fees += traded * fee_per_share
+            hedge_shares = 0.0
+            break
+        delta = _straddle_delta(daily, date, spot, strike, rate_override, dividend_override)
+        target = -position_sign * multiplier * delta
+        traded = abs(target - hedge_shares)
+        turnover += traded
+        hedge_slippage += traded * spot * slippage_bps / 10_000.0
+        hedge_fees += traded * fee_per_share
+        hedge_shares = target
+        max_abs_shares = max(max_abs_shares, abs(hedge_shares))
+        previous_spot = spot
+    return hedge_pnl, hedge_fees, hedge_slippage, turnover, max_abs_shares
+
+
+def _straddle_delta(quotes: pd.DataFrame, date: pd.Timestamp, spot: float,
+                    strike: float, rate_override: float | None,
+                    dividend_override: float | None) -> float:
+    if quotes.empty or not np.isfinite(spot) or spot <= 0 or not np.isfinite(strike) or strike <= 0:
+        raise ValueError("Cannot calculate option delta without current quotes and a positive spot")
+    tenor = (pd.Timestamp(quotes.expiry.iloc[0]) - date).days / 365.0
+    if tenor <= 0:
+        raise ValueError("Option expired before hedge exit")
+    deltas = []
+    for kind in ("call", "put"):
+        rows = quotes[quotes.option_type.eq(kind)]
+        if rows.empty:
+            raise ValueError("Both call and put quotes are required to hedge a straddle")
+        row = rows.iloc[0]
+        rate = _input_or_override(row.get("risk_free_rate"), rate_override)
+        dividend = row.get("dividend_yield", np.nan)
+        if pd.isna(dividend):
+            forward = row.get("forward_price", np.nan)
+            if pd.isna(forward):
+                dividend = dividend_override
+            else:
+                dividend = rate - math.log(float(forward) / spot) / tenor
+        dividend = _input_or_override(dividend, dividend_override)
+        volatility = float(row.implied_volatility)
+        if not np.isfinite(volatility) or volatility <= 0:
+            raise ValueError("Positive quote IV is required for delta hedging")
+        if not np.isfinite([rate, dividend]).all():
+            raise ValueError("Finite risk-free and dividend yields are required for delta hedging")
+        d1 = (math.log(spot / strike) + (rate - dividend + 0.5 * volatility ** 2) * tenor) / (volatility * math.sqrt(tenor))
+        n_d1 = 0.5 * (1.0 + math.erf(d1 / math.sqrt(2.0)))
+        deltas.append(math.exp(-dividend * tenor) * (n_d1 if kind == "call" else n_d1 - 1.0))
+    return float(sum(deltas))
+
+
+def _input_or_override(value, override: float | None) -> float:
+    if pd.notna(value):
+        result = float(value)
+    elif override is not None:
+        result = float(override)
+    else:
+        raise ValueError("Delta hedge needs quote carry fields or explicit rate/dividend overrides")
+    if not np.isfinite(result):
+        raise ValueError("Delta hedge carry inputs must be finite")
+    return result

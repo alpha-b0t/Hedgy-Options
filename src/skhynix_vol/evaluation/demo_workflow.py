@@ -76,6 +76,9 @@ def run_synthetic_research_demo(output_dir: str | Path = "data/demo_synthetic",
         trades, summary = backtest_straddles(
             quotes, rv_predictions, prices, horizon=horizon,
             min_vol_edge=0.02, fee_per_contract=10.0,
+            hedge_mode="daily_delta", option_slippage_bps=5.0,
+            hedge_slippage_bps=3.0, hedge_fee_per_share=0.01,
+            max_relative_spread=0.25,
         )
         all_trades.append(trades)
         all_summaries.append(summary)
@@ -100,6 +103,9 @@ def run_synthetic_research_demo(output_dir: str | Path = "data/demo_synthetic",
         "projected_surface_rows": int(len(projected)),
         "backtest_trade_rows": int(len(trade_frame)),
         "backtest_fee_per_leg_krw": 10.0,
+        "backtest_hedge_mode": "daily_delta",
+        "backtest_option_slippage_bps": 5.0,
+        "backtest_hedge_slippage_bps": 3.0,
         "outputs": {
             "synthetic_prices": str(prices_path),
             "synthetic_quotes": str(quotes_path),

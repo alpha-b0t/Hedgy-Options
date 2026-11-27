@@ -40,7 +40,7 @@ The forecast grids, evaluation metrics, and run manifest are available as browsa
 | **IV surfaces** | Build coverage-aware forward-moneyness/tenor grids, plot surfaces, export PCA factors, and benchmark persistence, historical mean, and PCA forecasts. |
 | **Deep learning for IV** | Train a PyTorch sequence-to-surface LSTM with training-window-only cell selection/imputation; export latest grids, images, and chronological metrics. |
 | **Quote diagnostics** | Recalculate midpoint IV when carry inputs allow, inspect static arbitrage conditions, and project a grid to static European call-price constraints. |
-| **Strategy research** | Simulate a quote-based ATM straddle benchmark with bid/ask execution and configurable contract multiplier and fees, when aligned entry/exit quotes exist. |
+| **Strategy research** | Simulate quote-based ATM straddles with optional daily delta hedging, option/hedge slippage, hedge commissions, liquidity filters, and trade-level tail-risk summaries. |
 | **Offline demo** | Generate a self-contained synthetic price-and-options research run, charts, CSV reports, and a machine-readable run manifest without external market data. |
 
 For stage-by-stage completion and remaining data work, see the [project roadmap](ROADMAP.md).
@@ -120,6 +120,28 @@ Quote files identify observation date, underlying, expiry, call/put, strike, bid
 
 The IV LSTM uses recent surface snapshots to forecast the next grid. Compare it on the same chronological dates with persistence, historical mean, and PCA benchmarks; an ML forecast is a research benchmark, not evidence of economic value.
 
+## Strategy research and backtesting
+
+Run the quote-based straddle benchmark with explicit option slippage and liquidity filters:
+
+```bash
+skhynix-vol backtest --fee-per-contract 10 --option-slippage-bps 5 \
+  --max-relative-spread 0.25
+```
+
+When the quote file contains those fields, add `--min-option-volume` and/or `--min-open-interest` to apply corresponding liquidity cutoffs. Set thresholds in contract units for the selected provider.
+
+Enable daily delta hedging using same-contract option quotes at each holding-session close and underlying close prices:
+
+```bash
+skhynix-vol backtest --hedge-mode daily_delta --fee-per-contract 10 \
+  --hedge-slippage-bps 3 --hedge-fee-per-share 0.01 \
+  --max-relative-spread 0.25 --hedge-risk-free-rate 0.03 \
+  --hedge-dividend-yield 0.005
+```
+
+Carry inputs on quotes take precedence over explicit rate/yield fallbacks. The simulator skips trades when same-contract hedge quotes or liquidity requirements are missing. It exports option and hedge P&L, explicit costs, hedge turnover, drawdown, 95% loss VaR, and expected shortfall. It still omits margin, financing, intraday execution, exchange-specific charges, and full corporate-action handling; these settings need calibration before economic conclusions.
+
 ## Reports and artifacts
 
 Common outputs are written to `reports/`:
@@ -139,7 +161,7 @@ Large generated datasets and routine report files are git-ignored. The compact s
 - Historical option import is provider-neutral. No KRX scraping, licensing bypass, or provider-specific network adapter is included.
 - Midpoint repricing needs carry inputs. Missing values are surfaced in diagnostics rather than silently inferred.
 - Static surface projection enforces European call-price shape constraints; it does not model American exercise, discrete dividends, or quote uncertainty.
-- The straddle simulator needs quotes aligned to entry and exit dates; it does not model delta hedging, margin, financing, or all market frictions.
+- Daily delta-hedged straddles require a quote for both option legs on every holding date, and carry fields or explicit fallbacks. The simulator still does not model margin, financing, intraday execution, or all market frictions.
 - No live order execution is implemented.
 
 ## Development
