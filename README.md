@@ -40,7 +40,7 @@ The forecast grids, evaluation metrics, and run manifest are available as browsa
 | **IV surfaces** | Build coverage-aware forward-moneyness/tenor grids, plot surfaces, export PCA factors, and benchmark persistence, historical mean, and PCA forecasts. |
 | **Deep learning for IV** | Train a PyTorch sequence-to-surface LSTM with training-window-only cell selection/imputation; export latest grids, images, and chronological metrics. |
 | **Quote diagnostics** | Recalculate midpoint IV when carry inputs allow, inspect static arbitrage conditions, and project a grid to static European call-price constraints. |
-| **Strategy research** | Simulate quote-based ATM straddles with optional daily delta hedging, option/hedge slippage, hedge commissions, liquidity filters, and trade-level tail-risk summaries. |
+| **Strategy research** | Backtest ATM straddles with fixed contract sizing, bid/ask execution, configurable costs and liquidity/risk limits, optional daily delta hedging and timestamped snapshots, expiry cash settlement, margin-schedule input, financing/borrow assumptions, and exported trade-level risk/cost summaries. |
 | **Offline demo** | Generate a self-contained synthetic price-and-options research run, charts, CSV reports, and a machine-readable run manifest without external market data. |
 
 For stage-by-stage completion and remaining data work, see the [project roadmap](ROADMAP.md).
