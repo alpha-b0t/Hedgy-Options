@@ -198,6 +198,7 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         else:
             continue
         option_slippage = (entry_cash + exit_cash) * multiplier * contracts * option_slippage_bps / 10_000.0
+        option_turnover_krw = (entry_cash + exit_cash) * multiplier * contracts
         hedge_pnl = hedge_fees = hedge_slippage = hedge_turnover = 0.0
         hedge_max_abs_shares = 0.0
         hedge_peak_notional = 0.0
@@ -244,6 +245,7 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
             "gross_pnl_krw": gross_total, "option_fees_krw": 4.0 * fee_per_contract * contracts,
             "hedge_fees_krw": hedge_fees, "fees_krw": fees,
             "option_slippage_krw": option_slippage, "hedge_slippage_krw": hedge_slippage,
+            "option_turnover_krw": option_turnover_krw,
             "hedge_turnover_shares": hedge_turnover, "hedge_max_abs_shares": hedge_max_abs_shares,
             "hedge_peak_notional_krw": hedge_peak_notional,
             "financing_cost_krw": financing_cost, "stock_borrow_cost_krw": stock_borrow_cost,
@@ -279,6 +281,7 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
                    "entry_premium_per_share", "exit_premium_per_share", "option_pnl_krw", "hedge_pnl_krw",
                    "gross_pnl_krw", "option_fees_krw", "hedge_fees_krw", "fees_krw",
                    "option_slippage_krw", "hedge_slippage_krw", "hedge_turnover_shares",
+                   "option_turnover_krw",
                    "hedge_max_abs_shares", "hedge_peak_notional_krw", "financing_cost_krw", "stock_borrow_cost_krw",
                    "capital_requirement_krw", "capital_utilization_pct", "net_pnl_krw",
                    "entry_underlying", "hedge_mode", "contracts"]
@@ -330,6 +333,10 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         "total_gross_pnl_krw": float(trade_frame.gross_pnl_krw.sum()),
         "total_fees_krw": float(trade_frame.fees_krw.sum()),
         "total_slippage_krw": float((trade_frame.option_slippage_krw + trade_frame.hedge_slippage_krw).sum()),
+        "total_option_turnover_krw": float(trade_frame.option_turnover_krw.sum()),
+        "break_even_additional_option_slippage_bps": (
+            float(pnl.sum() / trade_frame.option_turnover_krw.sum() * 10_000.0)
+            if trade_frame.option_turnover_krw.sum() > 0 else np.nan),
         "total_financing_cost_krw": float(trade_frame.financing_cost_krw.sum()),
         "total_stock_borrow_cost_krw": float(trade_frame.stock_borrow_cost_krw.sum()),
         "total_hedge_pnl_krw": float(trade_frame.hedge_pnl_krw.sum()),
@@ -400,6 +407,8 @@ def _empty_summary(horizon: int) -> dict:
             "first_entry": pd.NaT, "last_exit": pd.NaT,
             "delta_hedging": False, "margin_model": False,
             "total_slippage_krw": 0.0, "total_hedge_pnl_krw": 0.0,
+            "total_option_turnover_krw": 0.0,
+            "break_even_additional_option_slippage_bps": np.nan,
             "total_hedge_turnover_shares": 0.0, "var_95_loss_krw": np.nan,
             "total_financing_cost_krw": 0.0, "total_stock_borrow_cost_krw": 0.0,
             "total_option_contracts": 0, "contracts_per_trade": 1,

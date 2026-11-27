@@ -134,7 +134,7 @@ skhynix-vol backtest --contracts 2 --fee-per-contract 10 \
   --annual-stock-borrow-rate 0.03
 ```
 
-Participation limits require volume/open-interest fields and apply to both legs at entry and exit, as well as each hedge date. Add `--min-option-volume` or `--min-open-interest` for absolute cutoffs. The cumulative-loss budget halts new entries after a realized portfolio loss reaches the limit; the drawdown budget halts after realized P&L falls by that amount from its prior peak. Neither liquidates an open position. When a capital base is supplied, short trades also require an explicit margin proxy; trades are skipped if the estimated premium/margin plus peak hedge-notional reserve exceeds the budget. The margin value is a user assumption, not a KRX margin formula or maximum-loss bound.
+Participation limits require volume/open-interest fields and apply to both legs at entry and exit, as well as each hedge date. Add `--min-option-volume` or `--min-open-interest` for absolute cutoffs. The cumulative-loss budget halts new entries after a realized portfolio loss reaches the limit; the drawdown budget halts after realized P&L falls by that amount from its prior peak. Neither liquidates an open position. The summary also reports the extra option slippage in basis points that would erase aggregate net P&L, after the configured costs. When a capital base is supplied, short trades also require an explicit margin proxy; trades are skipped if the estimated premium/margin plus peak hedge-notional reserve exceeds the budget. The margin value is a user assumption, not a KRX margin formula or maximum-loss bound.
 
 Enable daily delta hedging using same-contract option quotes at each holding-session close and underlying close prices:
 
