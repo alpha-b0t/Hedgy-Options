@@ -66,12 +66,15 @@ def fit_predict_lstm(data: pd.DataFrame, target: str, train_limit: int,
     split = max(1, int(len(train_x) * 0.85))
     if len(train_x) - split < 1:
         split = len(train_x) - 1
-    x_fit = torch.from_numpy(train_x[:split])
-    y_fit = torch.from_numpy(train_y[:split, None])
-    x_valid = torch.from_numpy(train_x[split:])
-    y_valid = torch.from_numpy(train_y[split:, None])
+    # PyTorch 2.2.x on Intel macOS was built against NumPy 1.x. Converting
+    # through Python lists avoids its ndarray bridge with this NumPy 2.x stack.
+    x_fit = torch.tensor(train_x[:split].tolist(), dtype=torch.float32)
+    y_fit = torch.tensor(train_y[:split, None].tolist(), dtype=torch.float32)
+    x_valid = torch.tensor(train_x[split:].tolist(), dtype=torch.float32)
+    y_valid = torch.tensor(train_y[split:, None].tolist(), dtype=torch.float32)
     x_forecast = windows[forecast_positions[forecast_mask]].astype(np.float32)
-    x_forecast = torch.from_numpy((x_forecast - feature_mean) / feature_scale)
+    x_forecast = torch.tensor(((x_forecast - feature_mean) / feature_scale).tolist(),
+                              dtype=torch.float32)
 
     prior_threads = torch.get_num_threads()
     prior_deterministic = torch.are_deterministic_algorithms_enabled()
@@ -108,7 +111,8 @@ def fit_predict_lstm(data: pd.DataFrame, target: str, train_limit: int,
             model.load_state_dict(best_state)
         model.eval()
         with torch.no_grad():
-            predictions = model(x_forecast).squeeze(-1).numpy() * y_scale + y_mean
+            predictions = (np.asarray(model(x_forecast).squeeze(-1).tolist(), dtype=float)
+                           * y_scale + y_mean)
     finally:
         torch.use_deterministic_algorithms(prior_deterministic)
         torch.set_num_threads(prior_threads)

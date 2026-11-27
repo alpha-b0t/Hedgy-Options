@@ -73,7 +73,7 @@ The Phase 3 walk-forward suite includes a fold-local MLP neural network. For an 
 python -m pip install -e '.[ml-deep]'
 ```
 
-When PyTorch is available, an LSTM joins both commands automatically. It consumes 20-session sequences of the same eight close-known features; feature scaling and chronological early stopping are fit within each training fold. Training labels are purged by the forecast horizon, while earlier unlabeled feature rows may provide sequence context. Without the optional extra, the suite continues with its standard models and MLP.
+When PyTorch is available, an LSTM joins both commands automatically. It consumes 20-session sequences of the same eight close-known features; feature scaling and chronological early stopping are fit within each training fold. Training labels are purged by the forecast horizon, while earlier unlabeled feature rows may provide sequence context. The optional dependency uses PyTorch 2.3.1+ where wheels are available; Intel macOS uses the final official x86 wheel, PyTorch 2.2.2. Without the optional extra, the suite continues with its standard models and MLP.
 
 The downloader uses Yahoo Finance via `yfinance`, requests unadjusted OHLC, adjusted close, dividends, and splits, and fails clearly if the provider returns no data. The date range, actual observation coverage, and generated paths are printed after success. Yahoo Finance is an initial research source, not an exchange-grade licensed feed; verify important observations against KRX or a suitable vendor before using them in consequential research.
 
@@ -189,6 +189,15 @@ skhynix-vol evaluate-iv --spot-forward-approximation
 ```
 
 Each target-date surface is forecast using earlier dates only. Outputs are `reports/iv_surface_walk_forward_predictions.csv` and `reports/iv_surface_walk_forward_metrics.csv`; metrics include surface MAE/RMSE, ATM error, and downside/upside skew error where those grid points are supported. The PCA model forecasts changes in factor scores; persistence and historical mean remain comparison baselines.
+
+An optional PyTorch sequence model forecasts the next IV grid directly from recent surface snapshots. It selects cells and imputes missing values using the training window only. Use at least 30 supported dates for chronological evaluation (the default sequence length is five sessions):
+
+```bash
+skhynix-vol evaluate-iv-dl --quotes data/processed/option_quotes.parquet
+skhynix-vol forecast-iv-dl --quotes data/processed/option_quotes.parquet
+```
+
+Walk-forward predictions and metrics are saved to `reports/iv_surface_lstm_walk_forward_predictions.csv` and `reports/iv_surface_lstm_walk_forward_metrics.csv`; the latest forecast grid and image are `reports/iv_surface_lstm_forecast.csv` and `.png`. This is a learned benchmark, not proof of predictive or trading value. Compare it with persistence, historical mean, and PCA on identical dates.
 
 Validate imported quotes and independently reprice provider IV from the bid/ask midpoint. The calculation needs a source forward and risk-free rate, or spot, risk-free rate, and dividend yield:
 

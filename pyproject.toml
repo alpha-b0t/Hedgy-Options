@@ -13,7 +13,10 @@ dependencies = ["pandas>=2.0", "numpy>=1.24", "scikit-learn>=1.4", "scipy>=1.10"
 dev = ["pytest>=8.0"]
 ml-boosting = ["xgboost>=2.0"]
 ml-lightgbm = ["lightgbm>=4.0"]
-ml-deep = ["torch>=2.3.1"]
+ml-deep = [
+  "torch>=2.3.1; platform_system != 'Darwin' or platform_machine != 'x86_64'",
+  "torch>=2.2.2; platform_system == 'Darwin' and platform_machine == 'x86_64'",
+]
 
 [project.scripts]
 skhynix-vol = "skhynix_vol.cli:main"

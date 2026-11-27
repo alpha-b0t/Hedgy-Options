@@ -14,6 +14,9 @@ from skhynix_vol.data.instruments import instrument_spec
 from skhynix_vol.evaluation.walk_forward import forecast_latest_rv, walk_forward_rv
 from skhynix_vol.evaluation.iv_walk_forward import walk_forward_iv
 from skhynix_vol.evaluation.demo_workflow import run_synthetic_research_demo
+from skhynix_vol.evaluation.dl_iv_walk_forward import (
+    walk_forward_iv_lstm, forecast_next_iv_lstm,
+)
 from skhynix_vol.evaluation.garch_walk_forward import forecast_latest_garch, walk_forward_garch
 from skhynix_vol.evaluation.ml_walk_forward import forecast_latest_ml, walk_forward_ml
 from skhynix_vol.models.lstm import lstm_available
@@ -294,6 +297,65 @@ def evaluate_iv_surface(quote_path: str, spot_forward_approximation: bool,
     print(f"Saved IV out-of-sample predictions and metrics under reports/ (synthetic={synthetic}).")
 
 
+def evaluate_iv_surface_dl(quote_path: str, spot_forward_approximation: bool,
+                           min_training_dates: int, sequence_length: int,
+                           max_epochs: int, seed: int) -> None:
+    """Evaluate the fold-local LSTM IV-surface forecaster."""
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        from skhynix_vol.data.options import normalize_option_quotes
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    predictions, metrics = walk_forward_iv_lstm(surface,
+        min_training_dates=min_training_dates, sequence_length=sequence_length,
+        max_epochs=max_epochs, seed=seed)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    pred_path = out / f"iv_surface_lstm_walk_forward_predictions{suffix}.csv"
+    metric_path = out / f"iv_surface_lstm_walk_forward_metrics{suffix}.csv"
+    predictions.to_csv(pred_path, index=False)
+    metrics.to_csv(metric_path, index=False)
+    if metrics.empty:
+        print("No LSTM IV folds met the historical coverage requirements.")
+    else:
+        print(metrics[["date", "n_training_dates", "n_grid_points", "mae", "rmse"]].to_string(index=False))
+    print(f"Saved {len(predictions):,} LSTM IV predictions to {pred_path}")
+    print(f"Saved LSTM IV metrics to {metric_path}")
+
+
+def forecast_iv_surface_dl(quote_path: str, spot_forward_approximation: bool,
+                           sequence_length: int, max_epochs: int, seed: int) -> None:
+    """Fit an LSTM on all prior surfaces and export the next-session forecast."""
+    from skhynix_vol.visualization.iv_charts import plot_iv_surface
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        from skhynix_vol.data.options import normalize_option_quotes
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    forecast = forecast_next_iv_lstm(surface, sequence_length=sequence_length,
+                                     max_epochs=max_epochs, seed=seed)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    target = out / f"iv_surface_lstm_forecast{suffix}.csv"
+    forecast.to_csv(target, index=False)
+    image = plot_iv_surface(forecast, out / f"iv_surface_lstm_forecast{suffix}.png",
+        value_column="implied_volatility_forecast",
+        title="SYNTHETIC DEMO — LSTM IV surface forecast" if synthetic
+              else "SK Hynix LSTM IV surface forecast")
+    print(f"Saved {len(forecast):,} forecast cells to {target}")
+    print(f"Saved forecast image to {image}")
+
+
 def project_iv(quote_path: str, spot_forward_approximation: bool) -> None:
     """Project supported call prices onto static-arbitrage constraints."""
     path = Path(quote_path)
@@ -406,6 +468,19 @@ def main() -> None:
     ive.add_argument("--spot-forward-approximation", action="store_true")
     ive.add_argument("--n-components", type=int, default=3)
     ive.add_argument("--min-training-dates", type=int, default=8)
+    iv_dl_eval = commands.add_parser("evaluate-iv-dl", help="Run leakage-safe LSTM IV-surface evaluation")
+    iv_dl_eval.add_argument("--quotes", default="data/processed/option_quotes.parquet")
+    iv_dl_eval.add_argument("--spot-forward-approximation", action="store_true")
+    iv_dl_eval.add_argument("--min-training-dates", type=int, default=30)
+    iv_dl_eval.add_argument("--sequence-length", type=int, default=5)
+    iv_dl_eval.add_argument("--max-epochs", type=int, default=60)
+    iv_dl_eval.add_argument("--seed", type=int, default=42)
+    iv_dl_forecast = commands.add_parser("forecast-iv-dl", help="Forecast the next IV surface using an LSTM")
+    iv_dl_forecast.add_argument("--quotes", default="data/processed/option_quotes.parquet")
+    iv_dl_forecast.add_argument("--spot-forward-approximation", action="store_true")
+    iv_dl_forecast.add_argument("--sequence-length", type=int, default=5)
+    iv_dl_forecast.add_argument("--max-epochs", type=int, default=60)
+    iv_dl_forecast.add_argument("--seed", type=int, default=42)
     projection = commands.add_parser("project-iv", help="Project IV grid onto static-arbitrage constraints")
     projection.add_argument("--quotes", default="data/processed/option_quotes.parquet")
     projection.add_argument("--spot-forward-approximation", action="store_true")
@@ -451,6 +526,12 @@ def main() -> None:
     elif args.command == "evaluate-iv":
         evaluate_iv_surface(args.quotes, args.spot_forward_approximation,
                             args.n_components, args.min_training_dates)
+    elif args.command == "evaluate-iv-dl":
+        evaluate_iv_surface_dl(args.quotes, args.spot_forward_approximation,
+            args.min_training_dates, args.sequence_length, args.max_epochs, args.seed)
+    elif args.command == "forecast-iv-dl":
+        forecast_iv_surface_dl(args.quotes, args.spot_forward_approximation,
+            args.sequence_length, args.max_epochs, args.seed)
     elif args.command == "project-iv":
         project_iv(args.quotes, args.spot_forward_approximation)
     elif args.command == "iv-factors":

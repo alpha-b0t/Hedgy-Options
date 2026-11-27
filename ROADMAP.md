@@ -13,7 +13,7 @@ The repository is a reproducible research prototype. Forecasting, quote diagnost
 | 2. Statistical RV | Rolling, EWMA, HAR-RV, GARCH family, walk-forward evaluation and current forecasts | Implemented | Results reproduced on archived, verified prices |
 | 3. ML RV | Fold-local RF, histogram boosting, SVR, MLP, optional XGBoost/LightGBM/LSTM | Implemented | Stable gains confirmed on untouched out-of-sample periods |
 | 4. Option quote interface | Standard quote schema, IV normalization, KRX contract facts, quote repricing, static checks | Implemented for files | Map and reconcile the selected licensed provider's actual fields |
-| 5. IV research | Coverage-supported surfaces, PCA forecast, chronological scoring, static projection | Implemented | Validate with genuine snapshots, including edge cases and projection residuals |
+| 5. IV research | Coverage-supported surfaces, PCA forecast, optional direct multi-output LSTM, chronological scoring, static projection | Implemented | Validate with genuine snapshots, including edge cases and projection residuals |
 | 6. Reproducible quote ingestion | Source labels, file hashes, import manifest, chain coverage report | Implemented | Provider identity and units documented for every imported dataset |
 | 7. Offline integration | Generated prices and chains run through RV evaluation, quote audit, IV surface, projection, and walk-forward IV scoring | Implemented | Workflow executes and all artifacts remain labeled synthetic |
 | 8. Strategy research | Bid/ask straddle simulator, fees, contract multiplier, ledger and summary metrics | Implemented as a simplified simulator | Validate fills and assumptions against real quotes; add risk controls before interpretation |
