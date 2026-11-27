@@ -122,14 +122,16 @@ The IV LSTM uses recent surface snapshots to forecast the next grid. Compare it 
 
 ## Strategy research and backtesting
 
-Run the quote-based straddle benchmark with explicit option slippage and liquidity filters:
+Run the quote-based straddle benchmark with explicit position size, slippage, liquidity participation caps, and a realized-loss halt:
 
 ```bash
-skhynix-vol backtest --fee-per-contract 10 --option-slippage-bps 5 \
-  --max-relative-spread 0.25
+skhynix-vol backtest --contracts 2 --fee-per-contract 10 \
+  --option-slippage-bps 5 --max-relative-spread 0.25 \
+  --max-volume-participation 0.10 --max-open-interest-participation 0.05 \
+  --max-cumulative-loss-krw 500000
 ```
 
-When the quote file contains those fields, add `--min-option-volume` and/or `--min-open-interest` to apply corresponding liquidity cutoffs. Set thresholds in contract units for the selected provider.
+Participation limits require volume/open-interest fields and apply to both legs at entry and exit, as well as each hedge date. Add `--min-option-volume` or `--min-open-interest` for absolute cutoffs. The cumulative-loss budget halts new entries after a realized portfolio loss reaches the limit; it does not liquidate an open position.
 
 Enable daily delta hedging using same-contract option quotes at each holding-session close and underlying close prices:
 
@@ -140,7 +142,7 @@ skhynix-vol backtest --hedge-mode daily_delta --fee-per-contract 10 \
   --hedge-dividend-yield 0.005
 ```
 
-Carry inputs on quotes take precedence over explicit rate/yield fallbacks. The simulator skips trades when same-contract hedge quotes or liquidity requirements are missing. It exports option and hedge P&L, explicit costs, hedge turnover, drawdown, 95% loss VaR, and expected shortfall. It still omits margin, financing, intraday execution, exchange-specific charges, and full corporate-action handling; these settings need calibration before economic conclusions.
+Carry inputs on quotes take precedence over explicit rate/yield fallbacks. The simulator skips trades when same-contract hedge quotes or liquidity requirements are missing. It exports option and hedge P&L, explicit costs, contract size, hedge turnover, drawdown, 95% loss VaR, expected shortfall, and whether the portfolio loss halt activated. It still omits margin, financing, intraday execution, exchange-specific charges, and full corporate-action handling; calibrate these settings before drawing economic conclusions.
 
 ## Reports and artifacts
 

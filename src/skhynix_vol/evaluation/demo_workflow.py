@@ -78,7 +78,9 @@ def run_synthetic_research_demo(output_dir: str | Path = "data/demo_synthetic",
             min_vol_edge=0.02, fee_per_contract=10.0,
             hedge_mode="daily_delta", option_slippage_bps=5.0,
             hedge_slippage_bps=3.0, hedge_fee_per_share=0.01,
-            max_relative_spread=0.25,
+            max_relative_spread=0.25, contracts=2,
+            max_volume_participation=0.10,
+            max_open_interest_participation=0.05,
         )
         all_trades.append(trades)
         all_summaries.append(summary)
@@ -106,6 +108,9 @@ def run_synthetic_research_demo(output_dir: str | Path = "data/demo_synthetic",
         "backtest_hedge_mode": "daily_delta",
         "backtest_option_slippage_bps": 5.0,
         "backtest_hedge_slippage_bps": 3.0,
+        "backtest_contracts_per_trade": 2,
+        "backtest_max_volume_participation": 0.10,
+        "backtest_max_open_interest_participation": 0.05,
         "outputs": {
             "synthetic_prices": str(prices_path),
             "synthetic_quotes": str(quotes_path),
