@@ -23,15 +23,20 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
                        capital_base_krw: float | None = None,
                        annual_financing_rate: float = 0.0,
                        annual_stock_borrow_rate: float = 0.0,
-                       max_cumulative_drawdown_krw: float | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
+                       max_cumulative_drawdown_krw: float | None = None,
+                       exercise_fee_per_contract: float = 0.0,
+                       margin_schedule: pd.DataFrame | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Simulate non-overlapping ATM straddles from historical forecast/quote data.
 
     A forecast above matched call/put IV by `min_vol_edge` buys a straddle;
     below by that amount sells one. Enter at ask for buys/bid for sells, exit
     exactly `horizon` underlying sessions later at bid/ask respectively. The
     optional daily delta hedge uses European Black-Scholes deltas from the
-    same-date option quotes and close prices. Missing daily quotes/carry inputs
-    cause a hedged trade to be skipped instead of silently interpolated.
+    same-date option quotes and close prices. If the forecast horizon reaches
+    a European option's last trading day, intrinsic cash settlement is recorded
+    using the official exercise-date reference price and settlement is dated on
+    the next underlying session. Missing daily quotes/carry inputs cause a
+    hedged trade to be skipped instead of silently interpolated.
     """
     required_q = {"date", "expiry", "option_type", "strike", "bid", "ask", "implied_volatility", "underlying_close"}
     if not required_q.issubset(quotes.columns):
@@ -44,7 +49,8 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
     if not np.isfinite([min_vol_edge, fee_per_contract, option_slippage_bps,
                         hedge_slippage_bps, hedge_fee_per_share,
                         min_option_volume, min_open_interest,
-                        annual_financing_rate, annual_stock_borrow_rate]).all():
+                        annual_financing_rate, annual_stock_borrow_rate,
+                        exercise_fee_per_contract]).all():
         raise ValueError("Edges, costs, and liquidity thresholds must be finite")
     if annual_financing_rate < 0 or annual_stock_borrow_rate < 0:
         raise ValueError("Financing and stock-borrow rates cannot be negative")
@@ -64,7 +70,7 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         raise ValueError("max_cumulative_drawdown_krw must be a finite positive drawdown limit")
     if (horizon < 1 or min_vol_edge < 0 or fee_per_contract < 0 or
         option_slippage_bps < 0 or hedge_slippage_bps < 0 or hedge_fee_per_share < 0 or
-        min_option_volume < 0 or min_open_interest < 0):
+        min_option_volume < 0 or min_open_interest < 0 or exercise_fee_per_contract < 0):
         raise ValueError("horizon must be positive; edges, costs, and liquidity thresholds cannot be negative")
     if hedge_mode not in {"none", "daily_delta"}:
         raise ValueError("hedge_mode must be 'none' or 'daily_delta'")
@@ -100,9 +106,40 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
     if "dividends" not in prices:
         prices["dividends"] = 0.0
     prices["dividends"] = pd.to_numeric(prices.dividends, errors="coerce").fillna(0.0)
+    settlement_columns = [column for column in
+        ("settlement_reference_price", "close", "base_price") if column in prices]
+    for column in settlement_columns:
+        prices[column] = pd.to_numeric(prices[column], errors="coerce")
     calendar = pd.Index(prices.index.sort_values())
     index_by_date = {date: i for i, date in enumerate(calendar)}
     quotes_by_date = {date: group for date, group in q.groupby("date", sort=False)}
+    margin_by_contract = None
+    margin_source = None
+    if margin_schedule is not None:
+        required_margin = {"date", "expiry", "strike", "contracts", "short_straddle_margin_krw", "source"}
+        if not required_margin.issubset(margin_schedule.columns):
+            raise ValueError(f"Margin schedule missing: {', '.join(sorted(required_margin - set(margin_schedule.columns)))}")
+        margin_data = margin_schedule.copy()
+        if margin_data.empty:
+            raise ValueError("Margin schedule is empty")
+        for column in ("date", "expiry"):
+            margin_data[column] = pd.to_datetime(margin_data[column], errors="coerce").dt.normalize()
+        for column in ("strike", "contracts", "short_straddle_margin_krw"):
+            margin_data[column] = pd.to_numeric(margin_data[column], errors="coerce")
+        if (margin_data[["date", "expiry", "strike", "contracts", "short_straddle_margin_krw", "source"]].isna().any().any()
+                or margin_data.short_straddle_margin_krw.le(0).any()
+                or not np.isfinite(margin_data[["strike", "contracts", "short_straddle_margin_krw"]].to_numpy(float)).all()
+                or margin_data.strike.le(0).any()
+                or margin_data.contracts.lt(1).any()
+                or margin_data.source.astype(str).str.strip().eq("").any()
+                or not np.allclose(margin_data.contracts, margin_data.contracts.astype(int))):
+            raise ValueError("Margin schedule dates, keys, source, quantity, and positive requirements must be valid")
+        margin_key = ["date", "expiry", "strike", "contracts"]
+        if margin_data.duplicated(margin_key).any():
+            raise ValueError("Margin schedule must contain one row per date/expiry/strike/quantity")
+        margin_by_contract = {key: group.set_index("date") for key, group in
+            margin_data.groupby(["expiry", "strike", "contracts"], sort=False)}
+        margin_source = ", ".join(sorted(margin_data.source.astype(str).unique()))
     preds = rv_predictions[rv_predictions.horizon.eq(horizon)].copy()
     preds["date"] = pd.to_datetime(preds.date).dt.normalize()
     # Forecast folds can cover years before the option dataset begins. Ignore
@@ -114,29 +151,31 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
     skipped_liquidity = 0
     skipped_hedge_coverage = 0
     skipped_capital_limit = 0
+    skipped_settlement_coverage = 0
+    skipped_margin_coverage = 0
     last_exit_index = -1
     realized_net_pnl = 0.0
     risk_halt = False
     drawdown_halt = False
-    peak_realized_pnl = 0.0
     peak_realized_pnl = 0.0
     for forecast in preds.itertuples(index=False):
         if risk_halt:
             break
         entry_date = forecast.date
         entry_index = index_by_date.get(entry_date)
-        if entry_index is None or entry_index <= last_exit_index or entry_index + horizon >= len(calendar):
+        if entry_index is None or entry_index <= last_exit_index or entry_index + 1 >= len(calendar):
             continue
-        exit_date = calendar[entry_index + horizon]
+        target_available = entry_index + horizon < len(calendar)
+        target_exit_index = min(entry_index + horizon, len(calendar) - 1)
+        target_exit_date = calendar[target_exit_index]
         on_entry = quotes_by_date.get(entry_date, q.iloc[0:0])
         on_entry = on_entry[on_entry.option_type.isin(["call", "put"])].copy()
-        on_exit_date = quotes_by_date.get(exit_date, q.iloc[0:0])
-        if on_entry.empty or on_exit_date.empty:
+        if on_entry.empty:
             continue
         calls = on_entry[on_entry.option_type.eq("call")]
         puts = on_entry[on_entry.option_type.eq("put")]
         pairs = calls.merge(puts, on=["date", "expiry", "strike"], suffixes=("_call", "_put"))
-        pairs = pairs[pairs.expiry > exit_date].copy()
+        pairs = pairs[pairs.expiry > entry_date].copy()
         if pairs.empty:
             continue
         for side in ("call", "put"):
@@ -168,37 +207,75 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         target_tenor_days = horizon * 365.0 / 252.0
         pairs["expiry_distance"] = np.abs((pairs.expiry - entry_date).dt.days - target_tenor_days)
         pair = pairs.sort_values(["abs_log_moneyness", "expiry_distance"]).iloc[0]
-        exit_call = on_exit_date[(on_exit_date.option_type.eq("call")) &
-            on_exit_date.expiry.eq(pair.expiry) & np.isclose(on_exit_date.strike, pair.strike)]
-        exit_put = on_exit_date[(on_exit_date.option_type.eq("put")) &
-            on_exit_date.expiry.eq(pair.expiry) & np.isclose(on_exit_date.strike, pair.strike)]
-        if exit_call.empty or exit_put.empty:
+        expiry_index = index_by_date.get(pair.expiry)
+        if pair.expiry <= target_exit_date and expiry_index is None:
+            skipped_settlement_coverage += 1
             continue
-        exit_quote_pair = pd.concat([exit_call.iloc[[0]], exit_put.iloc[[0]]], ignore_index=True)
-        if not _passes_quote_liquidity(exit_quote_pair, max_relative_spread, min_option_volume,
-                min_open_interest, contracts, max_volume_participation,
-                max_open_interest_participation):
-            skipped_liquidity += 1
+        settles_at_expiry = expiry_index is not None and expiry_index <= target_exit_index
+        if not target_available and not settles_at_expiry:
             continue
+        if settles_at_expiry:
+            if expiry_index + 1 >= len(calendar) or not settlement_columns:
+                skipped_settlement_coverage += 1
+                continue
+            option_close_date = calendar[expiry_index]
+            exit_date = calendar[expiry_index + 1]
+            settlement_row = prices.loc[option_close_date]
+            settlement_spot = next((settlement_row[column] for column in settlement_columns
+                                    if pd.notna(settlement_row[column])), np.nan)
+            if pd.isna(settlement_spot) or float(settlement_spot) <= 0:
+                skipped_settlement_coverage += 1
+                continue
+            trade_horizon = expiry_index - entry_index
+            exit_call = exit_put = pd.DataFrame()
+            call_exit_price = put_exit_price = np.nan
+            call_settlement = max(float(settlement_spot) - float(pair.strike), 0.0)
+            put_settlement = max(float(pair.strike) - float(settlement_spot), 0.0)
+            settlement_value = call_settlement + put_settlement
+            settlement_legs = int(call_settlement > 0) + int(put_settlement > 0)
+            settlement_index = expiry_index + 1
+        else:
+            option_close_date = target_exit_date
+            exit_date = target_exit_date
+            settlement_index = target_exit_index
+            trade_horizon = target_exit_index - entry_index
+            on_exit_date = quotes_by_date.get(option_close_date, q.iloc[0:0])
+            exit_call = on_exit_date[(on_exit_date.option_type.eq("call")) &
+                on_exit_date.expiry.eq(pair.expiry) & np.isclose(on_exit_date.strike, pair.strike)]
+            exit_put = on_exit_date[(on_exit_date.option_type.eq("put")) &
+                on_exit_date.expiry.eq(pair.expiry) & np.isclose(on_exit_date.strike, pair.strike)]
+            if exit_call.empty or exit_put.empty:
+                continue
+            exit_quote_pair = pd.concat([exit_call.iloc[[0]], exit_put.iloc[[0]]], ignore_index=True)
+            if not _passes_quote_liquidity(exit_quote_pair, max_relative_spread, min_option_volume,
+                    min_open_interest, contracts, max_volume_participation,
+                    max_open_interest_participation):
+                skipped_liquidity += 1
+                continue
+            call_exit_price = float(exit_call.bid.iloc[0])
+            put_exit_price = float(exit_put.bid.iloc[0])
+            settlement_value = np.nan
+            settlement_legs = 0
         forecast_rv = float(forecast.har_rv)
         atm_iv = float((pair.implied_volatility_call + pair.implied_volatility_put) / 2.0)
         edge = forecast_rv - atm_iv
         if edge > min_vol_edge:
             side = "long"
             entry_cash = float(pair.ask_call + pair.ask_put)
-            exit_cash = float(exit_call.bid.iloc[0] + exit_put.bid.iloc[0])
+            exit_cash = (settlement_value if settles_at_expiry else call_exit_price + put_exit_price)
             multiplier = _multiplier(pair, contract_multiplier)
             gross = (exit_cash - entry_cash) * multiplier * contracts
         elif edge < -min_vol_edge:
             side = "short"
             entry_cash = float(pair.bid_call + pair.bid_put)
-            exit_cash = float(exit_call.ask.iloc[0] + exit_put.ask.iloc[0])
+            exit_cash = (settlement_value if settles_at_expiry else
+                         float(exit_call.ask.iloc[0]) + float(exit_put.ask.iloc[0]))
             multiplier = _multiplier(pair, contract_multiplier)
             gross = (entry_cash - exit_cash) * multiplier * contracts
         else:
             continue
-        option_slippage = (entry_cash + exit_cash) * multiplier * contracts * option_slippage_bps / 10_000.0
-        option_turnover_krw = (entry_cash + exit_cash) * multiplier * contracts
+        option_turnover_krw = (entry_cash + (0.0 if settles_at_expiry else exit_cash)) * multiplier * contracts
+        option_slippage = option_turnover_krw * option_slippage_bps / 10_000.0
         hedge_pnl = hedge_fees = hedge_slippage = hedge_turnover = 0.0
         hedge_max_abs_shares = 0.0
         hedge_peak_notional = 0.0
@@ -209,7 +286,7 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
                 (hedge_pnl, hedge_fees, hedge_slippage, hedge_turnover, hedge_max_abs_shares,
                  hedge_peak_notional, hedge_financing_notional_days,
                  hedge_borrow_notional_days) = _daily_delta_hedge(
-                    contract_quotes, prices, calendar, entry_index, horizon, exit_date,
+                    contract_quotes, prices, calendar, entry_index, trade_horizon, option_close_date,
                     side, multiplier, hedge_slippage_bps, hedge_fee_per_share,
                     hedge_risk_free_rate, hedge_dividend_yield,
                     max_relative_spread, min_option_volume, min_open_interest,
@@ -217,12 +294,29 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
             except (ValueError, KeyError, IndexError):
                 skipped_hedge_coverage += 1
                 continue
-        fees = 4.0 * fee_per_contract * contracts + hedge_fees
+        option_fees = ((2.0 * fee_per_contract * contracts + exercise_fee_per_contract * settlement_legs * contracts)
+                       if settles_at_expiry else 4.0 * fee_per_contract * contracts)
+        fees = option_fees + hedge_fees
         gross_total = gross + hedge_pnl
         holding_days = max(0, (pd.Timestamp(exit_date) - pd.Timestamp(entry_date)).days)
         option_capital = entry_cash * multiplier * contracts if side == "long" else 0.0
         margin_requirement = (short_margin_per_contract_krw * contracts
                               if side == "short" and short_margin_per_contract_krw is not None else np.nan)
+        margin_financing_notional_days = 0.0
+        if side == "short" and margin_by_contract is not None:
+            key = (pd.Timestamp(pair.expiry), float(pair.strike), int(contracts))
+            daily_margin = margin_by_contract.get(key)
+            held_dates = calendar[entry_index:expiry_index + 1 if settles_at_expiry else settlement_index + 1]
+            if daily_margin is None or not held_dates.isin(daily_margin.index).all():
+                skipped_margin_coverage += 1
+                continue
+            margin_rows = daily_margin.loc[held_dates]
+            margin_requirement = float(margin_rows.short_straddle_margin_krw.max())
+            margin_dates = list(held_dates)
+            for i, margin_date in enumerate(margin_dates):
+                next_date = margin_dates[i + 1] if i + 1 < len(margin_dates) else exit_date
+                interval_days = max(0, (pd.Timestamp(next_date) - pd.Timestamp(margin_date)).days)
+                margin_financing_notional_days += float(margin_rows.loc[margin_date].short_straddle_margin_krw) * interval_days
         hedge_capital = hedge_peak_notional
         capital_requirement = (option_capital + hedge_capital if side == "long" else
             margin_requirement + hedge_capital if np.isfinite(margin_requirement) else np.nan)
@@ -231,18 +325,31 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
                 skipped_capital_limit += 1
                 continue
         financing_basis = option_capital if side == "long" else (margin_requirement if np.isfinite(margin_requirement) else 0.0)
-        financing_cost = (financing_basis * annual_financing_rate * holding_days / 365.0 +
+        financing_notional_days = (option_capital * holding_days if side == "long" else
+            margin_financing_notional_days if margin_by_contract is not None and side == "short" else
+            financing_basis * holding_days)
+        financing_cost = (financing_notional_days * annual_financing_rate / 365.0 +
                           hedge_financing_notional_days * annual_financing_rate / 365.0)
         stock_borrow_cost = hedge_borrow_notional_days * annual_stock_borrow_rate / 365.0
         all_costs = fees + option_slippage + hedge_slippage + financing_cost + stock_borrow_cost
         trades.append({"entry_date": entry_date, "exit_date": exit_date, "horizon_sessions": horizon,
             "side": side, "strike": float(pair.strike), "expiry": pair.expiry,
+            "last_trading_date": pair.expiry, "option_close_date": option_close_date,
+            "settlement_date": exit_date, "settled_at_expiry": settles_at_expiry,
+            "settlement_reference_price": float(settlement_spot) if settles_at_expiry else np.nan,
+            "cash_settlement_per_share": float(settlement_value) if settles_at_expiry else np.nan,
+            "cash_settlement_cashflow_krw": ((settlement_value if side == "long" else -settlement_value)
+                * multiplier * contracts if settles_at_expiry else 0.0),
+            "settlement_itm_legs": settlement_legs if settles_at_expiry else 0,
             "entry_dte": int((pair.expiry - entry_date).days), "target_tenor_days": target_tenor_days,
+            "held_sessions": trade_horizon,
             "forecast_rv": forecast_rv,
             "matched_atm_iv": atm_iv, "vol_edge": edge, "contract_multiplier": multiplier,
-            "entry_premium_per_share": entry_cash, "exit_premium_per_share": exit_cash,
+            "entry_premium_per_share": entry_cash,
+            "exit_premium_per_share": np.nan if settles_at_expiry else exit_cash,
+            "exit_value_per_share": exit_cash,
             "contracts": contracts, "option_pnl_krw": gross, "hedge_pnl_krw": hedge_pnl,
-            "gross_pnl_krw": gross_total, "option_fees_krw": 4.0 * fee_per_contract * contracts,
+            "gross_pnl_krw": gross_total, "option_fees_krw": option_fees,
             "hedge_fees_krw": hedge_fees, "fees_krw": fees,
             "option_slippage_krw": option_slippage, "hedge_slippage_krw": hedge_slippage,
             "option_turnover_krw": option_turnover_krw,
@@ -250,6 +357,8 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
             "hedge_peak_notional_krw": hedge_peak_notional,
             "financing_cost_krw": financing_cost, "stock_borrow_cost_krw": stock_borrow_cost,
             "capital_requirement_krw": capital_requirement,
+            "margin_requirement_krw": margin_requirement,
+            "margin_financing_notional_days_krw": margin_financing_notional_days,
             "capital_utilization_pct": (100.0 * capital_requirement / capital_base_krw
                 if capital_base_krw is not None else np.nan),
             "net_pnl_krw": gross_total - all_costs, "entry_underlying": spot,
@@ -264,6 +373,10 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
             "capital_base_krw": capital_base_krw,
             "annual_financing_rate": annual_financing_rate,
             "annual_stock_borrow_rate": annual_stock_borrow_rate,
+            "exercise_fee_per_contract": exercise_fee_per_contract,
+            "margin_model": ("position_specific_schedule" if margin_by_contract is not None and side == "short"
+                else "user_proxy" if side == "short" and short_margin_per_contract_krw is not None else "none"),
+            "margin_source": margin_source if margin_by_contract is not None and side == "short" else None,
             "holding_calendar_days": holding_days})
         realized_net_pnl += gross_total - all_costs
         if max_cumulative_loss_krw is not None and realized_net_pnl <= -max_cumulative_loss_krw:
@@ -273,17 +386,22 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
                 peak_realized_pnl - realized_net_pnl >= max_cumulative_drawdown_krw):
             drawdown_halt = True
         risk_halt = risk_halt or drawdown_halt
-        last_exit_index = entry_index + horizon
+        last_exit_index = settlement_index
     trade_frame = pd.DataFrame(trades)
     if trade_frame.empty:
         columns = ["entry_date", "exit_date", "horizon_sessions", "side", "strike", "expiry", "entry_dte",
                    "target_tenor_days", "forecast_rv", "matched_atm_iv", "vol_edge", "contract_multiplier",
+                   "last_trading_date", "option_close_date", "settlement_date", "settled_at_expiry",
+                   "settlement_reference_price", "cash_settlement_per_share", "settlement_itm_legs", "held_sessions",
+                   "cash_settlement_cashflow_krw",
                    "entry_premium_per_share", "exit_premium_per_share", "option_pnl_krw", "hedge_pnl_krw",
+                   "exit_value_per_share",
                    "gross_pnl_krw", "option_fees_krw", "hedge_fees_krw", "fees_krw",
                    "option_slippage_krw", "hedge_slippage_krw", "hedge_turnover_shares",
                    "option_turnover_krw",
                    "hedge_max_abs_shares", "hedge_peak_notional_krw", "financing_cost_krw", "stock_borrow_cost_krw",
                    "capital_requirement_krw", "capital_utilization_pct", "net_pnl_krw",
+                   "margin_requirement_krw", "margin_financing_notional_days_krw",
                    "entry_underlying", "hedge_mode", "contracts"]
         trades = pd.DataFrame(columns=columns)
         summary = _empty_summary(horizon)
@@ -306,14 +424,21 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         summary["short_margin_per_contract_krw"] = short_margin_per_contract_krw
         summary["annual_financing_rate"] = annual_financing_rate
         summary["annual_stock_borrow_rate"] = annual_stock_borrow_rate
+        summary["exercise_fee_per_contract"] = exercise_fee_per_contract
+        summary["margin_model"] = ("position_specific_schedule" if margin_by_contract is not None else
+            "user_proxy" if short_margin_per_contract_krw is not None else False)
+        summary["margin_source"] = margin_source
         summary["return_on_capital_pct"] = np.nan
-        summary["estimated_capital_model"] = "user_supplied_margin_plus_peak_hedge_notional"
+        summary["estimated_capital_model"] = ("position_specific_margin_schedule_plus_peak_hedge_notional"
+            if margin_by_contract is not None else "user_supplied_margin_plus_peak_hedge_notional")
         summary["skipped_capital_limit_candidates"] = skipped_capital_limit
         summary["liquidity_filters"] = (max_relative_spread is not None or min_option_volume > 0 or
             min_open_interest > 0 or max_volume_participation is not None or
             max_open_interest_participation is not None)
         summary["skipped_liquidity_candidates"] = skipped_liquidity
         summary["skipped_hedge_coverage_candidates"] = skipped_hedge_coverage
+        summary["skipped_settlement_coverage_candidates"] = skipped_settlement_coverage
+        summary["skipped_margin_coverage_candidates"] = skipped_margin_coverage
         if data_origin is not None:
             trades["data_origin"] = data_origin
             summary["data_origin"] = data_origin
@@ -342,9 +467,13 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         "total_hedge_pnl_krw": float(trade_frame.hedge_pnl_krw.sum()),
         "total_hedge_turnover_shares": float(trade_frame.hedge_turnover_shares.sum()),
         "total_option_contracts": int(trade_frame.contracts.sum()),
+        "expiring_trades": int(trade_frame.settled_at_expiry.sum()),
+        "total_expiry_cash_settlement_krw": float(trade_frame.cash_settlement_cashflow_krw.sum()),
         "contracts_per_trade": contracts,
         "peak_capital_requirement_krw": float(trade_frame.capital_requirement_krw.max()) if trade_frame.capital_requirement_krw.notna().any() else np.nan,
         "max_capital_utilization_pct": float(trade_frame.capital_utilization_pct.max()) if trade_frame.capital_utilization_pct.notna().any() else np.nan,
+        "peak_short_margin_requirement_krw": float(trade_frame.loc[trade_frame.side.eq("short"), "margin_requirement_krw"].max())
+            if trade_frame.loc[trade_frame.side.eq("short"), "margin_requirement_krw"].notna().any() else np.nan,
         "capital_base_krw": capital_base_krw,
         "return_on_capital_pct": (float(pnl.sum() / capital_base_krw * 100.0)
             if capital_base_krw is not None else np.nan),
@@ -370,16 +499,23 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         "short_margin_per_contract_krw": short_margin_per_contract_krw,
         "annual_financing_rate": annual_financing_rate,
         "annual_stock_borrow_rate": annual_stock_borrow_rate,
-        "estimated_capital_model": "user_supplied_margin_plus_peak_hedge_notional",
+        "estimated_capital_model": ("position_specific_margin_schedule_plus_peak_hedge_notional"
+            if margin_by_contract is not None else "user_supplied_margin_plus_peak_hedge_notional"),
         "risk_halt_triggered": risk_halt,
         "drawdown_halt_triggered": drawdown_halt,
-        "delta_hedging": hedge_mode == "daily_delta", "margin_model": False,
+        "delta_hedging": hedge_mode == "daily_delta",
         "liquidity_filters": (max_relative_spread is not None or min_option_volume > 0 or
             min_open_interest > 0 or max_volume_participation is not None or
             max_open_interest_participation is not None),
         "skipped_liquidity_candidates": skipped_liquidity,
         "skipped_hedge_coverage_candidates": skipped_hedge_coverage,
-        "skipped_capital_limit_candidates": skipped_capital_limit}
+        "skipped_capital_limit_candidates": skipped_capital_limit,
+        "skipped_settlement_coverage_candidates": skipped_settlement_coverage,
+        "skipped_margin_coverage_candidates": skipped_margin_coverage,
+        "margin_model": ("position_specific_schedule" if margin_by_contract is not None else
+            "user_proxy" if short_margin_per_contract_krw is not None else False),
+        "margin_source": margin_source,
+        "exercise_fee_per_contract": exercise_fee_per_contract}
     if data_origin is not None:
         summary["data_origin"] = data_origin
     summary["synthetic_data_flag"] = is_synthetic
@@ -412,7 +548,9 @@ def _empty_summary(horizon: int) -> dict:
             "total_hedge_turnover_shares": 0.0, "var_95_loss_krw": np.nan,
             "total_financing_cost_krw": 0.0, "total_stock_borrow_cost_krw": 0.0,
             "total_option_contracts": 0, "contracts_per_trade": 1,
+            "expiring_trades": 0, "total_expiry_cash_settlement_krw": 0.0,
             "peak_capital_requirement_krw": np.nan,
+            "peak_short_margin_requirement_krw": np.nan,
             "max_capital_utilization_pct": np.nan,
             "return_on_capital_pct": np.nan,
             "expected_shortfall_95_loss_krw": np.nan,
@@ -420,7 +558,9 @@ def _empty_summary(horizon: int) -> dict:
             "pnl_std_krw": np.nan, "liquidity_filters": False,
             "skipped_liquidity_candidates": 0,
             "skipped_hedge_coverage_candidates": 0,
-            "skipped_capital_limit_candidates": 0}
+            "skipped_capital_limit_candidates": 0,
+            "skipped_settlement_coverage_candidates": 0,
+            "skipped_margin_coverage_candidates": 0}
 
 
 def _passes_quote_liquidity(quotes: pd.DataFrame, max_relative_spread: float | None,

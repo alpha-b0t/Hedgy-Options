@@ -72,6 +72,10 @@ def run_synthetic_research_demo(output_dir: str | Path = "data/demo_synthetic",
     iv_metrics.to_csv(report_dir / "iv_surface_walk_forward_metrics_synthetic_demo.csv", index=False)
 
     all_trades, all_summaries = [], []
+    synthetic_margin_schedule = quotes[["date", "expiry", "strike"]].drop_duplicates().copy()
+    synthetic_margin_schedule["contracts"] = 2
+    synthetic_margin_schedule["short_straddle_margin_krw"] = 2_000_000.0
+    synthetic_margin_schedule["source"] = "SYNTHETIC_DEMO_NOT_KRX_MARGIN"
     for horizon in (5, 20, 60):
         trades, summary = backtest_straddles(
             quotes, rv_predictions, prices, horizon=horizon,
@@ -81,11 +85,12 @@ def run_synthetic_research_demo(output_dir: str | Path = "data/demo_synthetic",
             max_relative_spread=0.25, contracts=2,
             max_volume_participation=0.10,
             max_open_interest_participation=0.05,
-            short_margin_per_contract_krw=1_000_000.0,
             capital_base_krw=20_000_000.0,
             annual_financing_rate=0.04,
             annual_stock_borrow_rate=0.03,
             max_cumulative_drawdown_krw=2_000_000.0,
+            exercise_fee_per_contract=1.0,
+            margin_schedule=synthetic_margin_schedule,
         )
         all_trades.append(trades)
         all_summaries.append(summary)
@@ -115,9 +120,11 @@ def run_synthetic_research_demo(output_dir: str | Path = "data/demo_synthetic",
         "backtest_hedge_slippage_bps": 3.0,
         "backtest_contracts_per_trade": 2,
         "backtest_max_cumulative_drawdown_krw": 2_000_000.0,
+        "backtest_margin_schedule_source": "SYNTHETIC_DEMO_NOT_KRX_MARGIN",
+        "backtest_exercise_fee_per_contract_krw": 1.0,
         "backtest_max_volume_participation": 0.10,
         "backtest_max_open_interest_participation": 0.05,
-        "backtest_short_margin_proxy_per_contract_krw": 1_000_000.0,
+        "backtest_synthetic_short_straddle_margin_krw": 2_000_000.0,
         "backtest_capital_base_krw": 20_000_000.0,
         "backtest_annual_financing_rate": 0.04,
         "backtest_annual_stock_borrow_rate": 0.03,

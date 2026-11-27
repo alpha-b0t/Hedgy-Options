@@ -103,6 +103,9 @@ def attach_krx_single_stock_option_spec(quotes: pd.DataFrame,
     data["exchange_product"] = spec["product"]
     data["exercise_style"] = spec["exercise_style"]
     data["settlement_type"] = spec["settlement_type"]
+    data["last_trading_day_rule"] = spec["last_trading_day"]
+    data["final_settlement_lag_sessions"] = spec["final_settlement_lag_sessions"]
+    data["exercise_settlement_price_rule"] = spec["exercise_settlement_price"]
     return data
 
 

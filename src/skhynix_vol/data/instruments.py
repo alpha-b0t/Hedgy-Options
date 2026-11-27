@@ -11,8 +11,11 @@ KRX_SINGLE_STOCK_OPTIONS = {
         "exercise_style": "european",
         "settlement_type": "cash",
         "listing_cycle": "monthly; two non-quarterly and four quarterly months",
-        "last_trading_day": "second Thursday of the contract month",
+        "last_trading_day": "second Thursday of the contract month; brought forward if holiday",
+        "final_settlement_lag_sessions": 1,
+        "exercise_settlement_price": "underlying close on the exercise/last-trading day; base price if no close",
         "source_url": "https://global.krx.co.kr/contents/GLB/02/0201/0201040402/GLB0201040402.jsp",
+        "settlement_rule_url": "https://law.krx.co.kr/las/RefBon.jsp?lawid=000114&lawkd=B&pubdt=20241101&pubno=0000022630&reflinkchk=Y",
     }
 }
 

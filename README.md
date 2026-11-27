@@ -129,12 +129,16 @@ skhynix-vol backtest --contracts 2 --fee-per-contract 10 \
   --option-slippage-bps 5 --max-relative-spread 0.25 \
   --max-volume-participation 0.10 --max-open-interest-participation 0.05 \
   --max-cumulative-loss-krw 500000 --max-cumulative-drawdown-krw 750000 \
-  --short-margin-per-contract-krw 1000000 \
+  --margin-schedule data/krx_short_straddle_margin.csv --exercise-fee-per-contract 10 \
   --capital-base-krw 20000000 --annual-financing-rate 0.04 \
   --annual-stock-borrow-rate 0.03
 ```
 
-Participation limits require volume/open-interest fields and apply to both legs at entry and exit, as well as each hedge date. Add `--min-option-volume` or `--min-open-interest` for absolute cutoffs. The cumulative-loss budget halts new entries after a realized portfolio loss reaches the limit; the drawdown budget halts after realized P&L falls by that amount from its prior peak. Neither liquidates an open position. The summary also reports the extra option slippage in basis points that would erase aggregate net P&L, after the configured costs. When a capital base is supplied, short trades also require an explicit margin proxy; trades are skipped if the estimated premium/margin plus peak hedge-notional reserve exceeds the budget. The margin value is a user assumption, not a KRX margin formula or maximum-loss bound.
+Participation limits require volume/open-interest fields and apply to both legs at entry and exit, as well as each hedge date. Add `--min-option-volume` or `--min-open-interest` for absolute cutoffs. The cumulative-loss budget halts new entries after a realized portfolio loss reaches the limit; the drawdown budget halts after realized P&L falls by that amount from its prior peak. Neither liquidates an open position. The summary also reports the extra option slippage in basis points that would erase aggregate net P&L, after configured costs.
+
+For exchange-calibrated short margin, `--margin-schedule` accepts a CSV/Parquet schedule with `date,expiry,strike,contracts,short_straddle_margin_krw,source`. Each daily amount must represent the KRX or member-calculated margin for that exact short straddle position size; the simulator requires complete daily coverage through the last trading day and uses the peak margin plus peak hedge notional for its capital check. A margin file is not bundled, because the KRX margin is portfolio based and the required official daily margin inputs are account and position specific. If no schedule is passed, `--short-margin-per-contract-krw` remains a user proxy and must not be described as exchange-calibrated. Exercise charges remain user supplied using `--exercise-fee-per-contract`.
+
+The `expiry` field in option quotes must identify the actual last trading day, after any holiday adjustment. Underlying prices used for expiry should be unadjusted and include the last-trading-day close (or an authoritative `settlement_reference_price`; `base_price` is used only if no close is available) and the next trading session for settlement dating.
 
 Enable daily delta hedging using same-contract option quotes at each holding-session close and underlying close prices:
 
@@ -145,7 +149,7 @@ skhynix-vol backtest --hedge-mode daily_delta --fee-per-contract 10 \
   --hedge-dividend-yield 0.005
 ```
 
-Carry inputs on quotes take precedence over explicit rate/yield fallbacks. The simulator skips trades when same-contract hedge quotes or liquidity requirements are missing. It exports option and hedge P&L, fees, slippage, premium/margin financing, hedge stock-borrow cost, estimated capital requirement/utilization, drawdown, 95% loss VaR, expected shortfall, and whether the portfolio loss halt activated. It still omits an exchange-calibrated margin model, intraday execution, settlement cash flows, exchange-specific charges, and full corporate-action handling; calibrate these settings before drawing economic conclusions.
+Carry inputs on quotes take precedence over explicit rate/yield fallbacks. For SK hynix KRX single-stock options, the simulator recognizes European exercise, cash settlement on the next trading session, and uses the exercise-date underlying close (or supplied `settlement_reference_price`; `base_price` is the documented fallback when no close exists). A trade whose target holding period reaches the last trading day settles at intrinsic value rather than using a stale option quote. The trade ledger records exercise date, settlement date, reference price, intrinsic cash amount, exercised legs, and exercised-position fees. It skips expiration trades without required settlement-price or next-session coverage. The simulator still omits intraday execution and full corporate-action handling; an authoritative margin schedule and licensed market data are needed for economically representative research.
 
 ## Reports and artifacts
 
@@ -162,11 +166,11 @@ Large generated datasets and routine report files are git-ignored. The compact s
 ## Data and interpretation notes
 
 - Yahoo Finance is an initial research source for underlying prices, not an exchange-grade licensed feed. Verify consequential work against KRX or a suitable vendor.
-- The KRX single-stock option workflow uses the SK Hynix contract multiplier of 10 shares and applies it in quote-based backtests. Confirm contract specifications and listing status against current exchange documentation before analyzing real data.
+- The KRX single-stock option workflow uses the SK Hynix 10-share contract size, European exercise, cash settlement, second-Thursday last trading day (brought forward for holidays), and next-session final settlement. The exact specifications and rule citations are recorded in [`instruments.py`](src/skhynix_vol/data/instruments.py); verify contract history and adjustments for the date range being studied.
 - Historical option import is provider-neutral. No KRX scraping, licensing bypass, or provider-specific network adapter is included.
 - Midpoint repricing needs carry inputs. Missing values are surfaced in diagnostics rather than silently inferred.
 - Static surface projection enforces European call-price shape constraints; it does not model American exercise, discrete dividends, or quote uncertainty.
-- Daily delta-hedged straddles require a quote for both option legs on every holding date, and carry fields or explicit fallbacks. The simulator still does not model margin, financing, intraday execution, or all market frictions.
+- Daily delta-hedged straddles require a quote for both option legs on each holding date through exercise, plus carry fields or explicit fallbacks. Position-specific margin schedules and financing are supported; intraday execution and all exchange/broker frictions are not.
 - No live order execution is implemented.
 
 ## Development

@@ -412,10 +412,13 @@ def backtest(quotes_path: str, predictions_path: str, prices_path: str,
              capital_base_krw: float | None = None,
              annual_financing_rate: float = 0.0,
              annual_stock_borrow_rate: float = 0.0,
-             max_cumulative_drawdown_krw: float | None = None) -> None:
+             max_cumulative_drawdown_krw: float | None = None,
+             exercise_fee_per_contract: float = 0.0,
+             margin_schedule_path: str | None = None) -> None:
     def read_table(path: str) -> pd.DataFrame:
         return pd.read_parquet(path) if Path(path).suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
     quotes, predictions, prices = map(read_table, [quotes_path, predictions_path, prices_path])
+    margin_schedule = read_table(margin_schedule_path) if margin_schedule_path else None
     all_trades, all_summaries = [], []
     for horizon in horizons:
         trades, summary = backtest_straddles(quotes, predictions, prices, horizon=horizon,
@@ -433,7 +436,9 @@ def backtest(quotes_path: str, predictions_path: str, prices_path: str,
             capital_base_krw=capital_base_krw,
             annual_financing_rate=annual_financing_rate,
             annual_stock_borrow_rate=annual_stock_borrow_rate,
-            max_cumulative_drawdown_krw=max_cumulative_drawdown_krw)
+            max_cumulative_drawdown_krw=max_cumulative_drawdown_krw,
+            exercise_fee_per_contract=exercise_fee_per_contract,
+            margin_schedule=margin_schedule)
         all_trades.append(trades); all_summaries.append(summary)
     out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
     trade_frame = pd.concat(all_trades, ignore_index=True) if all_trades else pd.DataFrame()
@@ -560,6 +565,10 @@ def main() -> None:
                     help="Annual carry charge on long premium, posted short margin, and long hedge notional")
     bt.add_argument("--annual-stock-borrow-rate", type=float, default=0.0,
                     help="Annual borrow cost applied to time-weighted short hedge notional")
+    bt.add_argument("--exercise-fee-per-contract", type=float, default=0.0,
+                    help="User-supplied fee for each exercised option contract at expiry")
+    bt.add_argument("--margin-schedule", default=None,
+                    help="CSV/Parquet of position-specific daily KRX/member margin requirements")
     args = parser.parse_args()
     if args.command == "download":
         run(start=args.start, end=args.end)
@@ -612,7 +621,8 @@ def main() -> None:
                  args.max_open_interest_participation, args.max_cumulative_loss_krw,
                  args.short_margin_per_contract_krw, args.capital_base_krw,
                  args.annual_financing_rate, args.annual_stock_borrow_rate,
-                 args.max_cumulative_drawdown_krw)
+                 args.max_cumulative_drawdown_krw, args.exercise_fee_per_contract,
+                 args.margin_schedule)
 
 
 if __name__ == "__main__":
