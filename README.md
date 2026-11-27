@@ -149,6 +149,8 @@ skhynix-vol backtest --hedge-mode daily_delta --fee-per-contract 10 \
   --hedge-dividend-yield 0.005
 ```
 
+For timestamped snapshots, `--quote-execution-time 14:30` selects the latest quote at or before 14:30 Korea time on the session after the forecast date, then uses the same cutoff on exits and hedge dates. The trade ledger stores the selected entry/exit timestamps. This creates a one-session signal-to-execution lag and requires valid `quote_timestamp` values; daily underlying close prices alone are not used as intraday hedge spots in this mode. It is still a snapshot simulation, not an order-book or market-impact execution model.
+
 Carry inputs on quotes take precedence over explicit rate/yield fallbacks. For SK hynix KRX single-stock options, the simulator recognizes European exercise, cash settlement on the next trading session, and uses the exercise-date underlying close (or supplied `settlement_reference_price`; `base_price` is the documented fallback when no close exists). A trade whose target holding period reaches the last trading day settles at intrinsic value rather than using a stale option quote. The trade ledger records exercise date, settlement date, reference price, intrinsic cash amount, exercised legs, and exercised-position fees. It skips expiration trades without required settlement-price or next-session coverage. The simulator still omits intraday execution and full corporate-action handling; an authoritative margin schedule and licensed market data are needed for economically representative research.
 
 ## Reports and artifacts

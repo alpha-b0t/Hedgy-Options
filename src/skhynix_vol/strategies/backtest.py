@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import math
+import re
 import numpy as np
 import pandas as pd
 
@@ -25,12 +26,16 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
                        annual_stock_borrow_rate: float = 0.0,
                        max_cumulative_drawdown_krw: float | None = None,
                        exercise_fee_per_contract: float = 0.0,
-                       margin_schedule: pd.DataFrame | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
+                       margin_schedule: pd.DataFrame | None = None,
+                       quote_execution_time: str | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Simulate non-overlapping ATM straddles from historical forecast/quote data.
 
     A forecast above matched call/put IV by `min_vol_edge` buys a straddle;
     below by that amount sells one. Enter at ask for buys/bid for sells, exit
-    exactly `horizon` underlying sessions later at bid/ask respectively. The
+    exactly `horizon` underlying sessions later at bid/ask respectively. When
+    `quote_execution_time` is set, the signal is entered on the next session
+    using the latest timestamped snapshot at or before that Korea-time cutoff.
+    The
     optional daily delta hedge uses European Black-Scholes deltas from the
     same-date option quotes and close prices. If the forecast horizon reaches
     a European option's last trading day, intrinsic cash settlement is recorded
@@ -74,6 +79,8 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         raise ValueError("horizon must be positive; edges, costs, and liquidity thresholds cannot be negative")
     if hedge_mode not in {"none", "daily_delta"}:
         raise ValueError("hedge_mode must be 'none' or 'daily_delta'")
+    if quote_execution_time is not None and not re.fullmatch(r"(?:[01]\d|2[0-3]):[0-5]\d", quote_execution_time):
+        raise ValueError("quote_execution_time must use HH:MM Korea local time")
     if max_relative_spread is not None and (not np.isfinite(max_relative_spread) or not 0 <= max_relative_spread <= 2):
         raise ValueError("max_relative_spread must be between 0 and 2")
     if hedge_mode == "daily_delta" and "close" not in underlying_prices:
@@ -93,11 +100,19 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
     is_synthetic = (q.synthetic_data_flag.fillna(False).astype(str).str.lower()
                     .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in q else False
     contract_keys = ["date", "expiry", "option_type", "strike"]
-    if q.duplicated(contract_keys).any():
+    if quote_execution_time is not None and "quote_timestamp" not in q:
+        raise ValueError("quote_execution_time requires quote_timestamp on every option snapshot")
+    if "quote_timestamp" in q:
+        q["quote_timestamp"] = pd.to_datetime(q.quote_timestamp, utc=True, errors="coerce")
+        if quote_execution_time is not None and q.quote_timestamp.isna().any():
+            raise ValueError("quote_execution_time requires valid timestamps on every quote row")
+        q = q.dropna(subset=["quote_timestamp"])
+    if q.duplicated(contract_keys).any() and quote_execution_time is None:
         if "quote_timestamp" not in q:
             raise ValueError("Duplicate same-day contract quotes need quote_timestamp to select the closing snapshot")
-        q["quote_timestamp"] = pd.to_datetime(q.quote_timestamp, utc=True, errors="coerce")
         q = q.sort_values("quote_timestamp").drop_duplicates(contract_keys, keep="last")
+    elif "quote_timestamp" in q:
+        q = q.sort_values("quote_timestamp").drop_duplicates(contract_keys + ["quote_timestamp"], keep="last")
     prices = underlying_prices.copy()
     prices["date"] = pd.to_datetime(prices.date).dt.normalize()
     prices = prices.sort_values("date").drop_duplicates("date", keep="last").set_index("date")
@@ -145,7 +160,14 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
     # Forecast folds can cover years before the option dataset begins. Ignore
     # those dates up front, and use per-date quote slices in the loop rather
     # than rescanning the complete chain file for every forecast row.
-    preds = preds[preds.date.isin(quotes_by_date)]
+    if quote_execution_time is None:
+        preds = preds[preds.date.isin(quotes_by_date)]
+    else:
+        def has_next_session_quotes(date):
+            signal_index = index_by_date.get(date)
+            return (signal_index is not None and signal_index + 1 < len(calendar)
+                    and calendar[signal_index + 1] in quotes_by_date)
+        preds = preds[preds.date.map(has_next_session_quotes)]
     preds = preds.sort_values("date")
     trades = []
     skipped_liquidity = 0
@@ -161,14 +183,17 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
     for forecast in preds.itertuples(index=False):
         if risk_halt:
             break
-        entry_date = forecast.date
-        entry_index = index_by_date.get(entry_date)
+        signal_date = forecast.date
+        signal_index = index_by_date.get(signal_date)
+        entry_index = (signal_index + 1 if quote_execution_time is not None and signal_index is not None
+                       else signal_index)
         if entry_index is None or entry_index <= last_exit_index or entry_index + 1 >= len(calendar):
             continue
+        entry_date = calendar[entry_index]
         target_available = entry_index + horizon < len(calendar)
         target_exit_index = min(entry_index + horizon, len(calendar) - 1)
         target_exit_date = calendar[target_exit_index]
-        on_entry = quotes_by_date.get(entry_date, q.iloc[0:0])
+        on_entry = _select_quote_snapshot(quotes_by_date.get(entry_date, q.iloc[0:0]), quote_execution_time)
         on_entry = on_entry[on_entry.option_type.isin(["call", "put"])].copy()
         if on_entry.empty:
             continue
@@ -207,6 +232,9 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         target_tenor_days = horizon * 365.0 / 252.0
         pairs["expiry_distance"] = np.abs((pairs.expiry - entry_date).dt.days - target_tenor_days)
         pair = pairs.sort_values(["abs_log_moneyness", "expiry_distance"]).iloc[0]
+        entry_snapshot_timestamp = max((pair.get(column, pd.NaT) for column in
+            ("quote_timestamp_call", "quote_timestamp_put") if pd.notna(pair.get(column, pd.NaT))),
+            default=pd.NaT)
         expiry_index = index_by_date.get(pair.expiry)
         if pair.expiry <= target_exit_date and expiry_index is None:
             skipped_settlement_coverage += 1
@@ -239,7 +267,7 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
             exit_date = target_exit_date
             settlement_index = target_exit_index
             trade_horizon = target_exit_index - entry_index
-            on_exit_date = quotes_by_date.get(option_close_date, q.iloc[0:0])
+            on_exit_date = _select_quote_snapshot(quotes_by_date.get(option_close_date, q.iloc[0:0]), quote_execution_time)
             exit_call = on_exit_date[(on_exit_date.option_type.eq("call")) &
                 on_exit_date.expiry.eq(pair.expiry) & np.isclose(on_exit_date.strike, pair.strike)]
             exit_put = on_exit_date[(on_exit_date.option_type.eq("put")) &
@@ -254,8 +282,14 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
                 continue
             call_exit_price = float(exit_call.bid.iloc[0])
             put_exit_price = float(exit_put.bid.iloc[0])
+            exit_snapshot_timestamp = max((pd.Timestamp(value) for value in
+                [exit_call.quote_timestamp.iloc[0] if "quote_timestamp" in exit_call else pd.NaT,
+                 exit_put.quote_timestamp.iloc[0] if "quote_timestamp" in exit_put else pd.NaT]
+                if pd.notna(value)), default=pd.NaT)
             settlement_value = np.nan
             settlement_legs = 0
+        if settles_at_expiry:
+            exit_snapshot_timestamp = pd.NaT
         forecast_rv = float(forecast.har_rv)
         atm_iv = float((pair.implied_volatility_call + pair.implied_volatility_put) / 2.0)
         edge = forecast_rv - atm_iv
@@ -290,7 +324,8 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
                     side, multiplier, hedge_slippage_bps, hedge_fee_per_share,
                     hedge_risk_free_rate, hedge_dividend_yield,
                     max_relative_spread, min_option_volume, min_open_interest,
-                    contracts, max_volume_participation, max_open_interest_participation)
+                    contracts, max_volume_participation, max_open_interest_participation,
+                    quote_execution_time)
             except (ValueError, KeyError, IndexError):
                 skipped_hedge_coverage += 1
                 continue
@@ -332,7 +367,10 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
                           hedge_financing_notional_days * annual_financing_rate / 365.0)
         stock_borrow_cost = hedge_borrow_notional_days * annual_stock_borrow_rate / 365.0
         all_costs = fees + option_slippage + hedge_slippage + financing_cost + stock_borrow_cost
-        trades.append({"entry_date": entry_date, "exit_date": exit_date, "horizon_sessions": horizon,
+        trades.append({"signal_date": signal_date, "entry_date": entry_date, "exit_date": exit_date,
+            "horizon_sessions": horizon, "quote_execution_time": quote_execution_time,
+            "entry_snapshot_timestamp": entry_snapshot_timestamp,
+            "exit_snapshot_timestamp": exit_snapshot_timestamp,
             "side": side, "strike": float(pair.strike), "expiry": pair.expiry,
             "last_trading_date": pair.expiry, "option_close_date": option_close_date,
             "settlement_date": exit_date, "settled_at_expiry": settles_at_expiry,
@@ -390,7 +428,8 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
     trade_frame = pd.DataFrame(trades)
     if trade_frame.empty:
         columns = ["entry_date", "exit_date", "horizon_sessions", "side", "strike", "expiry", "entry_dte",
-                   "target_tenor_days", "forecast_rv", "matched_atm_iv", "vol_edge", "contract_multiplier",
+                   "signal_date", "target_tenor_days", "forecast_rv", "matched_atm_iv", "vol_edge", "contract_multiplier",
+                   "entry_snapshot_timestamp", "exit_snapshot_timestamp",
                    "last_trading_date", "option_close_date", "settlement_date", "settled_at_expiry",
                    "settlement_reference_price", "cash_settlement_per_share", "settlement_itm_legs", "held_sessions",
                    "cash_settlement_cashflow_krw",
@@ -425,6 +464,8 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         summary["annual_financing_rate"] = annual_financing_rate
         summary["annual_stock_borrow_rate"] = annual_stock_borrow_rate
         summary["exercise_fee_per_contract"] = exercise_fee_per_contract
+        summary["quote_execution_time"] = quote_execution_time
+        summary["execution_lag_sessions"] = 1 if quote_execution_time is not None else 0
         summary["margin_model"] = ("position_specific_schedule" if margin_by_contract is not None else
             "user_proxy" if short_margin_per_contract_krw is not None else False)
         summary["margin_source"] = margin_source
@@ -515,7 +556,9 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         "margin_model": ("position_specific_schedule" if margin_by_contract is not None else
             "user_proxy" if short_margin_per_contract_krw is not None else False),
         "margin_source": margin_source,
-        "exercise_fee_per_contract": exercise_fee_per_contract}
+        "exercise_fee_per_contract": exercise_fee_per_contract,
+        "quote_execution_time": quote_execution_time,
+        "execution_lag_sessions": 1 if quote_execution_time is not None else 0}
     if data_origin is not None:
         summary["data_origin"] = data_origin
     summary["synthetic_data_flag"] = is_synthetic
@@ -589,6 +632,23 @@ def _passes_quote_liquidity(quotes: pd.DataFrame, max_relative_spread: float | N
     return True
 
 
+def _select_quote_snapshot(quotes: pd.DataFrame, execution_time: str | None) -> pd.DataFrame:
+    """Select the latest same-session contract quote at or before a Korea-time cutoff."""
+    if quotes.empty or "quote_timestamp" not in quotes:
+        return quotes
+    rows = quotes
+    if execution_time is not None:
+        session_date = pd.Timestamp(rows.date.iloc[0]).normalize()
+        hour, minute = map(int, execution_time.split(":"))
+        cutoff = (session_date.tz_localize("Asia/Seoul") +
+                  pd.Timedelta(hours=hour, minutes=minute)).tz_convert("UTC")
+        rows = rows[rows.quote_timestamp.le(cutoff)]
+    if rows.empty:
+        return rows
+    keys = [column for column in ("date", "expiry", "option_type", "strike") if column in rows]
+    return rows.sort_values("quote_timestamp").drop_duplicates(keys, keep="last")
+
+
 def _daily_delta_hedge(contract_quotes: pd.DataFrame, prices: pd.DataFrame,
                        calendar: pd.Index, entry_index: int, horizon: int,
                        exit_date: pd.Timestamp, option_side: str, multiplier: float,
@@ -597,11 +657,13 @@ def _daily_delta_hedge(contract_quotes: pd.DataFrame, prices: pd.DataFrame,
                        max_relative_spread: float | None, min_volume: float,
                        min_open_interest: float, contracts: int = 1,
                        max_volume_participation: float | None = None,
-                       max_open_interest_participation: float | None = None) -> tuple[float, float, float, float, float, float, float, float]:
+                       max_open_interest_participation: float | None = None,
+                       quote_execution_time: str | None = None) -> tuple[float, float, float, float, float, float, float, float]:
     """Close-to-close delta hedge with explicit hedge execution costs."""
     entry_date = calendar[entry_index]
-    entry_quotes = contract_quotes[contract_quotes.date.eq(entry_date)]
-    entry_spot = float(prices.loc[entry_date, "close"])
+    entry_quotes = _select_quote_snapshot(contract_quotes[contract_quotes.date.eq(entry_date)], quote_execution_time)
+    entry_spot = (float(entry_quotes.underlying_close.iloc[0]) if quote_execution_time is not None
+                  else float(prices.loc[entry_date, "close"]))
     entry_delta = _straddle_delta(entry_quotes, entry_date, entry_spot,
         float(entry_quotes.strike.iloc[0]), rate_override, dividend_override)
     position_sign = 1.0 if option_side == "long" else -1.0
@@ -621,7 +683,7 @@ def _daily_delta_hedge(contract_quotes: pd.DataFrame, prices: pd.DataFrame,
     expiry = pd.Timestamp(entry_quotes.expiry.iloc[0])
     for step in range(1, horizon + 1):
         date = calendar[entry_index + step]
-        daily = contract_quotes[contract_quotes.date.eq(date)]
+        daily = _select_quote_snapshot(contract_quotes[contract_quotes.date.eq(date)], quote_execution_time)
         if not _passes_quote_liquidity(daily[daily.option_type.isin(["call", "put"])],
                 max_relative_spread, min_volume, min_open_interest, contracts,
                 max_volume_participation, max_open_interest_participation):
@@ -629,7 +691,8 @@ def _daily_delta_hedge(contract_quotes: pd.DataFrame, prices: pd.DataFrame,
         daily = daily[daily.option_type.isin(["call", "put"])]
         if set(daily.option_type) != {"call", "put"}:
             raise ValueError("Missing call or put during hedge window")
-        spot = float(prices.loc[date, "close"])
+        spot = (float(daily.underlying_close.iloc[0]) if quote_execution_time is not None
+                else float(prices.loc[date, "close"]))
         dividends = float(prices.loc[date, "dividends"])
         interval_days = max(0, (pd.Timestamp(date) - pd.Timestamp(previous_date)).days)
         hedge_financing_notional_days += max(hedge_shares, 0.0) * previous_spot * interval_days
