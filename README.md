@@ -2,6 +2,8 @@
 
 A reproducible Python research foundation for SK Hynix (KRX: 000660; Yahoo Finance: `000660.KS`). The initial pipeline downloads daily prices, validates and stores raw and normalized observations, and builds trailing realized-volatility features and forward 5-, 20-, and 60-session realized-volatility labels.
 
+See [ROADMAP.md](ROADMAP.md) for stage status, exit criteria, and the remaining licensed-data work.
+
 This repository is research software, not financial advice. Forecast accuracy does not establish trading profitability. No live trading is implemented. Historical options data is not fabricated or assumed to be available from Yahoo Finance.
 
 ## Setup
@@ -109,19 +111,26 @@ Trailing windows count observed daily rows (sessions), not calendar days. Featur
 pytest
 ```
 
-The current implementation includes latest-date RV forecasts, chronological RV evaluation with GARCH-family models, a machine-learning and neural RV comparison, a provider-file IV-surface workflow, quote-level static-arbitrage diagnostics and surface projection, and a quote-based straddle simulation engine. Remaining work is connecting a licensed KRX options data source and validating the projection against genuine option chains; the synthetic fixture is only for interface verification.
+The current implementation includes latest-date RV forecasts, chronological RV evaluation with GARCH-family models, a machine-learning and neural RV comparison, a provider-file IV-surface workflow with source labels and import manifests, quote-level static-arbitrage diagnostics and surface projection, and a quote-based straddle simulation engine. The next stages are provider-specific KRX ingestion, validation on genuine option chains, then economic evaluation using verified historical quotes. The synthetic fixture is only for interface verification.
 
 ## Phase 4: KRX options and implied volatility
 
 The target instrument is KRX single-stock options on SK hynix (000660). KRX specifies a 10-share contract, European exercise, cash settlement, and monthly contracts. SK hynix is among the single-stock option underlyings; the planned weekly options for SK hynix and three other stocks were postponed in June 2026. Reconfirm the live KRX contract list and current listing status when acquiring a new dataset. See [KRX single-stock option specifications](https://global.krx.co.kr/contents/GLB/02/0201/0201040402/GLB0201040402.jsp) and [Yonhap's report on the weekly-options postponement](https://en.yna.co.kr/view/AEN20260625004000320).
 
-The code applies the verified 10-share multiplier and checks imported multiplier conflicts. It imports historical observations from a provider CSV or Parquet file; it does not scrape KRX or bypass vendor licensing. Yahoo Finance is not an options source. The quote file must identify the underlying, expiry, side, strike, bid, ask, spot, and source IV. Add a forward (preferred) or carry fields (rate and dividend yield) for independent IV recalculation.
+The code applies the verified 10-share multiplier and checks imported multiplier conflicts. It imports historical observations from a provider CSV or Parquet file; it does not scrape KRX or bypass vendor licensing. Yahoo Finance is not an options source. The quote file must identify the underlying, expiry, side, strike, bid, ask, spot, and source IV. Add a forward (preferred) or carry fields (rate and dividend yield) for independent IV recalculation. Record the vendor or dataset label during import so it remains visible in normalized quotes and diagnostics:
+
+```bash
+skhynix-vol import-options provider_quotes.csv --iv-units percent --source "Licensed Vendor daily options"
+skhynix-vol validate-options provider_quotes.csv --iv-units percent --source "Licensed Vendor daily options"
+```
 
 For interface development only, generate a removable synthetic quote file from local price dates:
 
 ```bash
 skhynix-vol generate-demo-options
 ```
+
+To run the complete offline RV and options workflow on generated underlying prices and synthetic option quotes, use `skhynix-vol demo-research`. This writes only to `data/demo_synthetic/` and creates `_synthetic_demo` reports. See [ROADMAP.md](ROADMAP.md) for the included stages and the limits of synthetic results.
 
 The file is written to `data/demo_synthetic/options_quotes.csv`, outside the processed market-data directory. It carries `synthetic_data_flag=true` and `data_origin=SYNTHETIC_DEMO_DO_NOT_USE_FOR_RESEARCH`; its Black-76 prices, IVs, and weekly expiries are simulated. You can pass it directly to `iv-surface`, `evaluate-iv`, and `validate-options` to exercise those commands. Do not import it as historical option data or use it for strategy-performance claims. Delete `data/demo_synthetic/` to remove the fixture.
 
@@ -171,6 +180,8 @@ Run `skhynix-vol iv-factors --spot-forward-approximation` to export historical f
 
 The forecast grid is exported to `reports/iv_surface_forecast.csv` and rendered to `reports/iv_surface_forecast.png`. Forecast grids are not constrained to be arbitrage-free; `project-iv` applies static European call-price constraints to a constructed grid. Use the chronological evaluator before economic interpretation. PCA components are sign-indeterminate, so interpret them from exported loadings rather than assigning level/skew/curvature labels automatically.
 
+Each imported row retains the source label, input filename, and SHA-256 digest of the original file. `reports/option_import_manifest.json` records the digest, IV input units, quote count, and date coverage. Import also exports `reports/option_chain_quality.csv`, grouped by observation date and expiry, with call/put coverage, matched strikes, duplicates, crossed and zero-bid quotes, invalid prices, relative spreads, and carry/timestamp coverage. `validate-options` writes the same chain report next to its quote and arbitrage diagnostics. These summaries expose data quality; they do not certify a chain for trading.
+
 Evaluate one-step-ahead IV surfaces on expanding chronological folds against persistence and historical-mean baselines:
 
 ```bash
@@ -194,3 +205,7 @@ skhynix-vol backtest --contract-multiplier 10 --fee-per-contract 10
 ```
 
 This simulator requires historical options quotes aligned to both entry and exit dates; without them it cannot produce actual backtest results. It does not delta-hedge, model margin, slippage beyond quoted spreads, financing, or exchange-specific fees. Short straddles have potentially very large losses. Results are hypothetical research output, not a profitability claim. Trade ledger and summary are exported as `reports/straddle_backtest_trades.csv` and `reports/straddle_backtest_summary.csv`.
+
+### Phase 6 and later stages
+
+Phase 6 establishes a provider-neutral import and audit boundary with source identity, raw-file integrity, normalized quote data, and chain-level coverage diagnostics. The next stages are provider-specific KRX ingestion, validation on genuine option chains, and economic evaluation using verified historical quotes. Those stages require a licensed provider's field definitions, an authorized access method, and real history. After adding that adapter, run quote validation, static-arbitrage checks, surface projection, chronological IV scoring, and the strategy simulation on the same real dataset. Synthetic data is for interface checks only. No provider-specific network connector is enabled until a vendor and authorized access method are selected.

@@ -9,9 +9,11 @@ from skhynix_vol.data.prices import download_prices, save_price_data
 from skhynix_vol.data.options import (load_option_file, save_option_quotes,
     attach_krx_single_stock_option_spec, normalize_option_quotes)
 from skhynix_vol.data.demo_options import generate_synthetic_option_quotes
+from skhynix_vol.data.option_quality import option_chain_quality
 from skhynix_vol.data.instruments import instrument_spec
 from skhynix_vol.evaluation.walk_forward import forecast_latest_rv, walk_forward_rv
 from skhynix_vol.evaluation.iv_walk_forward import walk_forward_iv
+from skhynix_vol.evaluation.demo_workflow import run_synthetic_research_demo
 from skhynix_vol.evaluation.garch_walk_forward import forecast_latest_garch, walk_forward_garch
 from skhynix_vol.evaluation.ml_walk_forward import forecast_latest_ml, walk_forward_ml
 from skhynix_vol.models.lstm import lstm_available
@@ -139,8 +141,8 @@ def forecast_ml() -> None:
     print(f"Saved latest ML forecasts to {target}")
 
 
-def import_options(path: str, iv_units: str) -> None:
-    raw, normalized = load_option_file(path, iv_units=iv_units)
+def import_options(path: str, iv_units: str, source: str | None = None) -> None:
+    raw, normalized = load_option_file(path, iv_units=iv_units, source=source)
     if ("synthetic_data_flag" in normalized and normalized.synthetic_data_flag.fillna(False)
             .astype(str).str.lower().isin({"true", "1", "yes"}).any()):
         raise ValueError("Synthetic demo quotes cannot be imported into data/processed; use them directly with demo workflows")
@@ -148,10 +150,25 @@ def import_options(path: str, iv_units: str) -> None:
     normalized = validate_option_iv(normalized)
     arbitrage_report = static_arbitrage_diagnostics(normalized)
     raw_path, processed_path = save_option_quotes(raw, normalized)
-    Path("reports").mkdir(parents=True, exist_ok=True)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
     normalized.to_csv("reports/option_quote_iv_validation.csv", index=False)
     arbitrage_report.to_csv("reports/option_static_arbitrage_diagnostics.csv", index=False)
+    option_chain_quality(normalized).to_csv(out / "option_chain_quality.csv", index=False)
+    (out / "option_import_manifest.json").write_text(json.dumps({
+        "source": normalized.source.iloc[0] if len(normalized) else source or f"file:{Path(path).name}",
+        "source_file": Path(path).name,
+        "source_sha256": normalized.source_sha256.iloc[0],
+        "iv_units_input": iv_units,
+        "quote_count": int(len(normalized)),
+        "observation_start": str(normalized.date.min().date()) if len(normalized) else None,
+        "observation_end": str(normalized.date.max().date()) if len(normalized) else None,
+        "expiry_start": str(normalized.expiry.min().date()) if len(normalized) else None,
+        "expiry_end": str(normalized.expiry.max().date()) if len(normalized) else None,
+        "synthetic_data": bool(normalized.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                                .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in normalized else False,
+    }, indent=2) + "\n", encoding="utf-8")
     print(f"Imported {len(normalized):,} option quotes from {path}")
+    print(f"Recorded source: {normalized.source.iloc[0]}")
     print(f"Observation dates: {normalized.date.min().date()} to {normalized.date.max().date()}")
     print(f"Crossed-market rows flagged: {(normalized.quote_quality_flag != 'ok').sum()}")
     print("IV validation statuses:")
@@ -175,9 +192,18 @@ def generate_demo_options(prices_path: str, output_path: str, days: int) -> None
     print("These are simulated Black-76 premiums and IVs; do not use for model performance or trading claims.")
 
 
-def validate_options_file(path: str, iv_units: str) -> None:
+def run_demo_research(output_dir: str, reports_dir: str, sessions: int,
+                      quote_days: int, seed: int) -> None:
+    result = run_synthetic_research_demo(output_dir=output_dir, reports_dir=reports_dir,
+        sessions=sessions, quote_days=quote_days, seed=seed)
+    print("Completed offline SYNTHETIC research workflow (not market evidence).")
+    for key, value in result.items():
+        print(f"{key}: {value}")
+
+
+def validate_options_file(path: str, iv_units: str, source: str | None = None) -> None:
     """Create quote-quality and provider-IV consistency diagnostics."""
-    raw, normalized = load_option_file(path, iv_units=iv_units)
+    raw, normalized = load_option_file(path, iv_units=iv_units, source=source)
     normalized = attach_krx_single_stock_option_spec(normalized)
     report = validate_option_iv(normalized)
     arbitrage_report = static_arbitrage_diagnostics(normalized)
@@ -189,8 +215,11 @@ def validate_options_file(path: str, iv_units: str) -> None:
     report.to_csv(target, index=False)
     arb_target = out / f"option_static_arbitrage_diagnostics{suffix}.csv"
     arbitrage_report.to_csv(arb_target, index=False)
+    quality_target = out / f"option_chain_quality{suffix}.csv"
+    option_chain_quality(report).to_csv(quality_target, index=False)
     print(report.iv_validation_status.value_counts(dropna=False).to_string())
     print(f"Saved {len(report):,} quote diagnostics to {target}; raw source rows: {len(raw):,}")
+    print(f"Saved chain coverage diagnostics to {quality_target}")
     print(f"Static-arbitrage flagged expiry groups: {int(arbitrage_report.arbitrage_flag.sum())}; saved to {arb_target}")
 
 
@@ -348,12 +377,22 @@ def main() -> None:
     demo.add_argument("--prices", default="data/processed/daily_prices.parquet")
     demo.add_argument("--out", default="data/demo_synthetic/options_quotes.csv")
     demo.add_argument("--days", type=int, default=65, help="Recent underlying sessions to simulate")
+    demo_run = commands.add_parser("demo-research", help="Run the complete offline workflow on generated data")
+    demo_run.add_argument("--out-dir", default="data/demo_synthetic")
+    demo_run.add_argument("--reports-dir", default="reports")
+    demo_run.add_argument("--sessions", type=int, default=3024, help="Synthetic underlying sessions")
+    demo_run.add_argument("--quote-days", type=int, default=126, help="Recent sessions of synthetic option chains")
+    demo_run.add_argument("--seed", type=int, default=7)
     imp = commands.add_parser("import-options", help="Import a provider-supplied options CSV or Parquet")
     imp.add_argument("path")
     imp.add_argument("--iv-units", choices=["decimal", "percent"], default="decimal")
     validate = commands.add_parser("validate-options", help="Validate quotes and independently reprice provider IV")
     validate.add_argument("path")
     validate.add_argument("--iv-units", choices=["decimal", "percent"], default="decimal")
+    imp.add_argument("--source", default=None,
+                     help="Provider or dataset label retained in normalized quote data")
+    validate.add_argument("--source", default=None,
+                          help="Provider or dataset label retained in validation output")
     iv = commands.add_parser("iv-surface", help="Build and plot coverage-supported daily IV surfaces")
     iv.add_argument("--quotes", default="data/processed/option_quotes.parquet")
     iv.add_argument("--as-of", default=None, help="Observation date to plot")
@@ -397,10 +436,13 @@ def main() -> None:
         forecast_ml()
     elif args.command == "generate-demo-options":
         generate_demo_options(args.prices, args.out, args.days)
+    elif args.command == "demo-research":
+        run_demo_research(args.out_dir, args.reports_dir, args.sessions,
+                          args.quote_days, args.seed)
     elif args.command == "import-options":
-        import_options(args.path, args.iv_units)
+        import_options(args.path, args.iv_units, args.source)
     elif args.command == "validate-options":
-        validate_options_file(args.path, args.iv_units)
+        validate_options_file(args.path, args.iv_units, args.source)
     elif args.command == "iv-surface":
         make_iv_surface(args.quotes, args.spot_forward_approximation, as_of=args.as_of)
     elif args.command == "forecast-iv":

@@ -5,6 +5,7 @@ import math
 
 import numpy as np
 import pandas as pd
+from scipy.special import ndtr
 
 
 def _cdf(x: float) -> float:
@@ -76,32 +77,66 @@ def validate_option_iv(quotes: pd.DataFrame, iv_tolerance: float = 0.05) -> pd.D
     out["calculated_implied_volatility"] = np.nan
     out["iv_validation_status"] = "missing_carry_inputs"
     out["iv_consistency_error"] = np.nan
-    for idx, row in out.iterrows():
-        if row.get("quote_quality_flag", "ok") != "ok":
-            out.at[idx, "iv_validation_status"] = "invalid_quote"
-            continue
-        rate = pd.to_numeric(pd.Series([row.get("risk_free_rate")]), errors="coerce").iloc[0]
-        forward = pd.to_numeric(pd.Series([row.get("forward_price")]), errors="coerce").iloc[0]
-        spot = pd.to_numeric(pd.Series([row.get("underlying_close")]), errors="coerce").iloc[0]
-        dividend = pd.to_numeric(pd.Series([row.get("dividend_yield")]), errors="coerce").iloc[0]
-        if not np.isfinite(rate):
-            continue
-        if not np.isfinite(forward):
-            if not np.isfinite(spot) or not np.isfinite(dividend):
-                continue
-            forward = spot * np.exp((rate - dividend) * row.tenor_years)
-        try:
-            calc = implied_volatility_from_price(float(row.mid), float(forward), float(row.strike),
-                float(row.tenor_years), float(rate), str(row.option_type))
-        except (ValueError, TypeError, OverflowError):
-            out.at[idx, "iv_validation_status"] = "outside_model_bounds"
-            continue
-        out.at[idx, "calculated_implied_volatility"] = calc
-        source_iv = pd.to_numeric(pd.Series([row.implied_volatility]), errors="coerce").iloc[0]
-        if np.isfinite(source_iv):
-            err = calc - float(source_iv)
-            out.at[idx, "iv_consistency_error"] = err
-            out.at[idx, "iv_validation_status"] = "consistent" if abs(err) <= iv_tolerance else "iv_mismatch"
-        else:
-            out.at[idx, "iv_validation_status"] = "calculated_source_iv_missing"
+
+    # Vectorized Black-76 inversion keeps full historical chains practical to
+    # validate. Bounds and input checks match implied_volatility_from_price.
+    n = len(out)
+    as_numeric = lambda name: pd.to_numeric(out.get(name, pd.Series(np.nan, index=out.index)), errors="coerce").to_numpy(float)
+    rate = as_numeric("risk_free_rate")
+    forward = as_numeric("forward_price")
+    spot = as_numeric("underlying_close")
+    dividend = as_numeric("dividend_yield")
+    strike = as_numeric("strike")
+    tenor = out.tenor_years.to_numpy(float)
+    mid = out.mid.to_numpy(float)
+    kind = out.option_type.astype(str).str.lower().to_numpy()
+    is_call = kind == "call"
+    has_source_forward = np.isfinite(forward)
+    can_derive_forward = (~has_source_forward & np.isfinite(spot) & np.isfinite(dividend)
+                          & np.isfinite(rate) & np.isfinite(tenor))
+    used_forward = forward.copy()
+    used_forward[can_derive_forward] = spot[can_derive_forward] * np.exp(
+        (rate[can_derive_forward] - dividend[can_derive_forward]) * tenor[can_derive_forward])
+    has_carry = np.isfinite(rate) & (has_source_forward | can_derive_forward)
+    quality_ok = (out.get("quote_quality_flag", pd.Series("ok", index=out.index))
+                  .fillna("invalid_quote").eq("ok").to_numpy())
+    finite_inputs = (np.isfinite(mid) & np.isfinite(used_forward) & np.isfinite(strike)
+                     & np.isfinite(tenor) & np.isfinite(rate))
+    discount = np.exp(-np.where(np.isfinite(rate), rate, 0.0) * np.where(np.isfinite(tenor), tenor, 0.0))
+    intrinsic = discount * np.maximum(np.where(is_call, used_forward - strike, strike - used_forward), 0.0)
+    upper = discount * np.where(is_call, used_forward, strike)
+    in_bounds = (finite_inputs & (used_forward > 0) & (strike > 0) & (tenor > 0)
+                 & (mid >= intrinsic - 1e-9) & (mid < upper))
+    valid = quality_ok & has_carry & in_bounds & np.isin(kind, ["call", "put"])
+    statuses = np.full(n, "missing_carry_inputs", dtype=object)
+    statuses[~quality_ok] = "invalid_quote"
+    statuses[quality_ok & has_carry & ~in_bounds] = "outside_model_bounds"
+    calculated = np.full(n, np.nan)
+    if valid.any():
+        f, k, t, r, price, call = (used_forward[valid], strike[valid], tenor[valid],
+                                   rate[valid], mid[valid], is_call[valid])
+        low = np.full(len(f), 1e-6)
+        high = np.full(len(f), 5.0)
+        discount_valid = np.exp(-r * t)
+        for _ in range(80):
+            vol = (low + high) / 2.0
+            root_t = np.sqrt(t)
+            d1 = (np.log(f / k) + 0.5 * vol * vol * t) / (vol * root_t)
+            d2 = d1 - vol * root_t
+            call_price = discount_valid * (f * ndtr(d1) - k * ndtr(d2))
+            put_price = discount_valid * (k * ndtr(-d2) - f * ndtr(-d1))
+            model_price = np.where(call, call_price, put_price)
+            below = model_price < price
+            low = np.where(below, vol, low)
+            high = np.where(below, high, vol)
+        calculated[valid] = (low + high) / 2.0
+    out["calculated_implied_volatility"] = calculated
+    source_iv = as_numeric("implied_volatility")
+    comparable = valid & np.isfinite(source_iv)
+    errors = calculated - source_iv
+    out["iv_consistency_error"] = np.where(comparable, errors, np.nan)
+    statuses[valid & ~np.isfinite(source_iv)] = "calculated_source_iv_missing"
+    statuses[comparable] = np.where(np.abs(errors[comparable]) <= iv_tolerance,
+                                    "consistent", "iv_mismatch")
+    out["iv_validation_status"] = statuses
     return out

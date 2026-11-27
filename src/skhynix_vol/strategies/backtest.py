@@ -48,8 +48,13 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
     prices["date"] = pd.to_datetime(prices.date).dt.normalize()
     calendar = pd.Index(prices.date.drop_duplicates().sort_values())
     index_by_date = {date: i for i, date in enumerate(calendar)}
+    quotes_by_date = {date: group for date, group in q.groupby("date", sort=False)}
     preds = rv_predictions[rv_predictions.horizon.eq(horizon)].copy()
     preds["date"] = pd.to_datetime(preds.date).dt.normalize()
+    # Forecast folds can cover years before the option dataset begins. Ignore
+    # those dates up front, and use per-date quote slices in the loop rather
+    # than rescanning the complete chain file for every forecast row.
+    preds = preds[preds.date.isin(quotes_by_date)]
     preds = preds.sort_values("date")
     trades = []
     last_exit_index = -1
@@ -59,8 +64,9 @@ def backtest_straddles(quotes: pd.DataFrame, rv_predictions: pd.DataFrame,
         if entry_index is None or entry_index <= last_exit_index or entry_index + horizon >= len(calendar):
             continue
         exit_date = calendar[entry_index + horizon]
-        on_entry = q[q.date.eq(entry_date) & q.option_type.isin(["call", "put"])].copy()
-        on_exit_date = q[q.date.eq(exit_date)].copy()
+        on_entry = quotes_by_date.get(entry_date, q.iloc[0:0])
+        on_entry = on_entry[on_entry.option_type.isin(["call", "put"])].copy()
+        on_exit_date = quotes_by_date.get(exit_date, q.iloc[0:0])
         if on_entry.empty or on_exit_date.empty:
             continue
         calls = on_entry[on_entry.option_type.eq("call")]

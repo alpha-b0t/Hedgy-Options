@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import hashlib
 from pathlib import Path
 
 import numpy as np
@@ -22,6 +23,8 @@ def normalize_option_quotes(frame: pd.DataFrame, iv_units: str = "decimal",
     if iv_units not in {"decimal", "percent"}:
         raise ValueError("iv_units must be 'decimal' or 'percent'")
     data = frame.copy()
+    if data.empty:
+        raise ValueError("Option quote file is empty")
     data.columns = [str(c).strip().lower().replace(" ", "_") for c in data.columns]
     aliases = {"expiration": "expiry", "expiration_date": "expiry", "type": "option_type",
                "iv": "implied_volatility", "spot": "underlying_close", "openinterest": "open_interest",
@@ -103,7 +106,8 @@ def attach_krx_single_stock_option_spec(quotes: pd.DataFrame,
     return data
 
 
-def load_option_file(path: str | Path, iv_units: str = "decimal") -> tuple[pd.DataFrame, pd.DataFrame]:
+def load_option_file(path: str | Path, iv_units: str = "decimal",
+                     source: str | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Load CSV/Parquet input and return untouched source data plus normalized quotes."""
     path = Path(path)
     if path.suffix.lower() == ".csv":
@@ -112,7 +116,16 @@ def load_option_file(path: str | Path, iv_units: str = "decimal") -> tuple[pd.Da
         raw = pd.read_parquet(path)
     else:
         raise ValueError("Options input must be CSV or Parquet")
-    return raw, normalize_option_quotes(raw, iv_units=iv_units, source=f"file:{path.name}")
+    source_label = source.strip() if source and source.strip() else f"file:{path.name}"
+    digest_builder = hashlib.sha256()
+    with path.open("rb") as source_file:
+        for block in iter(lambda: source_file.read(1024 * 1024), b""):
+            digest_builder.update(block)
+    digest = digest_builder.hexdigest()
+    normalized = normalize_option_quotes(raw, iv_units=iv_units, source=source_label)
+    normalized["source_file"] = path.name
+    normalized["source_sha256"] = digest
+    return raw, normalized
 
 
 def save_option_quotes(raw: pd.DataFrame, normalized: pd.DataFrame,

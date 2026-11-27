@@ -7,6 +7,46 @@ import pandas as pd
 from skhynix_vol.features.option_pricing import european_option_price
 
 
+def generate_synthetic_prices(sessions: int = 3024, seed: int = 7,
+                              start: str = "2014-01-02",
+                              initial_price: float = 150_000.0) -> pd.DataFrame:
+    """Generate a deterministic, regime-switching price path for demos only."""
+    if sessions < 500 or initial_price <= 0:
+        raise ValueError("sessions must be at least 500 and initial_price must be positive")
+    rng = np.random.default_rng(seed)
+    dates = pd.bdate_range(start=start, periods=sessions)
+    # A persistent volatility state makes the exercise less degenerate than
+    # constant-volatility Brownian motion while remaining reproducible.
+    regime = np.zeros(sessions)
+    shocks = rng.standard_normal(sessions)
+    for i in range(1, sessions):
+        regime[i] = 0.94 * regime[i - 1] + 0.34 * shocks[i - 1]
+    daily_vol = np.clip(0.016 * np.exp(0.35 * regime), 0.006, 0.065)
+    returns = 0.0002 + daily_vol * shocks
+    close = initial_price * np.exp(np.cumsum(returns))
+    overnight = rng.normal(0.0, 0.002, sessions)
+    open_price = close * np.exp(-returns + overnight)
+    intraday_range = np.abs(rng.normal(0.008, 0.004, sessions))
+    high = np.maximum(open_price, close) * (1.0 + intraday_range)
+    low = np.minimum(open_price, close) * (1.0 - intraday_range)
+    volume = rng.lognormal(mean=15.0, sigma=0.45, size=sessions).astype("int64")
+    return pd.DataFrame({
+        "date": dates,
+        "ticker": "SYNTHETIC_000660",
+        "open": open_price,
+        "high": high,
+        "low": low,
+        "close": close,
+        "adj_close": close,
+        "volume": volume,
+        "dividends": 0.0,
+        "stock_splits": 0.0,
+        "ohlc_quality_flag": "synthetic",
+        "source": "SYNTHETIC_DEMO_DO_NOT_USE_FOR_RESEARCH",
+        "synthetic_data_flag": True,
+    })
+
+
 def generate_synthetic_option_quotes(prices: pd.DataFrame, days: int = 65,
                                      underlying: str = "000660") -> pd.DataFrame:
     """Create labeled Black-76 quotes for demos; never suitable for research.
