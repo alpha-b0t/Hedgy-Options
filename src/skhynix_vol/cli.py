@@ -1,4 +1,400 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éí×o|í:-jZ.¶›­–)Þ³R""$6öÖÖæBÖÆ–æRVçG'’ö–çBf÷"F†R–æ—F–Â&W6V&6‚—VÆ–æRâ"" ¦–×÷'B&w'6P¦–×÷'B§6öà¦g&öÒF†Æ–"–×÷'BF€ ¦–×÷'BæF22@ ¦g&öÒ6¶‡–æ—…÷föÂæFFç&–6W2–×÷'BF÷væÆöE÷&–6W2Â6fU÷&–6UöFF¦g&öÒ6¶‡–æ—…÷föÂæFFæ÷F–öç2–×÷'B†ÆöEö÷F–öåöf–ÆRÂ6fUö÷F–öå÷V÷FW2À¢GF6…ö·'…÷6–ævÆU÷7Fö6µö÷F–öå÷7V2Âæ÷&ÖÆ—¦Uö÷F–öå÷V÷FW2¦g&öÒ6¶‡–æ—…÷föÂæFFæFVÖõö÷F–öç2–×÷'BvVæW&FU÷7–çF†WF–5ö÷F–öå÷V÷FW0¦g&öÒ6¶‡–æ—…÷föÂæFFæ÷F–öå÷VÆ—G’–×÷'B÷F–öåö6†–å÷VÆ—G¦g&öÒ6¶‡–æ—…÷föÂæFFæ–ç7G'VÖVçG2–×÷'B–ç7G'VÖVçE÷7V0¦g&öÒ6¶‡–æ—…÷föÂæWfÇVF–öâçvÆµöf÷'v&B–×÷'Bf÷&V67EöÆFW7E÷'bÂvÆµöf÷'v&E÷'`¦g&öÒ6¶‡–æ—…÷föÂæWfÇVF–öâæ—e÷vÆµöf÷'v&B–×÷'BvÆµöf÷'v&Eö—`¦g&öÒ6¶‡–æ—…÷föÂæWfÇVF–öâæFVÖõ÷v÷&¶fÆ÷r–×÷'B'Vå÷7–çF†WF–5÷&W6V&6…öFVÖð¦g&öÒ6¶‡–æ—…÷föÂæWfÇVF–öâæFÅö—e÷vÆµöf÷'v&B–×÷'B€¢vÆµöf÷'v&Eö—eöÇ7FÒÂf÷&V67EöæW‡Eö—eöÇ7FÒÀ¢¦g&öÒ6¶‡–æ—…÷föÂæWfÇVF–öâæv&6…÷vÆµöf÷'v&B–×÷'Bf÷&V67EöÆFW7Eöv&6‚ÂvÆµöf÷'v&Eöv&6€¦g&öÒ6¶‡–æ—…÷föÂæWfÇVF–öâæÖÅ÷vÆµöf÷'v&B–×÷'Bf÷&V67EöÆFW7EöÖÂÂvÆµöf÷'v&EöÖÀ¦g&öÒ6¶‡–æ—…÷föÂæÖöFVÇ2æÇ7FÒ–×÷'BÇ7FÕöf–Æ&ÆP¦g&öÒ6¶‡–æ—…÷föÂæfVGW&W2æ–×Æ–VB–×÷'B†'V–ÆEö—e÷7W&f6RÂf÷&V67EöæW‡Eö—e÷7W&f6RÀ¢—e÷7W&f6U÷6öf7F÷'2¦g&öÒ6¶‡–æ—…÷föÂæfVGW&W2æ÷F–öå÷&–6–ær–×÷'BfÆ–FFUö÷F–öåö—`¦g&öÒ6¶‡–æ—…÷föÂæfVGW&W2æ&&—G&vR–×÷'B7FF–5ö&&—G&vUöF–væ÷7F–70¦g&öÒ6¶‡–æ—…÷föÂæfVGW&W2æ&&—G&vU÷7W&f6R–×÷'B&ö¦V7Eö—e÷7W&f6P¦g&öÒ6¶‡–æ—…÷föÂæfVGW&W2ç&VÆ—¦VB–×÷'B'V–ÆE÷&VÆ—¦VEöFF6W@¦g&öÒ6¶‡–æ—…÷föÂç7G&FVv–W2æ&6·FW7B–×÷'B&6·FW7E÷7G&FFÆW0  ¦FVb'Vâ‡7F'C¢7G"Ò##RÓÓ"ÂVæC¢7G"ÂæöæRÒæöæR’ÓâæöæS ¢g&öÒ6¶‡–æ—…÷föÂçf—7VÆ—¦F–öâæ6†'G2–×÷'B7&VFUöW‡Æ÷&F÷'•ö6†'G0¢&rÂ&–6W2ÒF÷væÆöE÷&–6W2‡7F'C×7F'BÂVæCÖVæB¢&u÷F‚Â&–6U÷F‚Ò6fU÷&–6UöFF‡&rÂ&–6W2¢fVGW&W2Ò'V–ÆE÷&VÆ—¦VEöFF6WB‡&–6W2¢F&vWEö6öÇVÖç2Ò¶6öÂf÷"6öÂ–âfVGW&W2–b6öÂç7F'G7v—F‚‚'F&vWE÷'eò"•Ð¢fVGW&U÷F‚Ò&FF÷&ö6W76VB÷'eöfVGW&W2ç'VWB ¢F&vWE÷F‚Ò&FF÷&ö6W76VB÷'e÷F&vWG2ç'VWB ¢fVGW&W2æG&÷†6öÇVÖç3×F&vWEö6öÇVÖç2’çFõ÷'VWB†fVGW&U÷F‚Â–æFWƒÔfÇ6R¢fVGW&W2æÆö5³¢Â²&FFR"Â§F&vWEö6öÇVÖç5ÕÒçFõ÷'VWB‡F&vWE÷F‚Â–æFWƒÔfÇ6R¢6†'G2Ò7&VFUöW‡Æ÷&F÷'•ö6†'G2‡&–6W2ÂfVGW&W2¢&–çB†b%&WG&–WfVB¶ÆVâ‡&–6W2“¢ÇÒ6W76–öç3¢·&–6W2æFFRæÖ–â‚’æFFR‚—ÒFò·&–6W2æFFRæÖ‚‚’æFFR‚—Ò"¢fÆvvVBÒ&–6W2æÆö5·&–6W2æö†Æ5÷VÆ—G•öfÆrææR‚&ö²"’Â&FFR%Ð¢–bÆVâ†fÆvvVB“ ¢FFW2Ò"Â"æ¦ö–â‡BçFõöFFWF–ÖR†fÆvvVB’æGBç7G&gF–ÖR‚"U’ÒVÒÒVB"’¢&–çB†b$FFVÆ—G“¢¶ÆVâ†fÆvvVB—Òô„Ä2&ævR–æ6öç6—7FVæ6–W2fÆvvVBæB&WF–æVC¢¶FFW7Ò"¢&–çB†b%6fVB&s¢·&u÷F‡ÕÆå6fVB&ö6W76VB&–6W3¢·&–6U÷F‡Ò"¢&–çB†b%6fVBfVGW&W3¢¶fVGW&U÷F‡ÕÆå6fVBF&vWG3¢·F&vWE÷F‡Ò"¢&–çB‚$6†'G3¢"²"Â"æ¦ö–â‡7G"‡F‚’f÷"F‚–â6†'G2’  ¦FVbWfÇVFR‚’ÓâæöæS ¢""%'VâF†RW‡æF–ær×v–æF÷r%b&6VÆ–æW2g&öÒ6fVB&ö6W76VB&–6W2â"" ¢F‚ÒF‚‚&FF÷&ö6W76VBöF–Ç•÷&–6W2ç'VWB"¢–bæ÷BF‚æW†—7G2‚“ ¢&—6Rf–ÆTæ÷Df÷VæDW'&÷"‚%'Vâ6¶‡–æ—‚×föÂF÷væÆöF&Vf÷&R6¶‡–æ—‚×föÂWfÇVFV"¢&–6W2ÒBç&VE÷'VWB‡F‚¢fVGW&W2Ò'V–ÆE÷&VÆ—¦VEöFF6WB‡&–6W2¢&VF–7F–öç2ÂÖWG&–72ÒvÆµöf÷'v&E÷'b†fVGW&W2¢v&6…÷&VF–7F–öç2Âv&6…öÖWG&–72ÒvÆµöf÷'v&Eöv&6‚†fVGW&W2¢÷WBÒF‚‚'&W÷'G2"“²÷WBæÖ¶F—"‡&VçG3ÕG'VRÂW†—7Eöö³ÕG'VR¢&VF–7F–öç2çFõö77b†÷WBò''e÷vÆµöf÷'v&E÷&VF–7F–öç2æ77b"Â–æFWƒÔfÇ6R¢ÖWG&–72çFõö77b†÷WBò''e÷vÆµöf÷'v&EöÖWG&–72æ77b"Â–æFWƒÔfÇ6R¢v&6…÷&VF–7F–öç2çFõö77b†÷WBò''eöv&6…÷vÆµöf÷'v&E÷&VF–7F–öç2æ77b"Â–æFWƒÔfÇ6R¢v&6…öÖWG&–72çFõö77b†÷WBò''eöv&6…÷vÆµöf÷'v&EöÖWG&–72æ77b"Â–æFWƒÔfÇ6R¢ÖWFFFÒ°¢'F–6¶W"#¢#ccäµ2"À¢'6÷W&6R#¢%–†öòf–ææ6R‡–f–ææ6R’Â2&V6÷&FVB–â&ö6W76VBF–Ç’&–6W2"À¢&ö'6W'fF–öåö6÷VçB#¢–çB†ÆVâ‡&–6W2’’À¢&FF÷7F'B#¢7G"‡BçFõöFFWF–ÖR‡&–6W2æFFR’æÖ–â‚’æFFR‚’’–bÆVâ‡&–6W2’VÇ6RæöæRÀ¢&FFöVæB#¢7G"‡BçFõöFFWF–ÖR‡&–6W2æFFR’æÖ‚‚’æFFR‚’’–bÆVâ‡&–6W2’VÇ6RæöæRÀ¢&fVGW&U÷F&vWEöFVf–æ—F–öâ#¢&F§W7FVBÖ6Æ÷6RÆör&WGW&ç3²#S"×6W76–öâæçVÆ—¦F–öã²f÷'v&B&WGW&ç2B³âçB¶‚"À¢&WfÇVF–öâ#¢²&föÆG2#¢&W‡æF–ær6ÆVæF"×–V"FW7BföÆG2"Â&Ö–å÷G&–å÷–V'2#¢RÀ¢'W&vU÷6W76–öç2#¢³RÂ#ÂcÒÂ&ÖöFVÇ2#¢²'&öÆÆ–æu÷'b"Â&WvÖ÷föÂ"Â&†%÷'b%ÒÀ¢&†%öfVGW&W2#¢²''eó"Â''eóR"Â''eó#"Â''eóc%ÒÀ¢&WvÖöÆÖ&F#¢ã“BÂ&v&6…öÖöFVÇ2#¢²&v&6‚"Â&Vv&6‚"Â&v§%öv&6‚%ÒÀ¢&ÖWG&–72#¢²&ÖR"Â'&×6R"Â'Æ–¶U÷f&–æ6U÷66ÆR"Â'#""Â&F—&V7F–öæÅö67W&7’%×ÒÀ¢Ð¢†÷WBò''e÷vÆµöf÷'v&E÷'Vâæ§6öâ"’çw&—FU÷FW‡B†§6öâæGV×2†ÖWFFFÂ–æFVçCÓ"’²%Æâ"ÂVæ6öF–æsÒ'WFbÓ‚"¢–bÖWG&–72æV×G“ ¢&–çB‚$æòvÆ²Öf÷'v&BföÆG2f–Æ&ÆS²6†V6²F†R&–6R†—7F÷'’ÆVæwF‚â"¢VÇ6S ¢7VÖÖ'’ÒÖWG&–72æw&÷W'’…²&†÷&—¦öâ"Â&ÖöFVÂ%Ò•µ²&ÖR"Â'&×6R"Â'Æ–¶R%ÕÒæÖVâ‚¢&–çB‡7VÖÖ'’çFõ÷7G&–ær‚’¢–bæ÷Bv&6…öÖWG&–72æV×G“ ¢&–çB‚%Æät$4‚fÖ–Ç’†æçVÂÖföÆBÖVâ“¢"¢&–çB†v&6…öÖWG&–72æw&÷W'’…²&†÷&—¦öâ"Â&ÖöFVÂ%Ò•µ²&ÖR"Â'&×6R"Â'Æ–¶R%ÕÒæÖVâ‚’çFõ÷7G&–ær‚’¢&–çB‚%6fVBæçVÂföÆB&VF–7F–öç2æBÖWG&–72VæFW"&W÷'G2òâ"  ¦FVbWfÇVFUöÖÂ‚’ÓâæöæS ¢""%'VâföÆBÖÆö6ÂÔÂÖöFVÇ2æB6fRF†V—"÷WBÖöb×6×ÆRf÷&V67G2â"" ¢F‚ÒF‚‚&FF÷&ö6W76VBöF–Ç•÷&–6W2ç'VWB"¢–bæ÷BF‚æW†—7G2‚“ ¢&—6Rf–ÆTæ÷Df÷VæDW'&÷"‚%'Vâ6¶‡–æ—‚×föÂF÷væÆöF&Vf÷&R6¶‡–æ—‚×föÂWfÇVFRÖÖÆ"¢fVGW&W2Ò'V–ÆE÷&VÆ—¦VEöFF6WB‡Bç&VE÷'VWB‡F‚’¢&VF–7F–öç2ÂÖWG&–72ÒvÆµöf÷'v&EöÖÂ†fVGW&W2¢÷WBÒF‚‚'&W÷'G2"“²÷WBæÖ¶F—"‡&VçG3ÕG'VRÂW†—7Eöö³ÕG'VR¢&VF–7F–öç2çFõö77b†÷WBò''eöÖÅ÷vÆµöf÷'v&E÷&VF–7F–öç2æ77b"Â–æFWƒÔfÇ6R¢ÖWG&–72çFõö77b†÷WBò''eöÖÅ÷vÆµöf÷'v&EöÖWG&–72æ77b"Â–æFWƒÔfÇ6R¢–bæ÷BÇ7FÕöf–Æ&ÆR‚“ ¢&–çB‚$Å5DÒ6¶—VC²–ç7FÆÂF†R÷F–öæÂFWVæFVæ7’v—F‚—F†öâÖÒ—–ç7FÆÂÖRrå¶ÖÂÖFVWÒvâ"¢–bÖWG&–72æV×G“ ¢&–çB‚$æòÔÂvÆ²Öf÷'v&BföÆG2vW&Rf–Æ&ÆRâ"¢VÇ6S ¢&–çB†ÖWG&–72æw&÷W'’…²&†÷&—¦öâ"Â&ÖöFVÂ%Ò•µ²&ÖR"Â'&×6R"Â'Æ–¶R%ÕÒæÖVâ‚’çFõ÷7G&–ær‚’¢&–çB‚%6fVBÔÂföÆB&VF–7F–öç2æBÖWG&–72VæFW"&W÷'G2òâ"  ¦FVbf÷&V67E÷'b‚’ÓâæöæS ¢""%w&—FRÆFW7BÖ6Æ÷6RRó#óc6W76–öâ%bf÷&V67G2â"" ¢F‚ÒF‚‚&FF÷&ö6W76VBöF–Ç•÷&–6W2ç'VWB"¢–bæ÷BF‚æW†—7G2‚“ ¢&—6Rf–ÆTæ÷Df÷VæDW'&÷"‚%'Vâ6¶‡–æ—‚×föÂF÷væÆöF&Vf÷&R6¶‡–æ—‚×föÂf÷&V67B×'f"¢&–6W2ÒBç&VE÷'VWB‡F‚¢FF6WBÒ'V–ÆE÷&VÆ—¦VEöFF6WB‡&–6W2¢f÷&V67G2Òf÷&V67EöÆFW7E÷'b†FF6WB¢v&6…öf÷&V67G2Òf÷&V67EöÆFW7Eöv&6‚†FF6WB¢÷WBÒF‚‚'&W÷'G2"“²÷WBæÖ¶F—"‡&VçG3ÕG'VRÂW†—7Eöö³ÕG'VR¢F&vWBÒ÷WBò''eöf÷&V67G5öÆFW7Bæ77b ¢f÷&V67G2çFõö77b‡F&vWBÂ–æFWƒÔfÇ6R¢v&6…÷F&vWBÒ÷WBò''eöv&6…öf÷&V67G5öÆFW7Bæ77b ¢v&6…öf÷&V67G2çFõö77b†v&6…÷F&vWBÂ–æFWƒÔfÇ6R¢&–çB†b$2Ööb¶f÷&V67G2æ5ööeöFFRæ–Æö5³ÒæFFR‚—Ó¥Æç¶f÷&V67G5µ²v†÷&—¦öå÷6W76–öç2rÂv†%÷'eöf÷&V67BrÂw&öÆÆ–æu÷'eöf÷&V67BrÂvWvÖ÷föÅöf÷&V67BuÕÒçFõ÷7G&–ær†–æFWƒÔfÇ6R—Ò"¢&–çB†b%6fVBf÷&V67G2Fò·F&vWGÒ"¢&–çB‚$ÆFW7Bt$4‚ÖfÖ–Ç’f÷&V67G3¢"¢&–çB†v&6…öf÷&V67G5µ²&†÷&—¦öå÷6W76–öç2"Â&ÖöFVÂ"Â&f÷&V67E÷'b%ÕÒçFõ÷7G&–ær†–æFWƒÔfÇ6R’¢&–çB†b%6fVBt$4‚f÷&V67G2Fò¶v&6…÷F&vWGÒ"  ¦FVbf÷&V67EöÖÂ‚’ÓâæöæS ¢F‚ÒF‚‚&FF÷&ö6W76VBöF–Ç•÷&–6W2ç'VWB"¢–bæ÷BF‚æW†—7G2‚“ ¢&—6Rf–ÆTæ÷Df÷VæDW'&÷"‚%'Vâ6¶‡–æ—‚×föÂF÷væÆöF&Vf÷&R6¶‡–æ—‚×föÂf÷&V67BÖÖÆ"¢fVGW&W2Ò'V–ÆE÷&VÆ—¦VEöFF6WB‡Bç&VE÷'VWB‡F‚’¢f÷&V67G2Òf÷&V67EöÆFW7EöÖÂ†fVGW&W2¢–bæ÷BÇ7FÕöf–Æ&ÆR‚“ ¢&–çB‚$Å5DÒ6¶—VC²–ç7FÆÂF†R÷F–öæÂFWVæFVæ7’v—F‚—F†öâÖÒ—–ç7FÆÂÖRrå¶ÖÂÖFVWÒvâ"¢÷WBÒF‚‚'&W÷'G2"“²÷WBæÖ¶F—"‡&VçG3ÕG'VRÂW†—7Eöö³ÕG'VR¢F&vWBÒ÷WBò''eöÖÅöf÷&V67G5öÆFW7Bæ77b ¢f÷&V67G2çFõö77b‡F&vWBÂ–æFWƒÔfÇ6R¢&–çB†f÷&V67G5µ²&†÷&—¦öå÷6W76–öç2"Â&ÖöFVÂ"Â&f÷&V67E÷'b%ÕÒçFõ÷7G&–ær†–æFWƒÔfÇ6R’¢&–çB†b%6fVBÆFW7BÔÂf÷&V67G2Fò·F&vWGÒ"  ¦FVb–×÷'Eö÷F–öç2‡Fƒ¢7G"Â—e÷Væ—G3¢7G"Â6÷W&6S¢7G"ÂæöæRÒæöæR’ÓâæöæS ¢&rÂæ÷&ÖÆ—¦VBÒÆöEö÷F–öåöf–ÆR‡F‚Â—e÷Væ—G3Ö—e÷Væ—G2Â6÷W&6S×6÷W&6R¢–b‚'7–çF†WF–5öFFöfÆr"–âæ÷&ÖÆ—¦VBæBæ÷&ÖÆ—¦VBç7–çF†WF–5öFFöfÆræf–ÆÆæ„fÇ6R¢æ7G—R‡7G"’ç7G"æÆ÷vW"‚’æ—6–â‡²'G'VR"Â#"Â'–W2'Ò’æç’‚’“ ¢&—6RfÇVTW'&÷"‚%7–çF†WF–2FVÖòV÷FW26ææ÷B&R–×÷'FVB–çFòFF÷&ö6W76VC²W6RF†VÒF—&V7FÇ’v—F‚FVÖòv÷&¶fÆ÷w2"¢æ÷&ÖÆ—¦VBÒGF6…ö·'…÷6–ævÆU÷7Fö6µö÷F–öå÷7V2†æ÷&ÖÆ—¦VB¢æ÷&ÖÆ—¦VBÒfÆ–FFUö÷F–öåö—b†æ÷&ÖÆ—¦VB¢&&—G&vU÷&W÷'BÒ7FF–5ö&&—G&vUöF–væ÷7F–72†æ÷&ÖÆ—¦VB¢&u÷F‚Â&ö6W76VE÷F‚Ò6fUö÷F–öå÷V÷FW2‡&rÂæ÷&ÖÆ—¦VB¢÷WBÒF‚‚'&W÷'G2"“²÷WBæÖ¶F—"‡&VçG3ÕG'VRÂW†—7Eöö³ÕG'VR¢æ÷&ÖÆ—¦VBçFõö77b‚'&W÷'G2ö÷F–öå÷V÷FUö—e÷fÆ–FF–öâæ77b"Â–æFWƒÔfÇ6R¢&&—G&vU÷&W÷'BçFõö77b‚'&W÷'G2ö÷F–öå÷7FF–5ö&&—G&vUöF–væ÷7F–72æ77b"Â–æFWƒÔfÇ6R¢÷F–öåö6†–å÷VÆ—G’†æ÷&ÖÆ—¦VB’çFõö77b†÷WBò&÷F–öåö6†–å÷VÆ—G’æ77b"Â–æFWƒÔfÇ6R¢†÷WBò&÷F–öåö–×÷'EöÖæ–fW7Bæ§6öâ"’çw&—FU÷FW‡B†§6öâæGV×2‡°¢'6÷W&6R#¢æ÷&ÖÆ—¦VBç6÷W&6Ræ–Æö5³Ò–bÆVâ†æ÷&ÖÆ—¦VB’VÇ6R6÷W&6R÷"b&f–ÆS§µF‚‡F‚’ææÖWÒ"À¢'6÷W&6Uöf–ÆR#¢F‚‡F‚’ææÖRÀ¢'6÷W&6U÷6†#Sb#¢æ÷&ÖÆ—¦VBç6÷W&6U÷6†#Sbæ–Æö5³ÒÀ¢&—e÷Væ—G5ö–çWB#¢—e÷Væ—G2À¢'V÷FUö6÷VçB#¢–çB†ÆVâ†æ÷&ÖÆ—¦VB’’À¢&ö'6W'fF–öå÷7F'B#¢7G"†æ÷&ÖÆ—¦VBæFFRæÖ–â‚’æFFR‚’’–bÆVâ†æ÷&ÖÆ—¦VB’VÇ6RæöæRÀ¢&ö'6W'fF–öåöVæB#¢7G"†æ÷&ÖÆ—¦VBæFFRæÖ‚‚’æFFR‚’’–bÆVâ†æ÷&ÖÆ—¦VB’VÇ6RæöæRÀ¢&W‡—'•÷7F'B#¢7G"†æ÷&ÖÆ—¦VBæW‡—'’æÖ–â‚’æFFR‚’’–bÆVâ†æ÷&ÖÆ—¦VB’VÇ6RæöæRÀ¢&W‡—'•öVæB#¢7G"†æ÷&ÖÆ—¦VBæW‡—'’æÖ‚‚’æFFR‚’’–bÆVâ†æ÷&ÖÆ—¦VB’VÇ6RæöæRÀ¢'7–çF†WF–5öFF#¢&ööÂ†æ÷&ÖÆ—¦VBç7–çF†WF–5öFFöfÆræf–ÆÆæ„fÇ6R’æ7G—R‡7G"’ç7G"æÆ÷vW"‚¢æ—6–â‡²'G'VR"Â#"Â'–W2'Ò’æç’‚’’–b'7–çF†WF–5öFFöfÆr"–âæ÷&ÖÆ—¦VBVÇ6RfÇ6RÀ¢ÒÂ–æFVçCÓ"’²%Æâ"ÂVæ6öF–æsÒ'WFbÓ‚"¢&–çB†b$–×÷'FVB¶ÆVâ†æ÷&ÖÆ—¦VB“¢ÇÒ÷F–öâV÷FW2g&öÒ·F‡Ò"¢&–çB†b%&V6÷&FVB6÷W&6S¢¶æ÷&ÖÆ—¦VBç6÷W&6Ræ–Æö5³×Ò"¢&–çB†b$ö'6W'fF–öâFFW3¢¶æ÷&ÖÆ—¦VBæFFRæÖ–â‚’æFFR‚—ÒFò¶æ÷&ÖÆ—¦VBæFFRæÖ‚‚’æFFR‚—Ò"¢&–çB†b$7&÷76VBÖÖ&¶WB&÷w2fÆvvVC¢²†æ÷&ÖÆ—¦VBçV÷FU÷VÆ—G•öfÆrÒvö²r’ç7VÒ‚—Ò"¢&–çB‚$•bfÆ–FF–öâ7FGW6W3¢"¢&–çB†æ÷&ÖÆ—¦VBæ—e÷fÆ–FF–öå÷7FGW2çfÇVUö6÷VçG2†G&÷æÔfÇ6R’çFõ÷7G&–ær‚’¢7V2Ò–ç7G'VÖVçE÷7V2‚¢&–çB†b$–ç7G'VÖVçC¢·7V5²vW†6†ævRu×Ò·7V5²w&öGV7Bu×Ó²WW&÷VâW†W&6—6S²66‚6WGFÆVC²×VÇF—Æ–W"·7V5²v6öçG&7Eö×VÇF—Æ–W"u×Ò6†&W2"¢&–çB†b%6fVB&s¢·&u÷F‡ÕÆå6fVBæ÷&ÖÆ—¦VC¢·&ö6W76VE÷F‡Ò"  ¦FVbvVæW&FUöFVÖõö÷F–öç2‡&–6W5÷Fƒ¢7G"Â÷WGWE÷Fƒ¢7G"ÂF—3¢–çB’ÓâæöæS ¢""%w&—FRW‡Æ–6—FÇ’7–çF†WF–2÷F–öâV÷FW2÷WG6–FR&ö6W76VBÖ&¶WBFFâ"" ¢6÷W&6RÒF‚‡&–6W5÷F‚¢–bæ÷B6÷W&6RæW†—7G2‚“ ¢&—6Rf–ÆTæ÷Df÷VæDW'&÷"†b%&–6R†—7F÷'’æ÷Bf÷VæC¢·6÷W&6WÓ²'VâF÷væÆöBf—'7B"¢&–6W2ÒBç&VE÷'VWB‡6÷W&6R’–b6÷W&6Rç7Vff—‚æÆ÷vW"‚’–â²"ç'VWB"Â"ç'ÒVÇ6RBç&VEö77b‡6÷W&6R¢V÷FW2ÒvVæW&FU÷7–çF†WF–5ö÷F–öå÷V÷FW2‡&–6W2ÂF—3ÖF—2¢F&vWBÒF‚†÷WGWE÷F‚¢F&vWBç&VçBæÖ¶F—"‡&VçG3ÕG'VRÂW†—7Eöö³ÕG'VR¢V÷FW2çFõö77b‡F&vWBÂ–æFWƒÔfÇ6R¢&–çB†b$vVæW&FVB¶ÆVâ‡V÷FW2“¢ÇÒ5”åD„UD”2V÷FR&÷w2B·F&vWGÒ"¢&–çB‚%F†W6R&R6–×VÆFVB&Æ6²Ósb&VÖ—V×2æB•g3²Fòæ÷BW6Rf÷"ÖöFVÂW&f÷&Öæ6R÷"G&F–ær6Æ–×2â"  ¦FVb'VåöFVÖõ÷&W6V&6‚†÷WGWEöF—#¢7G"Â&W÷'G5öF—#¢7G"Â6W76–öç3¢–çBÀ¢V÷FUöF—3¢–çBÂ6VVC¢–çB’ÓâæöæS ¢&W7VÇBÒ'Vå÷7–çF†WF–5÷&W6V&6…öFVÖò†÷WGWEöF—#Ö÷WGWEöF—"Â&W÷'G5öF—#×&W÷'G5öF—"À¢6W76–öç3×6W76–öç2ÂV÷FUöF—3×V÷FUöF—2Â6VVC×6VVB¢&–çB‚$6ö×ÆWFVBöffÆ–æR5”åD„UD”2&W6V&6‚v÷&¶fÆ÷r†æ÷BÖ&¶WBWf–FVæ6R’â"¢f÷"¶W’ÂfÇVR–â&W7VÇBæ—FV×2‚“ ¢&–çB†b'¶¶W—Ó¢·fÇVWÒ"  ¦FVbfÆ–FFUö÷F–öç5öf–ÆR‡Fƒ¢7G"Â—e÷Væ—G3¢7G"Â6÷W&6S¢7G"ÂæöæRÒæöæR’ÓâæöæS ¢""$7&VFRV÷FR×VÆ—G’æB&÷f–FW"Ô•b6öç6—7FVæ7’F–væ÷7F–72â"" ¢&rÂæ÷&ÖÆ—¦VBÒÆöEö÷F–öåöf–ÆR‡F‚Â—e÷Væ—G3Ö—e÷Væ—G2Â6÷W&6S×6÷W&6R¢æ÷&ÖÆ—¦VBÒGF6…ö·'…÷6–ævÆU÷7Fö6µö÷F–öå÷7V2†æ÷&ÖÆ—¦VB¢&W÷'BÒfÆ–FFUö÷F–öåö—b†æ÷&ÖÆ—¦VB¢&&—G&vU÷&W÷'BÒ7FF–5ö&&—G&vUöF–væ÷7F–72†æ÷&ÖÆ—¦VB¢7–çF†WF–2Ò†æ÷&ÖÆ—¦VBç7–çF†WF–5öFFöfÆræf–ÆÆæ„fÇ6R’æ7G—R‡7G"’ç7G"æÆ÷vW"‚¢æ—6–â‡²'G'VR"Â#"Â'–W2'Ò’æç’‚’’–b'7–çF†WF–5öFFöfÆr"–âæ÷&ÖÆ—¦VBVÇ6RfÇ6P¢7Vff—‚Ò%÷7–çF†WF–5öFVÖò"–b7–çF†WF–2VÇ6R" ¢÷WBÒF‚‚'&W÷'G2"“²÷WBæÖ¶F—"‡&VçG3ÕG'VRÂW†—7Eöö³ÕG'VR¢F&vWBÒ÷WBòb&÷F–öå÷V÷FUö—e÷fÆ–FF–öç·7Vff—‡Òæ77b ¢&W÷'BçFõö77b‡F&vWBÂ–æFWƒÔfÇ6R¢&%÷F&vWBÒ÷WBòb&÷F–öå÷7FF–5ö&&—G&vUöF–væ÷7F–77·7Vff—‡Òæ77b ¢&&—G&vU÷&W÷'BçFõö77b†&%÷F&vWBÂ–æFWƒÔfÇ6R¢VÆ—G•÷F&vWBÒ÷WBòb&÷F–öåö6†–å÷VÆ—G—·7Vff—‡Òæ77b ¢÷F–öåö6†–å÷VÆ—G’‡&W÷'B’çFõö77b‡VÆ—G•÷F&vWBÂ–æFWƒÔfÇ6R¢&–çB‡&W÷'Bæ—e÷fÆ–FF–öå÷7FGW2çfÇVUö6÷VçG2†G&÷æÔfÇ6R’çFõ÷7G&–ær‚’¢&–çB†b%6fVB¶ÆVâ‡&W÷'B“¢ÇÒV÷FRF–væ÷7F–72Fò·F&vWGÓ²&r6÷W&6R&÷w3¢¶ÆVâ‡&r“¢ÇÒ"¢&–çB†b%6fVB6†–â6÷fW&vRF–væ÷7F–72Fò·VÆ—G•÷F&vWGÒ"¢&–çB†b%7FF–2Ö&&—G&vRfÆvvVBW‡—'’w&÷W3¢¶–çB†&&—G&vU÷&W÷'Bæ&&—G&vUöfÆrç7VÒ‚’—Ó²6fVBFò¶&%÷F&vWGÒ"  ¦FVbÖ¶Uö—e÷7W&f6R‡V÷FU÷Fƒ¢7G"Â7÷Eöf÷'v&Eö&÷†–ÖF–öã¢&ööÂÀ¢5ööc¢7G"ÂæöæRÒæöæRÂf÷&V67C¢&ööÂÒfÇ6RÀ¢åö6ö×öæVçG3¢–çBÒ2’ÓâæöæS ¢g&öÒ6¶‡–æ—…÷föÂçf—7VÆ—¦F–öâæ—eö6†'G2–×÷'BÆ÷Eö—e÷7W&f6P¢F‚ÒF‚‡V÷FU÷F‚¢–bæ÷BF‚æW†—7G2‚“ ¢&—6Rf–ÆTæ÷Df÷VæDW'&÷"†b$÷F–öç2f–ÆRæ÷Bf÷VæC¢·F‡Ó²–×÷'B&÷f–FW"V÷FW2f—'7B"¢V÷FW2ÒBç&VE÷'VWB‡F‚’–bF‚ç7Vff—‚æÆ÷vW"‚’–â²"ç'VWB"Â"ç'ÒVÇ6RBç&VEö77b‡F‚¢–b'V÷FU÷VÆ—G•öfÆr"æ÷B–âV÷FW3 ¢g&öÒ6¶‡–æ—…÷föÂæFFæ÷F–öç2–×÷'Bæ÷&ÖÆ—¦Uö÷F–öå÷V÷FW0¢V÷FW2Òæ÷&ÖÆ—¦Uö÷F–öå÷V÷FW2‡V÷FW2Â—e÷Væ—G3Ò&FV6–ÖÂ"Â6÷W&6SÖb&f–Íøó»h‘éì¶»§q«^t)} components under reports/.")
+"""Command-line entry point for the initial research pipeline."""
+import argparse
+import json
+from pathlib import Path
+
+import pandas as pd
+
+from skhynix_vol.data.prices import download_prices, save_price_data
+from skhynix_vol.data.options import (load_option_file, save_option_quotes,
+    attach_krx_single_stock_option_spec, normalize_option_quotes)
+from skhynix_vol.data.demo_options import generate_synthetic_option_quotes
+from skhynix_vol.data.option_quality import option_chain_quality
+from skhynix_vol.data.instruments import instrument_spec
+from skhynix_vol.evaluation.walk_forward import forecast_latest_rv, walk_forward_rv
+from skhynix_vol.evaluation.iv_walk_forward import walk_forward_iv
+from skhynix_vol.evaluation.demo_workflow import run_synthetic_research_demo
+from skhynix_vol.evaluation.dl_iv_walk_forward import (
+    walk_forward_iv_lstm, forecast_next_iv_lstm,
+)
+from skhynix_vol.evaluation.garch_walk_forward import forecast_latest_garch, walk_forward_garch
+from skhynix_vol.evaluation.ml_walk_forward import forecast_latest_ml, walk_forward_ml
+from skhynix_vol.models.lstm import lstm_available
+from skhynix_vol.features.implied import (build_iv_surface, forecast_next_iv_surface,
+    iv_surface_pca_factors)
+from skhynix_vol.features.option_pricing import validate_option_iv
+from skhynix_vol.features.arbitrage import static_arbitrage_diagnostics
+from skhynix_vol.features.arbitrage_surface import project_iv_surface
+from skhynix_vol.features.realized import build_realized_dataset
+from skhynix_vol.strategies.backtest import backtest_straddles
+
+
+def run(start: str = "2015-01-01", end: str | None = None) -> None:
+    from skhynix_vol.visualization.charts import create_exploratory_charts
+    raw, prices = download_prices(start=start, end=end)
+    raw_path, price_path = save_price_data(raw, prices)
+    features = build_realized_dataset(prices)
+    target_columns = [col for col in features if col.startswith("target_rv_")]
+    feature_path = "data/processed/rv_features.parquet"
+    target_path = "data/processed/rv_targets.parquet"
+    features.drop(columns=target_columns).to_parquet(feature_path, index=False)
+    features.loc[:, ["date", *target_columns]].to_parquet(target_path, index=False)
+    charts = create_exploratory_charts(prices, features)
+    print(f"Retrieved {len(prices):,} sessions: {prices.date.min().date()} to {prices.date.max().date()}")
+    flagged = prices.loc[prices.ohlc_quality_flag.ne("ok"), "date"]
+    if len(flagged):
+        dates = ", ".join(pd.to_datetime(flagged).dt.strftime("%Y-%m-%d"))
+        print(f"Data quality: {len(flagged)} OHLC range inconsistencies flagged and retained: {dates}")
+    print(f"Saved raw: {raw_path}\nSaved processed prices: {price_path}")
+    print(f"Saved features: {feature_path}\nSaved targets: {target_path}")
+    print("Charts: " + ", ".join(str(path) for path in charts))
+
+
+def evaluate() -> None:
+    """Run the expanding-window RV baselines from saved processed prices."""
+    path = Path("data/processed/daily_prices.parquet")
+    if not path.exists():
+        raise FileNotFoundError("Run `skhynix-vol download` before `skhynix-vol evaluate`")
+    prices = pd.read_parquet(path)
+    features = build_realized_dataset(prices)
+    predictions, metrics = walk_forward_rv(features)
+    garch_predictions, garch_metrics = walk_forward_garch(features)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    predictions.to_csv(out / "rv_walk_forward_predictions.csv", index=False)
+    metrics.to_csv(out / "rv_walk_forward_metrics.csv", index=False)
+    garch_predictions.to_csv(out / "rv_garch_walk_forward_predictions.csv", index=False)
+    garch_metrics.to_csv(out / "rv_garch_walk_forward_metrics.csv", index=False)
+    metadata = {
+        "ticker": "000660.KS",
+        "source": "Yahoo Finance (yfinance), as recorded in processed daily prices",
+        "observation_count": int(len(prices)),
+        "data_start": str(pd.to_datetime(prices.date).min().date()) if len(prices) else None,
+        "data_end": str(pd.to_datetime(prices.date).max().date()) if len(prices) else None,
+        "feature_target_definition": "adjusted-close log returns; 252-session annualization; forward returns t+1..t+h",
+        "evaluation": {"folds": "expanding calendar-year test folds", "min_train_years": 5,
+                       "purge_sessions": [5, 20, 60], "models": ["rolling_rv", "ewma_vol", "har_rv"],
+                       "har_features": ["rv_1", "rv_5", "rv_20", "rv_60"],
+                       "ewma_lambda": 0.94, "garch_models": ["garch", "egarch", "gjr_garch"],
+                       "metrics": ["mae", "rmse", "qlike_variance_scale", "r2", "directional_accuracy"]},
+    }
+    (out / "rv_walk_forward_run.json").write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
+    if metrics.empty:
+        print("No walk-forward folds available; check the price history length.")
+    else:
+        summary = metrics.groupby(["horizon", "model"])[["mae", "rmse", "qlike"]].mean()
+        print(summary.to_string())
+        if not garch_metrics.empty:
+            print("\nGARCH family (annual-fold mean):")
+            print(garch_metrics.groupby(["horizon", "model"])[["mae", "rmse", "qlike"]].mean().to_string())
+        print("Saved annual fold predictions and metrics under reports/.")
+
+
+def evaluate_ml() -> None:
+    """Run fold-local ML models and save their out-of-sample forecasts."""
+    path = Path("data/processed/daily_prices.parquet")
+    if not path.exists():
+        raise FileNotFoundError("Run `skhynix-vol download` before `skhynix-vol evaluate-ml`")
+    features = build_realized_dataset(pd.read_parquet(path))
+    predictions, metrics = walk_forward_ml(features)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    predictions.to_csv(out / "rv_ml_walk_forward_predictions.csv", index=False)
+    metrics.to_csv(out / "rv_ml_walk_forward_metrics.csv", index=False)
+    if not lstm_available():
+        print("LSTM skipped; install the optional dependency with `python -m pip install -e '.[ml-deep]'`.")
+    if metrics.empty:
+        print("No ML walk-forward folds were available.")
+    else:
+        print(metrics.groupby(["horizon", "model"])[["mae", "rmse", "qlike"]].mean().to_string())
+    print("Saved ML fold predictions and metrics under reports/.")
+
+
+def forecast_rv() -> None:
+    """Write latest-close 5/20/60 session RV forecasts."""
+    path = Path("data/processed/daily_prices.parquet")
+    if not path.exists():
+        raise FileNotFoundError("Run `skhynix-vol download` before `skhynix-vol forecast-rv`")
+    prices = pd.read_parquet(path)
+    dataset = build_realized_dataset(prices)
+    forecasts = forecast_latest_rv(dataset)
+    garch_forecasts = forecast_latest_garch(dataset)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    target = out / "rv_forecasts_latest.csv"
+    forecasts.to_csv(target, index=False)
+    garch_target = out / "rv_garch_forecasts_latest.csv"
+    garch_forecasts.to_csv(garch_target, index=False)
+    print(f"As-of {forecasts.as_of_date.iloc[0].date()}:\n{forecasts[['horizon_sessions','har_rv_forecast','rolling_rv_forecast','ewma_vol_forecast']].to_string(index=False)}")
+    print(f"Saved forecasts to {target}")
+    print("Latest GARCH-family forecasts:")
+    print(garch_forecasts[["horizon_sessions", "model", "forecast_rv"]].to_string(index=False))
+    print(f"Saved GARCH forecasts to {garch_target}")
+
+
+def forecast_ml() -> None:
+    path = Path("data/processed/daily_prices.parquet")
+    if not path.exists():
+        raise FileNotFoundError("Run `skhynix-vol download` before `skhynix-vol forecast-ml`")
+    features = build_realized_dataset(pd.read_parquet(path))
+    forecasts = forecast_latest_ml(features)
+    if not lstm_available():
+        print("LSTM skipped; install the optional dependency with `python -m pip install -e '.[ml-deep]'`.")
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    target = out / "rv_ml_forecasts_latest.csv"
+    forecasts.to_csv(target, index=False)
+    print(forecasts[["horizon_sessions", "model", "forecast_rv"]].to_string(index=False))
+    print(f"Saved latest ML forecasts to {target}")
+
+
+def import_options(path: str, iv_units: str, source: str | None = None) -> None:
+    raw, normalized = load_option_file(path, iv_units=iv_units, source=source)
+    if ("synthetic_data_flag" in normalized and normalized.synthetic_data_flag.fillna(False)
+            .astype(str).str.lower().isin({"true", "1", "yes"}).any()):
+        raise ValueError("Synthetic demo quotes cannot be imported into data/processed; use them directly with demo workflows")
+    normalized = attach_krx_single_stock_option_spec(normalized)
+    normalized = validate_option_iv(normalized)
+    arbitrage_report = static_arbitrage_diagnostics(normalized)
+    raw_path, processed_path = save_option_quotes(raw, normalized)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    normalized.to_csv("reports/option_quote_iv_validation.csv", index=False)
+    arbitrage_report.to_csv("reports/option_static_arbitrage_diagnostics.csv", index=False)
+    option_chain_quality(normalized).to_csv(out / "option_chain_quality.csv", index=False)
+    (out / "option_import_manifest.json").write_text(json.dumps({
+        "source": normalized.source.iloc[0] if len(normalized) else source or f"file:{Path(path).name}",
+        "source_file": Path(path).name,
+        "source_sha256": normalized.source_sha256.iloc[0],
+        "iv_units_input": iv_units,
+        "quote_count": int(len(normalized)),
+        "observation_start": str(normalized.date.min().date()) if len(normalized) else None,
+        "observation_end": str(normalized.date.max().date()) if len(normalized) else None,
+        "expiry_start": str(normalized.expiry.min().date()) if len(normalized) else None,
+        "expiry_end": str(normalized.expiry.max().date()) if len(normalized) else None,
+        "synthetic_data": bool(normalized.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                                .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in normalized else False,
+    }, indent=2) + "\n", encoding="utf-8")
+    print(f"Imported {len(normalized):,} option quotes from {path}")
+    print(f"Recorded source: {normalized.source.iloc[0]}")
+    print(f"Observation dates: {normalized.date.min().date()} to {normalized.date.max().date()}")
+    print(f"Crossed-market rows flagged: {(normalized.quote_quality_flag != 'ok').sum()}")
+    print("IV validation statuses:")
+    print(normalized.iv_validation_status.value_counts(dropna=False).to_string())
+    spec = instrument_spec()
+    print(f"Instrument: {spec['exchange']} {spec['product']}; European exercise; cash settled; multiplier {spec['contract_multiplier']} shares")
+    print(f"Saved raw: {raw_path}\nSaved normalized: {processed_path}")
+
+
+def generate_demo_options(prices_path: str, output_path: str, days: int) -> None:
+    """Write explicitly synthetic option quotes outside processed market data."""
+    source = Path(prices_path)
+    if not source.exists():
+        raise FileNotFoundError(f"Price history not found: {source}; run download first")
+    prices = pd.read_parquet(source) if source.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(source)
+    quotes = generate_synthetic_option_quotes(prices, days=days)
+    target = Path(output_path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    quotes.to_csv(target, index=False)
+    print(f"Generated {len(quotes):,} SYNTHETIC quote rows at {target}")
+    print("These are simulated Black-76 premiums and IVs; do not use for model performance or trading claims.")
+
+
+def run_demo_research(output_dir: str, reports_dir: str, sessions: int,
+                      quote_days: int, seed: int) -> None:
+    result = run_synthetic_research_demo(output_dir=output_dir, reports_dir=reports_dir,
+        sessions=sessions, quote_days=quote_days, seed=seed)
+    print("Completed offline SYNTHETIC research workflow (not market evidence).")
+    for key, value in result.items():
+        print(f"{key}: {value}")
+
+
+def validate_options_file(path: str, iv_units: str, source: str | None = None) -> None:
+    """Create quote-quality and provider-IV consistency diagnostics."""
+    raw, normalized = load_option_file(path, iv_units=iv_units, source=source)
+    normalized = attach_krx_single_stock_option_spec(normalized)
+    report = validate_option_iv(normalized)
+    arbitrage_report = static_arbitrage_diagnostics(normalized)
+    synthetic = (normalized.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in normalized else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    target = out / f"option_quote_iv_validation{suffix}.csv"
+    report.to_csv(target, index=False)
+    arb_target = out / f"option_static_arbitrage_diagnostics{suffix}.csv"
+    arbitrage_report.to_csv(arb_target, index=False)
+    quality_target = out / f"option_chain_quality{suffix}.csv"
+    option_chain_quality(report).to_csv(quality_target, index=False)
+    print(report.iv_validation_status.value_counts(dropna=False).to_string())
+    print(f"Saved {len(report):,} quote diagnostics to {target}; raw source rows: {len(raw):,}")
+    print(f"Saved chain coverage diagnostics to {quality_target}")
+    print(f"Static-arbitrage flagged expiry groups: {int(arbitrage_report.arbitrage_flag.sum())}; saved to {arb_target}")
+
+
+def make_iv_surface(quote_path: str, spot_forward_approximation: bool,
+                    as_of: str | None = None, forecast: bool = False,
+                    n_components: int = 3) -> None:
+    from skhynix_vol.visualization.iv_charts import plot_iv_surface
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}; import provider quotes first")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        from skhynix_vol.data.options import normalize_option_quotes
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    surface_path = Path("data/demo_synthetic/iv_surface.parquet") if synthetic else Path("data/processed/iv_surface.parquet")
+    surface_path.parent.mkdir(parents=True, exist_ok=True)
+    surface.to_parquet(surface_path, index=False)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    if as_of is not None:
+        as_date = pd.Timestamp(as_of).normalize()
+        surface = surface[surface.date.eq(as_date)]
+        if surface.empty:
+            raise ValueError(f"No supported IV surface grid for {as_date.date()}")
+    if forecast:
+        prediction = forecast_next_iv_surface(surface, n_components=n_components)
+        prediction_path = out / f"iv_surface_forecast{suffix}.csv"
+        prediction.to_csv(prediction_path, index=False)
+        factor_columns = [c for c in prediction if c.endswith("_change_forecast") or c.endswith("_score_asof") or c.endswith("_score_forecast")]
+        factor_forecast = prediction[["as_of_date", "training_start", "training_end", "n_training_dates", "n_components", "model", *factor_columns]].drop_duplicates()
+        factor_path = out / f"iv_surface_factor_change_forecast{suffix}.csv"
+        factor_forecast.to_csv(factor_path, index=False)
+        title = "SYNTHETIC DEMO â€” SK Hynix next-session IV surface forecast" if synthetic else "SK Hynix next-session IV surface forecast"
+        image_path = plot_iv_surface(prediction, out / f"iv_surface_forecast{suffix}.png",
+            value_column="implied_volatility_forecast", title=title)
+        print(f"Saved {len(prediction)} forecast grid cells to {prediction_path}")
+        print(f"Saved PCA factor change forecast to {factor_path}")
+        print(f"Saved forecast image: {image_path}")
+    else:
+        title = "SYNTHETIC DEMO â€” SK Hynix implied-volatility surface" if synthetic else "SK Hynix implied-volatility surface"
+        image_path = plot_iv_surface(surface, out / f"iv_surface{suffix}_{surface.date.max():%Y%m%d}.png", title=title)
+        print(f"Saved supported surface points: {surface_path}")
+        print(f"Saved image: {image_path}")
+
+
+def evaluate_iv_surface(quote_path: str, spot_forward_approximation: bool,
+                        n_components: int, min_training_dates: int) -> None:
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}; import provider quotes first")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        from skhynix_vol.data.options import normalize_option_quotes
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    predictions, metrics = walk_forward_iv(surface, n_components=n_components,
+                                            min_training_dates=min_training_dates)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    predictions.to_csv(out / f"iv_surface_walk_forward_predictions{suffix}.csv", index=False)
+    metrics.to_csv(out / f"iv_surface_walk_forward_metrics{suffix}.csv", index=False)
+    if metrics.empty:
+        print("No IV walk-forward folds met the minimum coverage requirements.")
+    else:
+        summary_cols = ["mae", "rmse", "atm_mae", "downside_skew_mae", "upside_skew_mae"]
+        print(metrics.groupby("model")[summary_cols].mean().to_string())
+    print(f"Saved IV out-of-sample predictions and metrics under reports/ (synthetic={synthetic}).")
+
+
+def evaluate_iv_surface_dl(quote_path: str, spot_forward_approximation: bool,
+                           min_training_dates: int, sequence_length: int,
+                           max_epochs: int, seed: int) -> None:
+    """Evaluate the fold-local LSTM IV-surface forecaster."""
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        from skhynix_vol.data.options import normalize_option_quotes
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    predictions, metrics = walk_forward_iv_lstm(surface,
+        min_training_dates=min_training_dates, sequence_length=sequence_length,
+        max_epochs=max_epochs, seed=seed)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    pred_path = out / f"iv_surface_lstm_walk_forward_predictions{suffix}.csv"
+    metric_path = out / f"iv_surface_lstm_walk_forward_metrics{suffix}.csv"
+    predictions.to_csv(pred_path, index=False)
+    metrics.to_csv(metric_path, index=False)
+    if metrics.empty:
+        print("No LSTM IV folds met the historical coverage requirements.")
+    else:
+        print(metrics[["date", "n_training_dates", "n_grid_points", "mae", "rmse"]].to_string(index=False))
+    print(f"Saved {len(predictions):,} LSTM IV predictions to {pred_path}")
+    print(f"Saved LSTM IV metrics to {metric_path}")
+
+
+def forecast_iv_surface_dl(quote_path: str, spot_forward_approximation: bool,
+                           sequence_length: int, max_epochs: int, seed: int) -> None:
+    """Fit an LSTM on all prior surfaces and export the next-session forecast."""
+    from skhynix_vol.visualization.iv_charts import plot_iv_surface
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        from skhynix_vol.data.options import normalize_option_quotes
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    forecast = forecast_next_iv_lstm(surface, sequence_length=sequence_length,
+                                     max_epochs=max_epochs, seed=seed)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    target = out / f"iv_surface_lstm_forecast{suffix}.csv"
+    forecast.to_csv(target, index=False)
+    image = plot_iv_surface(forecast, out / f"iv_surface_lstm_forecast{suffix}.png",
+        value_column="implied_volatility_forecast",
+        title="SYNTHETIC DEMO â€” LSTM IV surface forecast" if synthetic
+              else "SK Hynix LSTM IV surface forecast")
+    print(f"Saved {len(forecast):,} forecast cells to {target}")
+    print(f"Saved forecast image to {image}")
+
+
+def project_iv(quote_path: str, spot_forward_approximation: bool) -> None:
+    """Project supported call prices onto static-arbitrage constraints."""
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    projected = project_iv_surface(surface)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    target = out / f"iv_surface_arbitrage_projection{suffix}.csv"
+    projected.to_csv(target, index=False)
+    failed = projected.loc[projected.projection_status.ne("optimal"), "date"].nunique()
+    print(f"Projected {len(projected):,} surface cells; solver-failed dates: {failed}; max IV adjustment: {projected.absolute_iv_adjustment.max():.6f}")
+    print(f"Saved projected surface to {target}")
+
+
+def export_iv_factors(quote_path: str, spot_forward_approximation: bool,
+                      n_components: int) -> None:
+    """Export historical PCA factor scores and surface loadings."""
+    path = Path(quote_path)
+    if not path.exists():
+        raise FileNotFoundError(f"Options file not found: {path}; import provider quotes first")
+    quotes = pd.read_parquet(path) if path.suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
+    if "quote_quality_flag" not in quotes:
+        quotes = normalize_option_quotes(quotes, iv_units="decimal", source=f"file:{path.name}")
+    synthetic = (quotes.synthetic_data_flag.fillna(False).astype(str).str.lower()
+                 .isin({"true", "1", "yes"}).any()) if "synthetic_data_flag" in quotes else False
+    suffix = "_synthetic_demo" if synthetic else ""
+    surface = build_iv_surface(quotes, spot_forward_approximation=spot_forward_approximation)
+    scores, loadings = iv_surface_pca_factors(surface, n_components=n_components)
+    out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
+    scores.to_csv(out / f"iv_surface_pca_scores{suffix}.csv", index=False)
+    loadings.to_csv(out / f"iv_surface_pca_loadings{suffix}.csv", index=False)
+    print(f"Saved PCA factors for {scores.date.nunique()} dates and {loadings.component.nunique()} components under reports/.")
 
 
 def backtest(quotes_path: str, predictions_path: str, prices_path: str,
@@ -11,7 +407,11 @@ def backtest(quotes_path: str, predictions_path: str, prices_path: str,
              hedge_dividend_yield: float | None = None, contracts: int = 1,
              max_volume_participation: float | None = None,
              max_open_interest_participation: float | None = None,
-             max_cumulative_loss_krw: float | None = None) -> None:
+             max_cumulative_loss_krw: float | None = None,
+             short_margin_per_contract_krw: float | None = None,
+             capital_base_krw: float | None = None,
+             annual_financing_rate: float = 0.0,
+             annual_stock_borrow_rate: float = 0.0) -> None:
     def read_table(path: str) -> pd.DataFrame:
         return pd.read_parquet(path) if Path(path).suffix.lower() in {".parquet", ".pq"} else pd.read_csv(path)
     quotes, predictions, prices = map(read_table, [quotes_path, predictions_path, prices_path])
@@ -27,7 +427,11 @@ def backtest(quotes_path: str, predictions_path: str, prices_path: str,
             hedge_dividend_yield=hedge_dividend_yield, contracts=contracts,
             max_volume_participation=max_volume_participation,
             max_open_interest_participation=max_open_interest_participation,
-            max_cumulative_loss_krw=max_cumulative_loss_krw)
+            max_cumulative_loss_krw=max_cumulative_loss_krw,
+            short_margin_per_contract_krw=short_margin_per_contract_krw,
+            capital_base_krw=capital_base_krw,
+            annual_financing_rate=annual_financing_rate,
+            annual_stock_borrow_rate=annual_stock_borrow_rate)
         all_trades.append(trades); all_summaries.append(summary)
     out = Path("reports"); out.mkdir(parents=True, exist_ok=True)
     trade_frame = pd.concat(all_trades, ignore_index=True) if all_trades else pd.DataFrame()
@@ -144,6 +548,14 @@ def main() -> None:
                     help="Maximum contracts as a fraction of reported open interest (0, 1]")
     bt.add_argument("--max-cumulative-loss-krw", type=float, default=None,
                     help="Halt new entries once realized net P&L reaches this loss budget")
+    bt.add_argument("--short-margin-per-contract-krw", type=float, default=None,
+                    help="User-supplied short-option margin proxy; this is not a KRX margin calculation")
+    bt.add_argument("--capital-base-krw", type=float, default=None,
+                    help="Capital budget used to skip trades whose estimated requirement exceeds the base")
+    bt.add_argument("--annual-financing-rate", type=float, default=0.0,
+                    help="Annual carry charge on long premium, posted short margin, and long hedge notional")
+    bt.add_argument("--annual-stock-borrow-rate", type=float, default=0.0,
+                    help="Annual borrow cost applied to time-weighted short hedge notional")
     args = parser.parse_args()
     if args.command == "download":
         run(start=args.start, end=args.end)
@@ -193,7 +605,9 @@ def main() -> None:
                  args.min_option_volume, args.min_open_interest,
                  args.hedge_risk_free_rate, args.hedge_dividend_yield,
                  args.contracts, args.max_volume_participation,
-                 args.max_open_interest_participation, args.max_cumulative_loss_krw)
+                 args.max_open_interest_participation, args.max_cumulative_loss_krw,
+                 args.short_margin_per_contract_krw, args.capital_base_krw,
+                 args.annual_financing_rate, args.annual_stock_borrow_rate)
 
 
 if __name__ == "__main__":

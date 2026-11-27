@@ -81,6 +81,10 @@ def run_synthetic_research_demo(output_dir: str | Path = "data/demo_synthetic",
             max_relative_spread=0.25, contracts=2,
             max_volume_participation=0.10,
             max_open_interest_participation=0.05,
+            short_margin_per_contract_krw=1_000_000.0,
+            capital_base_krw=20_000_000.0,
+            annual_financing_rate=0.04,
+            annual_stock_borrow_rate=0.03,
         )
         all_trades.append(trades)
         all_summaries.append(summary)
@@ -111,6 +115,10 @@ def run_synthetic_research_demo(output_dir: str | Path = "data/demo_synthetic",
         "backtest_contracts_per_trade": 2,
         "backtest_max_volume_participation": 0.10,
         "backtest_max_open_interest_participation": 0.05,
+        "backtest_short_margin_proxy_per_contract_krw": 1_000_000.0,
+        "backtest_capital_base_krw": 20_000_000.0,
+        "backtest_annual_financing_rate": 0.04,
+        "backtest_annual_stock_borrow_rate": 0.03,
         "outputs": {
             "synthetic_prices": str(prices_path),
             "synthetic_quotes": str(quotes_path),
